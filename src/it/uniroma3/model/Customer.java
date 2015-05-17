@@ -1,16 +1,35 @@
-package model;
+package it.uniroma3.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Customer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String surname;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;  //?
+
     private Address address;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date registrationDate;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     public Customer(Date birthDate, String password, String email, String surname, String name, Date registrationDate) {

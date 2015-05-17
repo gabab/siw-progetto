@@ -1,15 +1,29 @@
-package model;
+package it.uniroma3.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
     private Float price;
+
+    @Column(nullable = false)
     private Integer inStock;
+
+    @OneToMany
     private List<Provider> providers;
 
     public Product(String name, String description, Float price, Integer inStock) {
