@@ -12,6 +12,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToOne
     private Customer customer;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -23,6 +24,8 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date processed;
 
+    @OneToMany
+    @JoinColumn(name = "orders_id")
     private List<OrderLine> orderlines;
 
     public Order() {
@@ -73,6 +76,10 @@ public class Order {
 
     public void setOrderlines(List<OrderLine> orderlines) {
         this.orderlines = orderlines;
+    }
+
+    public Long getId() {
+        return id;
     }
 
 }

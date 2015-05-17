@@ -16,9 +16,9 @@
                 <th>Price</th>
                 <th>Description</th>
             </tr>
-            <c:forEach var="p" items="#{controller.products}">
+            <c:forEach var="p" items="#{userController.products}">
                 <tr>
-                    <td><h:commandLink action="#{controller.findProduct(p.id)}" value="#{p.name}">
+                    <td><h:commandLink action="#{userController.findProduct(p.id)}" value="#{p.name}">
                     </h:commandLink></td>
                     <td>${p.price}</td>
                     <td>${p.description}</td>

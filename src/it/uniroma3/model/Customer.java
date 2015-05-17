@@ -1,7 +1,9 @@
 package it.uniroma3.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -22,6 +24,7 @@ public class Customer {
     @Column(nullable = false)
     private String password;  //?
 
+    @OneToOne
     private Address address;
 
     @Column(nullable = false)
@@ -32,6 +35,9 @@ public class Customer {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
+    @OneToMany
+    private List<Order> orders;
+
     public Customer(Date birthDate, String password, String email, String surname, String name, Date registrationDate) {
         this.birthDate = birthDate;
         this.password = password;
@@ -39,6 +45,7 @@ public class Customer {
         this.surname = surname;
         this.name = name;
         this.registrationDate = registrationDate;
+        this.orders = new ArrayList<>();
     }
 
     public Customer() {
@@ -138,5 +145,13 @@ public class Customer {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

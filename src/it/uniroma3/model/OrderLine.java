@@ -9,10 +9,15 @@ public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(nullable = false)
     private Float unitPrice;
+
     @Column(nullable = false)
     private Integer quantity;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Product product;
 
     public OrderLine(Float unitPrice, Integer quantity) {
         this.unitPrice = unitPrice;
@@ -39,32 +44,11 @@ public class OrderLine {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "OrderLine{" +
-                "quantity=" + quantity +
-                ", unitPrice=" + unitPrice +
-                '}';
+    public Product getProduct() {
+        return product;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OrderLine orderLine = (OrderLine) o;
-
-        if (!id.equals(orderLine.id)) return false;
-        if (!getUnitPrice().equals(orderLine.getUnitPrice())) return false;
-        return getQuantity().equals(orderLine.getQuantity());
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + getUnitPrice().hashCode();
-        result = 31 * result + getQuantity().hashCode();
-        return result;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

@@ -8,7 +8,7 @@
 <body>
 <f:view>
     <h:form>
-        <h:commandLink action="#{controller.listProducts}" value="List Products"/>
+        <h:commandLink action="#{userController.listProducts}" value="List Products"/>
     </h:form>
 </f:view>
 </body>

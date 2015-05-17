@@ -1,4 +1,6 @@
-package it.uniroma3.model;
+package it.uniroma3.facades;
+
+import it.uniroma3.model.Product;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

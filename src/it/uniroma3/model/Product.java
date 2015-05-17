@@ -15,6 +15,9 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
+    private String code;
+
+    @Column(length = 2000)
     private String description;
 
     @Column(nullable = false)
@@ -23,14 +26,15 @@ public class Product {
     @Column(nullable = false)
     private Integer inStock;
 
-    @OneToMany
+    @ManyToMany(mappedBy = "products")
     private List<Provider> providers;
 
-    public Product(String name, String description, Float price, Integer inStock) {
+    public Product(String name, String code, String description, Float price) {
         this.name = name;
+        this.code = code;
         this.description = description;
         this.price = price;
-        this.inStock = inStock;
+        this.inStock = 0;
         this.providers = new ArrayList<Provider>();
     }
 
@@ -102,5 +106,13 @@ public class Product {
 
     public void setInStock(Integer inStock) {
         this.inStock = inStock;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
