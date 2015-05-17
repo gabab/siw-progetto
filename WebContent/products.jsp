@@ -11,7 +11,6 @@
     <h1>Products</h1>
     <h:form>
         <table>
-
             <tr>
                 <th>Name</th>
                 <th>Price</th>
