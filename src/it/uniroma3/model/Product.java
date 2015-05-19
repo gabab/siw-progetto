@@ -10,22 +10,16 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column(nullable = false)
     private String name;
-
     @Column(nullable = false)
     private String code;
-
     @Column(length = 2000)
     private String description;
-
     @Column(nullable = false)
     private Float price;
-
     @Column(nullable = false)
     private Integer inStock;
-
     @ManyToMany(mappedBy = "products")
     private List<Provider> providers;
 
@@ -40,6 +34,10 @@ public class Product {
 
     public Product() {
 
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

@@ -8,7 +8,10 @@
 <body>
 <f:view>
     <h:form>
-        <h:commandLink action="#{userController.listProducts}" value="List Products"/>
+        <h:inputText value="#{userController.searchterm}" autocomplete="Search for a product"/>
+        <h:commandButton action="#{userController.searchProducts}"/>
+        <br><h:commandLink action="#{userController.listProducts}" value="List all products"/>
+        <br><h:commandLink action="/insert.jsp" value="Insert a product"/>
     </h:form>
 </f:view>
 </body>

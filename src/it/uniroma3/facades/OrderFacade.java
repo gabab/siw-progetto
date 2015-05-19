@@ -26,8 +26,8 @@ public class OrderFacade {
     }
 
 
-    public List<Order> getOpenOrders(){
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.closed IS NULL");
+    public List<Order> getOpenOrders() {
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.processed IS NULL");
         return (List<Order>) q.getResultList();
     }
 

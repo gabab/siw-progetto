@@ -21,10 +21,13 @@ public class UserController {
     private List<Product> products;
     @EJB(beanName = "product")
     private ProductFacade productFacade;
+    private String searchterm;
+
 
     public UserController() {
 
     }
+
 
     public String listProducts() {
         this.products = this.productFacade.getAllProducts();
@@ -38,6 +41,20 @@ public class UserController {
 
     public String findProduct(Long id) {
         this.product = this.productFacade.getProduct(id);
+        return "product";
+    }
+
+    public String searchProducts() {
+        this.products = this.productFacade.searchProducts(searchterm);
+        if (this.products.size() == 1){
+            this.product = this.products.get(0);
+            return "product";
+        }
+        return "products";
+    }
+
+    public String createProduct() {
+        this.product = this.productFacade.createProduct(name, price, code, description);
         return "product";
     }
 
@@ -89,6 +106,14 @@ public class UserController {
         this.product = product;
     }
 
+    public String getSearchterm() {
+        return searchterm;
+    }
+
+    public void setSearchterm(String searchterm) {
+        this.searchterm = searchterm;
+    }
+
     public List<Product> getProducts() {
         return products;
     }
@@ -96,4 +121,5 @@ public class UserController {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
 }
