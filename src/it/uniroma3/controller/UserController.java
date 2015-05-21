@@ -46,6 +46,7 @@ public class UserController {
 
     public String searchProducts() {
         this.products = this.productFacade.searchProducts(searchterm);
+        this.searchterm = null;
         if (this.products.size() == 1){
             this.product = this.products.get(0);
             return "product";

@@ -6,8 +6,8 @@
 <body>
 Choose activity:
 
-<a href="/insert.jsp">Insert new product</a>
-<a href="/openOrders.jsp">View open orders</a>
+<a href="insert.xhtml">Insert new product</a>
+<a href="orders.xhtml">View open orders</a>
 
 </body>
 </html>

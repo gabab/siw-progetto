@@ -1,19 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
-<%@taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
-<html>
-<head>
-    <title>Insert new product</title>
-</head>
-<body>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 <f:view>
     <h:form>
         <label>Name:
             <h:inputText value="#{userController.name}"
                          required="true"
                          requiredMessage="Name is mandatory" id="name"/></label><h:message for="name"/>
-        <br><br>
+        <br/><br/>
         <label>Price:
             <h:inputText value="#{userController.price}"
                          required="true"
@@ -22,7 +19,7 @@
                 <f:validateDoubleRange minimum="0.01"/></h:inputText>
             <h:message for="price"/>
         </label>
-        <br><br>
+        <br/><br/>
         <label>Code:
             <h:inputText value="#{userController.code}"
                          required="true"
@@ -30,12 +27,11 @@
                          validatorMessage="Code: min 6 max 10 characters" id="code">
                 <f:validateLength minimum="6" maximum="10"/>
             </h:inputText></label>
-        <h:message for="code" styleClass="error"/><br><br>
+        <h:message for="code" styleClass="error"/><br/><br/>
         <label>Description:
             <h:inputTextarea rows="6" cols="30" value="#{userController.description}" required="false"/>
-        </label><br><br>
+        </label><br/><br/>
         <h:commandButton value="Submit" action="#{userController.createProduct}"/>
     </h:form>
 </f:view>
-</body>
 </html>

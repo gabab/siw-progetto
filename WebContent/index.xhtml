@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sexy="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<sexy:head>
+    <title>Home Progetto</title>
+</sexy:head>
+<sexy:body>
+    <f:view>
+        <sexy:form>
+            <sexy:inputText value="#{userController.searchterm}" placeholder="Search..."/>
+
+            <sexy:commandButton value="BibboSearch" action="#{userController.searchProducts}"/>
+            <br/>
+            <br/>
+            <sexy:commandLink action="#{userController.listProducts}" value="List all products"/>
+        </sexy:form>
+        <br/>
+        <a href="insert.xhtml">Insert a product</a>
+        <br/>
+    </f:view>
+</sexy:body>
+</html>

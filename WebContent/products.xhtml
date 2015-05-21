@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+    <title>List of all products</title>
+</head>
+<body>
+<f:view>
+    <h:form>
+        <h:inputText value="#{userController.searchterm}"/>
+        <h:commandButton action="#{userController.searchProducts}"/>
+    </h:form>
+    <br/>
+    <h1>Products</h1>
+    <h:form>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Price</th>
+                <th>Description</th>
+            </tr>
+            <ui:repeat var="p" value="#{userController.products}">
+                <tr>
+                    <td><h:commandLink action="#{userController.findProduct(p.id)}" value="#{p.name}">
+                    </h:commandLink></td>
+                    <td>${p.code}</td>
+                    <td>${p.price}</td>
+                    <td>${p.description}</td>
+                </tr>
+            </ui:repeat>
+        </table>
+    </h:form>
+</f:view>
+</body>
+</html>
