@@ -3,7 +3,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="title">My Orders</ui:define>
+    <ui:define name="title">Open Orders</ui:define>
 
     <ui:define name="content">
         <f:view>
@@ -21,8 +21,8 @@
                             <td>${o.opened}</td>
                             <td>${o.closed}</td>
                             <td>${o.processed}</td>
-                            <td><h:commandLink action="#{customerHandler.findOrder(o.productID)}" value="Details">
-                            </h:commandLink></td>
+                            <td><h:commandLink action="#{adminHandler.viewOrderDetails}" value="Details"/></td>
+                            <td><h:commandLink action="#{adminHandler.processOrder(o.productID)}" value="Process"/></td>
                         </tr>
                     </ui:repeat>
                 </table>

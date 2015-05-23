@@ -7,7 +7,7 @@
 Choose activity:
 
 <a href="insert.xhtml">Insert new product</a>
-<a href="orders.xhtml">View open orders</a>
+<a href="orders.openOrders.xhtml">View open orders</a>
 
 </body>
 </html>

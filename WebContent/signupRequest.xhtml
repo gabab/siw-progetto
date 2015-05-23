@@ -8,12 +8,12 @@
         <f:view>
             <h:form>
                 <label>Name:
-                    <h:inputText value="#{userController.name}"
+                    <h:inputText value="#{userController.userName}"
                                  required="true"
                                  requiredMessage="Name is mandatory" id="name"/></label><h:message for="name"/>
                 <br/><br/>
                 <label>Price:
-                    <h:inputText value="#{userController.price}"
+                    <h:inputText value="#{userController.userPassword}"
                                  required="true"
                                  requiredMessage="Price is mandatory"
                                  converterMessage="Price must be a number" id="price">

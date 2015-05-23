@@ -12,13 +12,34 @@ import java.util.List;
 @SessionScoped
 public class UserController {
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private Long productID
     private String name;
     private Float price;
     private String description;
-    private String code;
+    private String productCode;
     private Product product;
     private List<Product> products;
+
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private String password;
+
     @EJB(beanName = "product")
     private ProductFacade productFacade;
     private String searchterm;
@@ -35,7 +56,7 @@ public class UserController {
     }
 
     public String findProduct() {
-        this.product = this.productFacade.getProduct(id);
+        this.product = this.productFacade.getProduct(productID);
         return "product";
     }
 
@@ -55,16 +76,16 @@ public class UserController {
     }
 
     public String createProduct() {
-        this.product = this.productFacade.createProduct(name, price, code, description);
+        this.product = this.productFacade.createProduct(name, price, productCode, description);
         return "product";
     }
 
-    public Long getId() {
-        return id;
+    public Long getProductID() {
+        return productID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setProductID(Long productID) {
+        this.productID = productID;
     }
 
     public String getName() {
@@ -91,12 +112,12 @@ public class UserController {
         this.description = description;
     }
 
-    public String getCode() {
-        return code;
+    public String getProductCode() {
+        return productCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 
     public Product getProduct() {
@@ -123,4 +144,7 @@ public class UserController {
         this.products = products;
     }
 
+    public String userLogin() {
+        return "prova";
+    }
 }

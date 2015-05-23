@@ -1,0 +1,20 @@
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">Login</ui:define>
+
+    <ui:define name="content">
+<f:view>
+    <h:form>
+        <label>Email: <h:inputText value="#{userController.email}" required="true"/>
+        </label>
+        <label>Password: <h:inputSecret value="#{userController.password}" required="true"/>
+        </label>
+        <h:commandButton action="#{userController.userLogin}" value="Login"/>
+    </h:form>
+</f:view>
+</ui:define>
+
+</ui:composition>

@@ -1,36 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
-<head>
-    <title>Order no. ${customerHandler.order.id}</title>
-</head>
-<body>
-<f:view>
-    <h1>Order no. ${customerHandler.order.id}</h1>
-    Opened: ${customerHandler.order.opened} Closed: ${customerHandler.order.closed}
-    Processed: ${customerHandler.order.processed}
-    <h:form>
-        <table>
-            <tr>
-                <th>Product</th>
-                <th>UnitPrice</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-            <ui:repeat var="ol" value="#{customerHandler.order.orderlines}">
-                <tr>
-                    <td>${ol.product.name}</td>
-                    <td>${ol.unitPrice}</td>
-                    <td>${ol.quantity}</td>
-                    <td>${ol.quantity * ol.unitPrice}</td>
-                </tr>
-            </ui:repeat>
-        </table>
-    </h:form>
-</f:view>
-</body>
-</html>
+<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">Order no. ${customerHandler.order.productID}</ui:define>
+
+    <ui:define name="content">
+        <f:view>
+            <h1>Order no. ${customerHandler.order.productID}</h1>
+            Opened: ${customerHandler.order.opened} Closed: ${customerHandler.order.closed}
+            Processed: ${customerHandler.order.processed}
+            <h:form>
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>UnitPrice</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    <ui:repeat var="ol" value="#{customerHandler.order.orderlines}">
+                        <tr>
+                            <td>${ol.product.name}</td>
+                            <td>${ol.unitPrice}</td>
+                            <td>${ol.quantity}</td>
+                            <td>${ol.quantity * ol.unitPrice}</td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>
