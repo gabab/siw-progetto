@@ -1,4 +1,4 @@
-<ui:composition template="/WEB-INF/templates/masterTemplate.xhtml"
+<ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -6,18 +6,8 @@
     <ui:define name="title">Home Page</ui:define>
 
     <ui:define name="content">
-        <f:view>
-            <h:form>
-                <h:inputText value="#{userController.searchterm}" placeholder="Search..."/>
-                <h:commandButton value="Search" action="#{userController.searchProducts}"/>
-                <br/>
-                <br/>
-                <h:commandLink action="#{userController.listProducts}" value="List all products"/>
-            </h:form>
-            <br/>
-            <a href="insertH.xhtml">Insert a product</a>
+            <a href="insert.xhtml">Insert a product</a>
             <a href="login.xhtml">Login</a>
             <br/>
-        </f:view>
     </ui:define>
 </ui:composition>

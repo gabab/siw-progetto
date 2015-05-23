@@ -12,7 +12,7 @@ import java.util.List;
 @SessionScoped
 public class UserController {
     private static final long serialVersionUID = 1L;
-    private Long productID
+    private Long productID;
     private String name;
     private Float price;
     private String description;
@@ -75,10 +75,7 @@ public class UserController {
         return "products";
     }
 
-    public String createProduct() {
-        this.product = this.productFacade.createProduct(name, price, productCode, description);
-        return "product";
-    }
+
 
     public Long getProductID() {
         return productID;
