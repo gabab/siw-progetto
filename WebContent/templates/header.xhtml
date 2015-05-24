@@ -25,7 +25,9 @@
                             <li>
                                 <h:outputLink id="login" value="login.xhtml"
                                               rendered="#{!login.loggedIn}">Login</h:outputLink>
-                                <h:commandLink id="logout" action="#{login.logout}" rendered="#{login.loggedIn}"/>
+                                <h:commandLink id="logout" action="#{login.logout}" rendered="#{login.loggedIn}">
+                                    Logout
+                                </h:commandLink>
                             </li>
                             <li><a href="#">Help</a></li>
                         </ul>

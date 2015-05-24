@@ -8,12 +8,12 @@
         <f:view>
         <h:form>
                 <label>Name:
-                    <h:inputText value="#{userController.name}"
+                    <h:inputText value="#{createProduct.name}"
                                  required="true"
                                  requiredMessage="Name is mandatory" id="name"/></label><h:message for="name"/>
                 <br/><br/>
                 <label>Price:
-                    <h:inputText value="#{userController.price}"
+                    <h:inputText value="#{createProduct.price}"
                                  required="true"
                                  requiredMessage="Price is mandatory"
                                  converterMessage="Price must be a number" id="price">
@@ -22,7 +22,7 @@
                 </label>
                 <br/><br/>
                 <label>Code:
-                    <h:inputText value="#{userController.productCode}"
+                    <h:inputText value="#{createProduct.code}"
                                  required="true"
                                  requiredMessage="Code is mandatory"
                                  validatorMessage="Code: min 6 max 10 characters" id="productCode">
@@ -30,9 +30,9 @@
                     </h:inputText></label>
                 <h:message for="productCode" styleClass="error"/><br/><br/>
                 <label>Description:
-                    <h:inputTextarea rows="6" cols="30" value="#{userController.description}" required="false"/>
+                    <h:inputTextarea rows="6" cols="30" value="#{createProduct.description}" required="false"/>
                 </label><br/><br/>
-                <h:commandButton value="Submit" action="#{userController.createProduct}"/>
+                <h:commandButton value="Submit" action="#{createProduct.insertProduct}"/>
             </h:form>
         </f:view>
     </ui:define>

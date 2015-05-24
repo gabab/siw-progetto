@@ -18,15 +18,6 @@
                 <h:commandLink value="List products" action="#{userController.listProducts}"/>
             </h:form>
         </f:view>
-
-        <f:view>
-            <h:form>
-                <h:inputText id="s" value="#{userController.productID}">
-                <f:validator validatorId="IDValidator" /></h:inputText>
-                <h:commandButton action="#{userController.findProduct}"/>
-                <h:message for="s"/>
-            </h:form>
-        </f:view>
         <br/>
         <a href="login.xhtml">Login</a>
         <br/>

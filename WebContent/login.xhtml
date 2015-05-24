@@ -15,8 +15,8 @@
                         <h:outputLabel for="password">Password:</h:outputLabel>
                         <h:inputSecret id="password" value="#{login.password}"/>
                 </h:panelGrid>
-                <h:commandButton value="Login" action="#{login.login}" rendered="#{!login.isLoggedIn}"/>
-                <h:commandButton value="Logout" action="#{login.logout}" rendered="#{login.isLoggedIn}"/>
+                <h:commandButton value="Login" action="#{login.login}" rendered="#{!login.loggedIn}"/>
+                <h:commandButton value="Logout" action="#{login.logout}" rendered="#{login.loggedIn}"/>
             </h:form>
         </f:view>
     </ui:define>

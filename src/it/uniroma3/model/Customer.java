@@ -11,13 +11,8 @@ import java.util.List;
 @Entity
 public class Customer extends User {
 
+    @Column(nullable = false)
     private RegistrationState registrationState;
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String surname;
 
     @OneToOne
     private Address address;
@@ -34,26 +29,31 @@ public class Customer extends User {
     private List<Order> orders;
 
     public Customer(String email, String password, String name, String surname, Date birthDate) {
-        super(email, password);
+        super(email, password, name, surname);
         this.setGroup(UserGroup.CUSTOMER);
         this.registrationState = RegistrationState.PENDING;
         this.birthDate = birthDate;
-        this.surname = surname;
-        this.name = name;
         this.registrationDate = registrationDate;
         this.orders = new ArrayList<>();
     }
 
     public Customer() {
         super();
-        this.setGroup(UserGroup.CUSTOMER);
+    }
+
+    public RegistrationState getRegistrationState() {
+        return registrationState;
+    }
+
+    public void setRegistrationState(RegistrationState registrationState) {
+        this.registrationState = registrationState;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                "name='" + this.getName() + '\'' +
+                ", surname='" + this.getSurname() + '\'' +
                 ", email='" + this.getEmail() + '\'' +
                 ", password='" + this.getPassword() + '\'' +
                 ", address=" + address +
@@ -85,23 +85,6 @@ public class Customer extends User {
         result = 31 * result + getPassword().hashCode();
         result = 31 * result + getBirthDate().hashCode();
         return result;
-    }
-
-    public String getName() {
-
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public Address getAddress() {

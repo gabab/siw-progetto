@@ -68,7 +68,7 @@ public class UserController {
     }
 
     public String searchProducts() {
-        if (!searchterm.equals(""))
+        if (searchterm.equals(""))
             return listProducts();
         this.products = this.productFacade.searchProducts(searchterm);
         this.productsViewTitle = "Search results for \"" + searchterm + "\"";
