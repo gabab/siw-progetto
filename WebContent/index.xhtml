@@ -1,13 +1,34 @@
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">Home Page</ui:define>
 
     <ui:define name="content">
-            <a href="insert.xhtml">Insert a product</a>
-            <a href="login.xhtml">Login</a>
-            <br/>
+        <br/>
+        <a href="insert.xhtml">Insert a product</a>
+        <br/>
+
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-align-left" aria-hidden="true"/>
+        </button>
+        <f:view>
+            <h:form>
+                <h:commandLink value="List products" action="#{userController.listProducts}"/>
+            </h:form>
+        </f:view>
+
+        <f:view>
+            <h:form>
+                <h:inputText id="s" value="#{userController.productID}">
+                <f:validator validatorId="IDValidator" /></h:inputText>
+                <h:commandButton action="#{userController.findProduct}"/>
+                <h:message for="s"/>
+            </h:form>
+        </f:view>
+        <br/>
+        <a href="login.xhtml">Login</a>
+        <br/>
     </ui:define>
 </ui:composition>

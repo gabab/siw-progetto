@@ -5,7 +5,8 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:define name="title">Insert Product</ui:define>
     <ui:define name="content">
-            <h:form>
+        <f:view>
+        <h:form>
                 <label>Name:
                     <h:inputText value="#{userController.name}"
                                  required="true"
@@ -33,6 +34,7 @@
                 </label><br/><br/>
                 <h:commandButton value="Submit" action="#{userController.createProduct}"/>
             </h:form>
+        </f:view>
     </ui:define>
 
 </ui:composition>

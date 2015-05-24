@@ -1,0 +1,14 @@
+<ui:composition template="templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">Registration Request sent</ui:define>
+
+    <ui:define name="content">
+
+        Hello #{registration.name}, your request has been forwarded to an administrator.
+        <br/>
+        An email will be sent to the address #{registration.email}when your request will be accepted.
+        Thank you for your time.
+    </ui:define>
+</ui:composition>

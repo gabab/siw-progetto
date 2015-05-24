@@ -23,7 +23,7 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private List<Provider> providers;
 
-    public Product(String name, String code, String description, Float price) {
+    public Product(String name, String code, Float price,String description) {
         this.name = name;
         this.code = code;
         this.description = description;

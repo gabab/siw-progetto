@@ -4,8 +4,12 @@ import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import java.util.List;
 
 @ManagedBean
@@ -13,14 +17,19 @@ import java.util.List;
 public class UserController {
     private static final long serialVersionUID = 1L;
     private Long productID;
-    private String name;
-    private Float price;
-    private String description;
-    private String productCode;
     private Product product;
-    private List<Product> products;
+    private List products;
 
     private String email;
+    private String password;
+    @EJB(beanName = "product")
+    private ProductFacade productFacade;
+    private String searchterm;
+    private String productsViewTitle;
+
+    public UserController() {
+
+    }
 
     public String getEmail() {
         return email;
@@ -38,20 +47,13 @@ public class UserController {
         this.password = password;
     }
 
-    private String password;
-
-    @EJB(beanName = "product")
-    private ProductFacade productFacade;
-    private String searchterm;
-
-
-    public UserController() {
-
+    private String avoidViewExpiredException(String s) {
+        return s; //+ "?faces-redirect=true";
     }
-
 
     public String listProducts() {
         this.products = this.productFacade.getAllProducts();
+        this.productsViewTitle = "Products Catalog";
         return "products";
     }
 
@@ -66,10 +68,13 @@ public class UserController {
     }
 
     public String searchProducts() {
+        if (!searchterm.equals(""))
+            return listProducts();
         this.products = this.productFacade.searchProducts(searchterm);
+        this.productsViewTitle = "Search results for \"" + searchterm + "\"";
         this.searchterm = null;
-        if (this.products.size() == 1){
-            this.product = this.products.get(0);
+        if (this.products.size() == 1) {
+            this.product = (Product) this.products.get(0);
             return "product";
         }
         return "products";
@@ -83,38 +88,6 @@ public class UserController {
 
     public void setProductID(Long productID) {
         this.productID = productID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
     }
 
     public Product getProduct() {
@@ -133,7 +106,7 @@ public class UserController {
         this.searchterm = searchterm;
     }
 
-    public List<Product> getProducts() {
+    public List getProducts() {
         return products;
     }
 
@@ -143,5 +116,9 @@ public class UserController {
 
     public String userLogin() {
         return "prova";
+    }
+
+    public String getProductsViewTitle() {
+        return productsViewTitle;
     }
 }

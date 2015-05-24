@@ -2,14 +2,14 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="title">${userController.product.name} - Details</ui:define>
+    <ui:define name="title">Details for #{userController.product.name} </ui:define>
 
     <ui:define name="content">
-        <f:view>
-            <h1>${userController.product.name}</h1><br/>
-            Price: ${userController.product.price}<br/>
-            Code: ${userController.product.code}<br/>
-            Description: ${userController.product.description}<br/>
-        </f:view>
+
+            <h1>#{userController.product.name}</h1><br/>
+            Price: #{userController.product.price}<br/>
+            Code: #{userController.product.code}<br/>
+            Description: #{userController.product.description}<br/>
+
     </ui:define>
 </ui:composition>

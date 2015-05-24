@@ -6,13 +6,18 @@
     <ui:define name="title">Login</ui:define>
 
     <ui:define name="content">
-    <h:form>
-        <label>Email: <h:inputText value="#{userController.email}" required="true"/>
-        </label>
-        <label>Password: <h:inputSecret value="#{userController.password}" required="true"/>
-        </label>
-        <h:commandButton action="#{userController.userLogin}" value="Login"/>
-    </h:form>
-</ui:define>
-
+        <br/>
+        <f:view>
+            <h:form>
+                <h:panelGrid columns="2" rendered="#{!login.loggedIn}">
+                        <h:outputLabel for="username">Username:</h:outputLabel>
+                        <h:inputText id="username" value="#{login.email}"/>
+                        <h:outputLabel for="password">Password:</h:outputLabel>
+                        <h:inputSecret id="password" value="#{login.password}"/>
+                </h:panelGrid>
+                <h:commandButton value="Login" action="#{login.login}" rendered="#{!login.isLoggedIn}"/>
+                <h:commandButton value="Logout" action="#{login.logout}" rendered="#{login.isLoggedIn}"/>
+            </h:form>
+        </f:view>
+    </ui:define>
 </ui:composition>

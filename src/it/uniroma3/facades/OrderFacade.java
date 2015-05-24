@@ -2,6 +2,7 @@ package it.uniroma3.facades;
 
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
+import it.uniroma3.model.enums.OrderState;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,9 +27,9 @@ public class OrderFacade {
     }
 
 
-    public List<Order> getOpenOrders() {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.processed IS NULL");
-        return (List<Order>) q.getResultList();
+    public List getOpenOrders() {
+        Query q = this.em.createQuery("SELECT o FROM orders o WHERE o.state = " + OrderState.CLOSED);
+        return q.getResultList();
     }
 
 

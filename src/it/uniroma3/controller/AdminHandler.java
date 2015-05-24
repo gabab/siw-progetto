@@ -7,20 +7,25 @@ import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Product;
+import it.uniroma3.model.enums.OrderState;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.util.List;
 
 @ManagedBean
 @SessionScoped
 public class AdminHandler {
 
     private Order order;
+    private List orders;
     private Customer customer;
+    @EJB(beanName = "customers")
     private CustomerFacade cf;
     @EJB(beanName = "product")
     private ProductFacade pf;
+    @EJB(beanName = "orders")
     private OrderFacade of;
 
     public Customer getCustomer() {
@@ -31,12 +36,26 @@ public class AdminHandler {
         this.customer = customer;
     }
 
+    public List getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List orders) {
+        this.orders = orders;
+    }
+
     public Order getOrder() {
         return order;
     }
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+
+    public String getOpenOrders() {
+        this.orders = this.of.getOpenOrders();
+        return "openOrders";
     }
 
     public String getCustomerInfo(Long orderID) {
@@ -58,6 +77,9 @@ public class AdminHandler {
             p.setInStock(p.getInStock() - ol.getQuantity());
             this.pf.updateProduct(p);
         }
+        current.setState(OrderState.PROCESSED);
         return "success";
     }
+
+
 }

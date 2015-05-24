@@ -6,7 +6,8 @@
     <ui:define name="title">Open Orders</ui:define>
 
     <ui:define name="content">
-            <h1>My Orders</h1>
+        <h1>My Orders</h1>
+        <f:view>
             <h:form>
                 <table>
                     <tr>
@@ -17,14 +18,15 @@
                     <ui:repeat var="o" value="#{customerHandler.orders}">
                         <tr>
                             order
-                            <td>${o.opened}</td>
-                            <td>${o.closed}</td>
-                            <td>${o.processed}</td>
+                            <td>#{o.opened}</td>
+                            <td>#{o.closed}</td>
+                            <td>#{o.processed}</td>
                             <td><h:commandLink action="#{adminHandler.viewOrderDetails}" value="Details"/></td>
                             <td><h:commandLink action="#{adminHandler.processOrder(o.productID)}" value="Process"/></td>
                         </tr>
                     </ui:repeat>
                 </table>
             </h:form>
+        </f:view>
     </ui:define>
 </ui:composition>

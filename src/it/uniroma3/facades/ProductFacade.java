@@ -22,20 +22,19 @@ public class ProductFacade {
         this.em = em;
     }
 
-    public Product getProduct(Long id){
+    public Product getProduct(Long id) {
         return this.em.find(Product.class, id);
     }
 
-    public List<Product> getAllProducts() {
-        List<Product> products = (List<Product>) this.em.createQuery("SELECT p FROM Product p").getResultList();
-        return products;
+    public List getAllProducts() {
+        return this.em.createQuery("SELECT p FROM Product p").getResultList();
     }
 
-    public void updateProduct(Product p){
+    public void updateProduct(Product p) {
         this.em.merge(p);
     }
 
-    public List<Product> searchProducts(String searchterm) {
+    public List searchProducts(String searchterm) {
         String id = "";
         searchterm = searchterm.toLowerCase();
         try {
@@ -50,9 +49,12 @@ public class ProductFacade {
         return q.getResultList();
     }
 
-    public Product createProduct(String name, Float price, String code, String description){
-        Product p = new Product(name, code, description, price);
+    public Product createProduct(String name, String code, Float price, String description) {
+        Product p = new Product(name, code, price, description);
         this.em.persist(p);
         return p;
     }
+
+
+
 }

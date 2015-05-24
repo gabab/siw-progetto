@@ -1,28 +1,23 @@
 package it.uniroma3.model;
 
+import it.uniroma3.model.enums.RegistrationState;
+import it.uniroma3.model.enums.UserGroup;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Customer {
+public class Customer extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private RegistrationState registrationState;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
     private String surname;
-
-    @Column(nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;  //?
 
     @OneToOne
     private Address address;
@@ -35,13 +30,14 @@ public class Customer {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
-    public Customer(Date birthDate, String password, String email, String surname, String name, Date registrationDate) {
+    public Customer(String email, String password, String name, String surname, Date birthDate) {
+        super(email, password);
+        this.setGroup(UserGroup.CUSTOMER);
+        this.registrationState = RegistrationState.PENDING;
         this.birthDate = birthDate;
-        this.password = password;
-        this.email = email;
         this.surname = surname;
         this.name = name;
         this.registrationDate = registrationDate;
@@ -49,7 +45,8 @@ public class Customer {
     }
 
     public Customer() {
-
+        super();
+        this.setGroup(UserGroup.CUSTOMER);
     }
 
     @Override
@@ -57,8 +54,8 @@ public class Customer {
         return "Customer{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", email='" + this.getEmail() + '\'' +
+                ", password='" + this.getPassword() + '\'' +
                 ", address=" + address +
                 ", registrationDate=" + registrationDate +
                 ", birthDate=" + birthDate +
@@ -107,22 +104,6 @@ public class Customer {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -154,4 +135,5 @@ public class Customer {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
 }

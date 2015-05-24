@@ -6,12 +6,6 @@
     <persistence-unit name="products2-unit" transaction-type="JTA">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <jta-data-source>PostgreSQL Database2</jta-data-source>
-        <class>it.uniroma3.model.Product</class>
-        <class>it.uniroma3.model.Address</class>
-        <class>it.uniroma3.model.Customer</class>
-        <class>it.uniroma3.model.Order</class>
-        <class>it.uniroma3.model.OrderLine</class>
-        <class>it.uniroma3.model.Provider</class>
         <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
         </properties>

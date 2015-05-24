@@ -1,0 +1,49 @@
+<ui:composition template="templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="title">Request registration</ui:define>
+    <ui:define name="content">
+
+        <h1>Registration</h1>
+
+        Insert your data here. All fields are mandatory.
+        <br/>
+        <br/>
+
+        <f:view>
+            <h:form>
+                <label>Name:
+                    <h:inputText value="#{registration.name}"
+                                 required="true"
+                                 requiredMessage="Name is mandatory" id="name"/></label><h:message for="name"/>
+                <br/><br/>
+                <label>Surname:
+                    <h:inputText value="#{registration.surname}"
+                                 required="true"
+                                 requiredMessage="Surname is mandatory" id="surname"/></label><h:message for="surname"/>
+                <br/><br/>
+                <label>Date of Birth:
+                    <h:inputText value="#{registration.birthDate}"
+                                 required="true"
+                                 requiredMessage="Date is mandatory" id="birthdate"><f:convertDateTime pattern="dd-M-yyyy"/></h:inputText></label><h:message
+                    for="birthdate"/>
+                <br/><br/>
+                <label>Email:
+                    <h:inputText value="#{registration.email}"
+                                 required="true"
+                                 requiredMessage="Email is mandatory" id="email"/></label><h:message for="email"/>
+                <br/><br/>
+                <label>Password:
+                    <h:inputSecret value="#{registration.password}"
+                                   required="true"
+                                   requiredMessage="Password is mandatory">
+                        <f:validateLength minimum="6"/></h:inputSecret>
+                </label>
+                <h:commandButton value="Submit" action="#{registration.requestRegistration}"/>
+            </h:form>
+        </f:view>
+    </ui:define>
+
+</ui:composition>

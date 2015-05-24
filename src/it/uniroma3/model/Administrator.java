@@ -1,8 +1,15 @@
 package it.uniroma3.model;
 
-import javax.persistence.Entity;
+import it.uniroma3.model.enums.UserGroup;
+
+import javax.persistence.*;
 
 @Entity
-public class Administrator {
+public class Administrator extends User {
 
+
+    public Administrator() {
+        super();
+        this.setGroup(UserGroup.ADMINISTRATOR);
+    }
 }

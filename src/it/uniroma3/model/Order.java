@@ -1,6 +1,9 @@
 package it.uniroma3.model;
 
+import it.uniroma3.model.enums.OrderState;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,12 +11,10 @@ import java.util.List;
 @Table(name = "orders")
 public class Order {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @OneToOne
-    private Customer customer;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date opened;
@@ -24,17 +25,34 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date processed;
 
+    @ManyToOne
+    private Customer customer;
+
     @OneToMany
     @JoinColumn(name = "orders_id")
     private List<OrderLine> orderlines;
+
+    @Column(nullable = false)
+    public OrderState state;
+
 
     public Order() {
 
     }
 
-    public Order(Date opened, Customer customer) {
-        this.opened = opened;
+    public Order(Customer customer) {
+        this.state = OrderState.OPENED;
+        this.opened = new Date();
         this.customer = customer;
+        this.orderlines = new ArrayList<>();
+    }
+
+    public OrderState getState() {
+        return state;
+    }
+
+    public void setState(OrderState state) {
+        this.state = state;
     }
 
     public Customer getCustomer() {
@@ -46,7 +64,6 @@ public class Order {
     }
 
     public Date getOpened() {
-
         return opened;
     }
 

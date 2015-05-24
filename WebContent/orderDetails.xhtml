@@ -3,13 +3,16 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="title">Order no. ${customerHandler.order.productID}</ui:define>
+    <ui:define name="title">Order no. #{customerHandler.order.id}</ui:define>
 
     <ui:define name="content">
+
+
+            <h1>Order no. #{customerHandler.order.id}</h1>
+            Opened: #{customerHandler.order.opened}
+            Closed: #{customerHandler.order.closed}
+            Processed: #{customerHandler.order.processed}
         <f:view>
-            <h1>Order no. ${customerHandler.order.productID}</h1>
-            Opened: ${customerHandler.order.opened} Closed: ${customerHandler.order.closed}
-            Processed: ${customerHandler.order.processed}
             <h:form>
                 <table>
                     <tr>
@@ -20,10 +23,10 @@
                     </tr>
                     <ui:repeat var="ol" value="#{customerHandler.order.orderlines}">
                         <tr>
-                            <td>${ol.product.name}</td>
-                            <td>${ol.unitPrice}</td>
-                            <td>${ol.quantity}</td>
-                            <td>${ol.quantity * ol.unitPrice}</td>
+                            <td>#{ol.product.name}</td>
+                            <td>#{ol.unitPrice}</td>
+                            <td>#{ol.quantity}</td>
+                            <td>#{ol.quantity * ol.unitPrice}</td>
                         </tr>
                     </ui:repeat>
                 </table>

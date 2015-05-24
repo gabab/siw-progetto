@@ -3,10 +3,11 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="title">Product Catalog</ui:define>
+    <ui:define name="title">#{userController.productsViewTitle}</ui:define>
 
     <ui:define name="content">
-            <h1>Products</h1>
+        <h1>Products</h1>
+        <f:view>
             <h:form>
                 <table>
                     <tr>
@@ -17,14 +18,14 @@
                     </tr>
                     <ui:repeat var="p" value="#{userController.products}">
                         <tr>
-                            <td><h:commandLink action="#{userController.findProduct(p.productID)}" value="#{p.name}">
-                            </h:commandLink></td>
-                            <td>${p.productCode}</td>
-                            <td>${p.price}</td>
-                            <td>${p.description}</td>
+                            <td><h:commandLink action="#{userController.findProduct(p.id)}" value="#{p.name}"/></td>
+                            <td>#{p.code}</td>
+                            <td>#{p.price}</td>
+                            <td>#{p.description}</td>
                         </tr>
                     </ui:repeat>
                 </table>
             </h:form>
+        </f:view>
     </ui:define>
 </ui:composition>
