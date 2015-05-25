@@ -12,7 +12,7 @@ import java.util.List;
 @Stateless(name = "customer")
 public class CustomerFacade {
 
-    @PersistenceContext(unitName = "products2-unit")
+    @PersistenceContext(unitName = "siw-unit")
     private EntityManager em;
 
     public EntityManager getEm() {
@@ -41,5 +41,9 @@ public class CustomerFacade {
         return null;
     }
 
-
+    public Order createOrder() {
+        Order order = new Order();
+        em.persist(order);
+        return order;
+    }
 }

@@ -12,28 +12,22 @@ import java.util.List;
 public class Order {
 
 
+    @Column(nullable = false)
+    public OrderState state;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date opened;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date closed;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date processed;
-
     @ManyToOne
     private Customer customer;
-
     @OneToMany
     @JoinColumn(name = "orders_id")
     private List<OrderLine> orderlines;
-
-    @Column(nullable = false)
-    public OrderState state;
 
 
     public Order() {
@@ -45,6 +39,11 @@ public class Order {
         this.opened = new Date();
         this.customer = customer;
         this.orderlines = new ArrayList<>();
+    }
+
+
+    public void addOrderLine(OrderLine ol) {
+        this.orderlines.add(ol);
     }
 
     public OrderState getState() {

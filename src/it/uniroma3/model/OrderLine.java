@@ -19,7 +19,8 @@ public class OrderLine {
     @OneToOne(fetch = FetchType.LAZY)
     private Product product;
 
-    public OrderLine(Float unitPrice, Integer quantity) {
+    public OrderLine(Product product, Float unitPrice, Integer quantity) {
+        this.product = product;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
     }

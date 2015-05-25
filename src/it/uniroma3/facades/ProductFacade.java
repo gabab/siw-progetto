@@ -11,7 +11,7 @@ import java.util.List;
 @Stateless(name = "product")
 public class ProductFacade {
 
-    @PersistenceContext(unitName = "products2-unit")
+    @PersistenceContext(unitName = "siw-unit")
     private EntityManager em;
 
     public EntityManager getEm() {

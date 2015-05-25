@@ -13,7 +13,7 @@ import java.util.Date;
 @Stateless(name = "user")
 public class UserFacade {
 
-    @PersistenceContext(unitName = "products2-unit")
+    @PersistenceContext(unitName = "siw-unit")
     private EntityManager em;
 
     public EntityManager getEm() {
