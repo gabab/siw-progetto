@@ -135,5 +135,17 @@ public class Customer extends User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+    
+    
+    
+    public Order getOrder(Long id){
+        Order ord = new Order();
+    	for(Order o : orders){
+    		if(o.getId() == id)
+    			ord = o;}
+    	  return ord;
+    	}
+    		
+    }
 
-}
+
