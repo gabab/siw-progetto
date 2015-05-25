@@ -40,6 +40,11 @@ public class CustomerFacade {
     public List<Order> getOrders() {
         return null;
     }
+  
+    public Order createOrder(){
+     Order order = new Order();
+     em.persist(order);
+     return order;}
 
 
 }
