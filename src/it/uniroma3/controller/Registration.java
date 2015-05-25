@@ -11,8 +11,6 @@ import java.util.Date;
 @ManagedBean
 @SessionScoped
 public class Registration {
-    @EJB(name = "customer")
-    private CustomerFacade cf;
     @EJB(name = "user")
     private UserFacade uf;
     private String name;
@@ -62,7 +60,7 @@ public class Registration {
     }
 
     public String requestRegistration() {
-        this.cf.createCustomer(email, password, name, surname, birthDate);
+        this.uf.createCustomer(email, password, name, surname, birthDate);
         return "confirmation";
     }
 

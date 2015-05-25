@@ -32,11 +32,7 @@ public class CustomerFacade {
         return null;
     }
 
-    public void createCustomer(String email, String password, String name, String surname, Date birthDate) {
-        Customer c = new Customer(email, password, name, surname, birthDate, UserGroup.CUSTOMER_PENDING);
-        c.setRegistrationDate(new Date());
-        this.em.persist(c);
-    }
+
 
     public List<Order> getOrders() {
         return null;

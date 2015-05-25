@@ -3,6 +3,7 @@ package it.uniroma3.controller;
 import it.uniroma3.facades.CustomerFacade;
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.facades.ProductFacade;
+import it.uniroma3.facades.UserFacade;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.OrderLine;
@@ -21,8 +22,8 @@ public class AdminHandler {
     private Order order;
     private List orders;
     private Customer customer;
-    @EJB(beanName = "customers")
-    private CustomerFacade cf;
+    @EJB(beanName = "user")
+    private UserFacade uf;
     @EJB(beanName = "product")
     private ProductFacade pf;
     @EJB(beanName = "orders")

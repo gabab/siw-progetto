@@ -39,7 +39,7 @@ public class UserFacade {
 
 
     public Customer findCustomer(String email) {
-        return (Customer) findUser(email, UserGroup.CUSTOMER);
+        return (Customer) findUser(email, UserGroup.CUSTOMER_CONFIRMED);
     }
 
     public Administrator findAdmin(String email) {
@@ -47,7 +47,7 @@ public class UserFacade {
     }
 
     public void createCustomer(String email, String password, String name, String surname, Date birthDate) {
-        Customer c = new Customer(email, password, name, surname, birthDate);
+        Customer c = new Customer(email, password, name, surname, birthDate, UserGroup.CUSTOMER_PENDING);
         c.setRegistrationDate(new Date());
         this.em.persist(c);
     }
