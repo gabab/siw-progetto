@@ -1,6 +1,5 @@
 package it.uniroma3.model;
 
-import it.uniroma3.model.enums.RegistrationState;
 import it.uniroma3.model.enums.UserGroup;
 
 import javax.persistence.*;
@@ -10,8 +9,6 @@ import java.util.List;
 
 @Entity
 public class Customer extends User {
-
-    private RegistrationState registrationState;
 
     @Column(nullable = false)
     private String name;
@@ -33,20 +30,16 @@ public class Customer extends User {
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
-    public Customer(String email, String password, String name, String surname, Date birthDate) {
-        super(email, password);
-        this.setGroup(UserGroup.CUSTOMER);
-        this.registrationState = RegistrationState.PENDING;
+    public Customer(String email, String password, String name, String surname, Date birthDate, UserGroup group) {
+        super(email, password, name, surname);
+        this.setGroup(group);
         this.birthDate = birthDate;
-        this.surname = surname;
-        this.name = name;
-        this.registrationDate = registrationDate;
+        this.registrationDate = new Date();
         this.orders = new ArrayList<>();
     }
 
     public Customer() {
         super();
-        this.setGroup(UserGroup.CUSTOMER);
     }
 
     @Override
@@ -85,23 +78,6 @@ public class Customer extends User {
         result = 31 * result + getPassword().hashCode();
         result = 31 * result + getBirthDate().hashCode();
         return result;
-    }
-
-    public String getName() {
-
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public Address getAddress() {

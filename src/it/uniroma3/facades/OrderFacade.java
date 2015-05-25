@@ -30,7 +30,7 @@ public class OrderFacade {
 
 
     public List getOpenOrders() {
-        Query q = this.em.createQuery("SELECT o FROM orders o WHERE o.state = " + OrderState.CLOSED);
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + OrderState.CLOSED);
         return q.getResultList();
     }
 

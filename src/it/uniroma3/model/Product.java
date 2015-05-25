@@ -23,17 +23,25 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private List<Provider> providers;
 
-    public Product(String name, String code, Float price,String description) {
+    public Product(String name, String code, Float price, String description) {
         this.name = name;
         this.code = code;
         this.description = description;
         this.price = price;
         this.inStock = 0;
-        this.providers = new ArrayList<Provider>();
+        this.providers = new ArrayList<>();
     }
 
     public Product() {
 
+    }
+
+    public List<Provider> getProviders() {
+        return providers;
+    }
+
+    public void setProviders(List<Provider> providers) {
+        this.providers = providers;
     }
 
     public Long getId() {
@@ -75,7 +83,7 @@ public class Product {
     }
 
     public String getName() {
-        return name; 
+        return name;
     }
 
     public void setName(String name) {

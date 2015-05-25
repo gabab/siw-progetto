@@ -41,6 +41,9 @@ public class Order {
         this.orderlines = new ArrayList<>();
     }
 
+    public Long getId() {
+        return id;
+    }
 
     public void addOrderLine(OrderLine ol) {
         this.orderlines.add(ol);
@@ -94,10 +97,7 @@ public class Order {
         this.orderlines = orderlines;
     }
 
-    
-    
-    public void addOrderLine(OrderLine ol){
-    	this.orderlines.add(ol);
-    }
-
 }
+
+
+
