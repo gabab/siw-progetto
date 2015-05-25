@@ -20,7 +20,7 @@ public class OrderLine {
     private Product product;
 
     public OrderLine(Product product, Float unitPrice, Integer quantity) {
-        this.product = product;
+    	this.product = product;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
     }

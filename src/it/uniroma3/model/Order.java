@@ -94,8 +94,10 @@ public class Order {
         this.orderlines = orderlines;
     }
 
-    public Long getId() {
-        return id;
+    
+    
+    public void addOrderLine(OrderLine ol){
+    	this.orderlines.add(ol);
     }
 
 }

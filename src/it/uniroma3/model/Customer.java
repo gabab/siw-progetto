@@ -11,8 +11,13 @@ import java.util.List;
 @Entity
 public class Customer extends User {
 
-    @Column(nullable = false)
     private RegistrationState registrationState;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String surname;
 
     @OneToOne
     private Address address;
@@ -29,31 +34,26 @@ public class Customer extends User {
     private List<Order> orders;
 
     public Customer(String email, String password, String name, String surname, Date birthDate) {
-        super(email, password, name, surname);
+        super(email, password);
         this.setGroup(UserGroup.CUSTOMER);
         this.registrationState = RegistrationState.PENDING;
         this.birthDate = birthDate;
+        this.surname = surname;
+        this.name = name;
         this.registrationDate = registrationDate;
         this.orders = new ArrayList<>();
     }
 
     public Customer() {
         super();
-    }
-
-    public RegistrationState getRegistrationState() {
-        return registrationState;
-    }
-
-    public void setRegistrationState(RegistrationState registrationState) {
-        this.registrationState = registrationState;
+        this.setGroup(UserGroup.CUSTOMER);
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "name='" + this.getName() + '\'' +
-                ", surname='" + this.getSurname() + '\'' +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 ", email='" + this.getEmail() + '\'' +
                 ", password='" + this.getPassword() + '\'' +
                 ", address=" + address +
@@ -87,6 +87,23 @@ public class Customer extends User {
         return result;
     }
 
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -118,16 +135,17 @@ public class Customer extends User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-
-
-    public Order getOrder(Long id) {
+    
+    
+    
+    public Order getOrder(Long id){
         Order ord = new Order();
-        for (Order o : orders) {
-            if (o.getId() == id)
-                ord = o;
-        }
-        return ord;
+    	for(Order o : orders){
+    		if(o.getId() == id)
+    			ord = o;}
+    	  return ord;
+    	}
+    		
     }
 
-}
 

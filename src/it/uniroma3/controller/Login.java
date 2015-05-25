@@ -7,7 +7,6 @@ import it.uniroma3.model.enums.UserGroup;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.util.Objects;
 
 
 @ManagedBean
