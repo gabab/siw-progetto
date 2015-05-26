@@ -17,7 +17,7 @@ import java.util.List;
 @SessionScoped
 public class UserController {
     private static final long serialVersionUID = 1L;
-    @ManagedProperty(value = "#{param.id}")
+    //@ManagedProperty(value = "#{param.id}")
     private Long productID;
     private Product product;
     private List products;
