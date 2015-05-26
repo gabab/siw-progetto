@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 
-@ManagedBean
+@ManagedBean(name = "login")
 @SessionScoped
 public class Login {
 
@@ -53,7 +53,7 @@ public class Login {
 
 
     public boolean isAdmin() {
-        return user.getGroup() == UserGroup.ADMINISTRATOR;
+        return isLoggedIn() && user.getGroup() == UserGroup.ADMINISTRATOR;
     }
 
     public boolean isLoggedIn() {
@@ -65,7 +65,7 @@ public class Login {
         if (u == null) {
             this.errorMessage = "Invalid email";
             return "login";
-        } else if (!this.password.equals(u.getPassword())){
+        } else if (!this.password.equals(u.getPassword())) {
             this.errorMessage = "Invalid password";
             return "login";
         }
@@ -75,5 +75,9 @@ public class Login {
 
     public void logout() {
         user = null;
+    }
+
+    public User getGetCustomer() {
+        return (!isAdmin()) ? user : null;
     }
 }

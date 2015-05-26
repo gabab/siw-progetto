@@ -39,13 +39,6 @@ public class OrderFacade {
         return q.getResultList();
     }
 
-
-    public List getOrdersState(OrderState state, Long customerID) {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state + "AND o.customer = " + customerID);
-        return q.getResultList();
-    }
-
-
     public Order getOrder(Long orderID) {
         return this.em.find(Order.class, orderID);
     }

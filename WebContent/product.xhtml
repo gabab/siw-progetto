@@ -1,15 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
-    <ui:define name="title">Details for #{userController.product.name}</ui:define>
+                xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">#{userController.product.name}</ui:define>
 
     <ui:define name="content">
-            <div><p:graphicImage value="#{userController.product.image}"/></div>
+        <div><h:graphicImage value="/images/#{userController.product.image}"/></div>
+        <div>
             <h1>#{userController.product.name}</h1><br/>
-            Price: #{userController.product.price}<br/>
-            Code: #{userController.product.code}<br/>
-            Description: #{userController.product.description}<br/>
-
+        </div>
+        <div>
+            <b>Price:</b> #{userController.product.price} €<br/>
+        </div>
+        <div>
+            <b>Code:</b>
+            #{userController.product.code}<br/>
+        </div>
+        <div>
+            <b>Description:</b><br/>
+            #{userController.product.description}<br/>
+        </div>
     </ui:define>
 </ui:composition>

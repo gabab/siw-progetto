@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -17,7 +18,8 @@
                     </tr>
                     <ui:repeat var="p" value="#{userController.products}">
                         <tr>
-                            <td><h:commandLink action="#{userController.findProduct(p.id)}" value="#{p.name}"/></td>
+                            <td><h:outputLink
+                                    value="#{userController.findProduct(p.id)}.xhtml?id=#{p.id}">#{p.name}</h:outputLink></td>
                             <td>#{p.code}</td>
                             <td>#{p.price}</td>
                             <td>#{p.description}</td>

@@ -7,6 +7,7 @@ import it.uniroma3.model.Order;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.util.List;
 
@@ -14,11 +15,28 @@ import java.util.List;
 @SessionScoped
 public class CustomerHandler {
 
+    //@ManagedProperty(value = "#{login.getCustomer}")
     private Customer currentCustomer;
     private List<Order> orders;
     private Order order;
     @EJB(name = "order")
     private OrderFacade orderFacade;
+
+    public OrderFacade getOrderFacade() {
+        return orderFacade;
+    }
+
+    public void setOrderFacade(OrderFacade orderFacade) {
+        this.orderFacade = orderFacade;
+    }
+
+    public Customer getCurrentCustomer() {
+        return currentCustomer;
+    }
+
+    public void setCurrentCustomer(Customer currentCustomer) {
+        this.currentCustomer = currentCustomer;
+    }
 
     public Order getOrder() {
         return order;

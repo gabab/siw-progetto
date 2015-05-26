@@ -6,6 +6,7 @@ import it.uniroma3.model.Product;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -16,6 +17,7 @@ import java.util.List;
 @SessionScoped
 public class UserController {
     private static final long serialVersionUID = 1L;
+    @ManagedProperty(value = "#{param.id}")
     private Long productID;
     private Product product;
     private List products;
