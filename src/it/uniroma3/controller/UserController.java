@@ -47,10 +47,6 @@ public class UserController {
         this.password = password;
     }
 
-    private String avoidViewExpiredException(String s) {
-        return s; //+ "?faces-redirect=true";
-    }
-
     public String listProducts() {
         this.products = this.productFacade.getAllProducts();
         this.productsViewTitle = "Products Catalog";

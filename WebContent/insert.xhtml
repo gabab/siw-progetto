@@ -2,11 +2,12 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
     <ui:define name="title">Insert Product</ui:define>
     <ui:define name="content">
         <f:view>
-        <h:form>
+            <h:form enctype="multipart/form-data">
                 <label>Name:
                     <h:inputText value="#{createProduct.name}"
                                  required="true"
@@ -32,7 +33,8 @@
                 <label>Description:
                     <h:inputTextarea rows="6" cols="30" value="#{createProduct.description}" required="false"/>
                 </label><br/><br/>
-                <h:commandButton value="Submit" action="#{createProduct.insertProduct}"/>
+                    <p:fileUpload id="fileuploader" value="#{createProduct.image}" mode="simple"/>
+                <p:commandButton value="Submit" action="#{createProduct.insertProduct}" ajax="false"/>
             </h:form>
         </f:view>
     </ui:define>

@@ -7,13 +7,25 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>projectDirectory</param-name>
+        <param-value>C:/Users/Gabriele/OneDrive/Workspace/IntellijIdea/siw-progetto/WebContent</param-value>
+    </context-param>
     <servlet>
-        <servlet-name>ee</servlet-name>
+        <servlet-name>Faces</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces</servlet-name>
+    </filter-mapping>
     <servlet-mapping>
-        <servlet-name>ee</servlet-name>
+        <servlet-name>Faces</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 </web-app>
