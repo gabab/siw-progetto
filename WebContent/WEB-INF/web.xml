@@ -8,8 +8,8 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <context-param>
-        <param-name>projectDirectory</param-name>
-        <param-value>C:/Users/Gabriele/OneDrive/Workspace/IntellijIdea/siw-progetto/WebContent</param-value>
+        <param-name>imagesDirectory</param-name>
+        <param-value>C:/siw-progetto/images</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces</servlet-name>

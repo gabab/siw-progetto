@@ -5,12 +5,11 @@ import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Product;
 import it.uniroma3.model.enums.OrderState;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.List;
 
 @Stateless(name = "order")
 public class OrderFacade {
@@ -28,9 +27,14 @@ public class OrderFacade {
         this.em = em;
     }
 
-
-    public List getOpenOrders() {
+    public List getClosedOrders() {
         Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + OrderState.CLOSED);
+        return q.getResultList();
+    }
+
+
+    public List getOrdersState(OrderState state, Long customerID) {
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state + "AND o.customer = " + customerID);
         return q.getResultList();
     }
 
@@ -38,12 +42,12 @@ public class OrderFacade {
     public Order getOrder(Long orderID) {
         return this.em.find(Order.class, orderID);
     }
-    
-    public void addOrderLine(int quantity, Long idProduct, Long idOrder){
-		Order order = em.find(Order.class, idOrder);
-		Product product = em.find(Product.class, idProduct);
-		Float price = product.getPrice();
-		order.addOrderLine(new OrderLine(product, price, quantity));
-		em.persist(order);
-	}	
+
+    public void addOrderLine(int quantity, Long idProduct, Long idOrder) {
+        Order order = em.find(Order.class, idOrder);
+        Product product = em.find(Product.class, idProduct);
+        Float price = product.getPrice();
+        order.addOrderLine(new OrderLine(product, price, quantity));
+        em.persist(order);
+    }
 }

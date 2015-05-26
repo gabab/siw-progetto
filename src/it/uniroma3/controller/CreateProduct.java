@@ -71,25 +71,25 @@ public class CreateProduct {
     }
 
     public String insertProduct() {
-        String filePath = getFilePath();
-        this.product = this.productFacade.createProduct(name, code, price, description, filePath);
+        String imageName = getFilePath();
+        this.product = this.productFacade.createProduct(name, code, price, description, imageName);
         return "product";
     }
 
     private String getFilePath() {
-        String filePath = null;
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        String directory = externalContext.getInitParameter("imagesDirectory");
+        String imagePath = directory + "/default.jpg";
         try {
             InputStream input = image.getInputstream();
-            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-            String directory = externalContext.getInitParameter("projectDirectory");
-            filePath = "/resources/images/products/" + code + ".png";
-            Path file = Paths.get(directory + filePath);
+            imagePath = code + ".jpg";
+            Path file = Paths.get(directory + "/" + imagePath);
             Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return filePath;
+        return imagePath;
     }
 
     public UploadedFile getImage() {

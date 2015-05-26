@@ -13,7 +13,11 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    public Long getId() {
+		return id;
+	}
+
+	@Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -27,6 +31,8 @@ public abstract class User {
 
     @Column(nullable = false)
     private UserGroup group;
+
+
 
     public User(String email, String password, String name, String surname) {
         this.password = password;

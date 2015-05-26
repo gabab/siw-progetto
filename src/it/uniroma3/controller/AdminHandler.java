@@ -54,8 +54,8 @@ public class AdminHandler {
     }
 
 
-    public String getOpenOrders() {
-        this.orders = this.of.getOpenOrders();
+    public String getClosedOrders() {
+        this.orders = this.of.getClosedOrders();
         return "openOrders";
     }
 
@@ -69,6 +69,7 @@ public class AdminHandler {
         return "orderDetails";
     }
 
+   //TODO: da sistemare
     public String processOrder(Long orderID) {
         Order current = this.of.getOrder(orderID);
         for (OrderLine ol : current.getOrderlines()) {
@@ -81,6 +82,8 @@ public class AdminHandler {
         current.setState(OrderState.PROCESSED);
         return "success";
     }
+
+
 
 
 }

@@ -24,15 +24,6 @@ public class Product {
     private List<Provider> providers;
     private String image;
 
-    public Product(String name, String code, Float price, String description) {
-        this.name = name;
-        this.code = code;
-        this.description = description;
-        this.price = price;
-        this.inStock = 0;
-        this.providers = new ArrayList<>();
-    }
-
     public Product(String name, String code, Float price, String description, String image) {
         this.name = name;
         this.code = code;

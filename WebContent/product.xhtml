@@ -1,11 +1,11 @@
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html">
-    <ui:define name="title">Details for #{userController.product.name} </ui:define>
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+    <ui:define name="title">Details for #{userController.product.name}</ui:define>
 
     <ui:define name="content">
-            <div><img src="#{userController.product.getImage}" /></div>
+            <div><p:graphicImage value="#{userController.product.image}"/></div>
             <h1>#{userController.product.name}</h1><br/>
             Price: #{userController.product.price}<br/>
             Code: #{userController.product.code}<br/>
