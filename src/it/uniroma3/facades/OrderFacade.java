@@ -27,10 +27,15 @@ public class OrderFacade {
     public void setEm(EntityManager em) {
         this.em = em;
     }
-
-
-    public List getOpenOrders() {
+     
+    public List getClosedOrders() {
         Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + OrderState.CLOSED);
+        return q.getResultList();
+    }
+    
+  
+    public List getOrdersState(OrderState state, Long customerID) {
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state + "AND o.customer = " + customerID);
         return q.getResultList();
     }
 
