@@ -4,7 +4,6 @@ package it.uniroma3.controller;
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
-import it.uniroma3.model.enums.OrderState;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -18,7 +17,6 @@ public class CustomerHandler {
     private Customer currentCustomer;
     private List<Order> orders;
     private Order order;
-
     @EJB(name = "order")
     private OrderFacade orderFacade;
 
@@ -31,8 +29,7 @@ public class CustomerHandler {
     }
 
     public String getOrders() {
-
-        this.orders = this.orderFacade.getOrdersState(OrderState.OPENED, this.currentCustomer.getId());
+        this.orders = this.currentCustomer.getOrders();
         return "myOrders";
     }
 

@@ -43,6 +43,10 @@ public class ProductFacade {
                         "OR LOWER(p.description) LIKE '%" + searchterm + "%')");
         return q.getResultList();
     }
+     
+
+  
+    }
 
     public Product createProduct(String name, String code, Float price, String description, String image) {
         Product p = new Product(name, code, price, description, image);

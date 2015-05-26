@@ -31,6 +31,8 @@ public abstract class User {
 
     @Column(nullable = false)
     private UserGroup group;
+    
+    
 
 
 
