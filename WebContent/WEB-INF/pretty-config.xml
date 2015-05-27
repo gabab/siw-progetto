@@ -1,0 +1,31 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd
+http://ocpsoft.org/schema/rewrite-config-prettyfaces ">
+
+    <url-mapping id="viewProduct">
+        <pattern value="/product/#{userController.id}"/>
+        <view-id value="/product.xhtml"/>
+        <action>#{userController.findProduct}</action>
+    </url-mapping>
+
+    <url-mapping id="viewProduct">
+        <pattern value="/"/>
+        <view-id value="/index.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="viewCatalog">
+        <pattern value="/products"/>
+        <view-id value="/products.xhtml"/>
+        <action>#{userController.listProducts}</action>
+    </url-mapping>
+
+    <url-mapping id="search">
+        <pattern value="/search/#{userController.searchterm}"/>
+        <view-id value="/products.xhtml"/>
+        <action>#{userController.searchProducts}</action>
+    </url-mapping>
+
+
+</pretty-config>

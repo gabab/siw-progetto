@@ -11,19 +11,25 @@
         <param-name>imagesDirectory</param-name>
         <param-value>C:/siw-progetto/images</param-value>
     </context-param>
+
     <servlet>
         <servlet-name>Faces</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
-        <servlet-name>images</servlet-name>
-        <servlet-class>it.uniroma3.servlet.ImageServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>images</servlet-name>
-        <url-pattern>/images/*</url-pattern>
-    </servlet-mapping>
+
+    <filter>
+        <filter-name>Pretty Filter</filter-name>
+        <filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>Pretty Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
     <filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>

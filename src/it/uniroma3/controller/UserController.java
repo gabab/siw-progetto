@@ -4,21 +4,15 @@ import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import java.util.List;
 
 @ManagedBean
 @SessionScoped
 public class UserController {
     private static final long serialVersionUID = 1L;
-    //@ManagedProperty(value = "#{param.id}")
-    private Long productID;
+    private Long id;
     private Product product;
     private List products;
 
@@ -56,7 +50,7 @@ public class UserController {
     }
 
     public String findProduct() {
-        this.product = this.productFacade.getProduct(productID);
+        this.product = this.productFacade.getProduct(id);
         return "product";
     }
 
@@ -80,12 +74,13 @@ public class UserController {
 
 
 
-    public Long getProductID() {
-        return productID;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setProductID(Long productID) {
-        this.productID = productID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Product getProduct() {

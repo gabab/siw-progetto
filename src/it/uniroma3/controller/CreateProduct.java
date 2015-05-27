@@ -71,15 +71,15 @@ public class CreateProduct {
     }
 
     public String insertProduct() {
-        String imageName = getFilePath();
-        this.product = this.productFacade.createProduct(name, code, price, description, imageName);
+        this.saveImage();
+        this.product = this.productFacade.createProduct(name, code, price, description);
         return "product";
     }
 
-    private String getFilePath() {
+    private void saveImage() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         String directory = externalContext.getInitParameter("imagesDirectory");
-        String imagePath = directory + "/default.jpg";
+        String imagePath;
         try {
             InputStream input = image.getInputstream();
             imagePath = code + ".jpg";
@@ -89,7 +89,6 @@ public class CreateProduct {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return imagePath;
     }
 
     public UploadedFile getImage() {

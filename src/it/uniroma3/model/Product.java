@@ -22,16 +22,14 @@ public class Product {
     private Integer inStock;
     @ManyToMany(mappedBy = "products")
     private List<Provider> providers;
-    private String image;
 
-    public Product(String name, String code, Float price, String description, String image) {
+    public Product(String name, String code, Float price, String description) {
         this.name = name;
         this.code = code;
         this.description = description;
         this.price = price;
         this.inStock = 0;
         this.providers = new ArrayList<>();
-        this.image = image;
     }
 
     public Product() {
@@ -124,11 +122,4 @@ public class Product {
         this.code = code;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getImage() {
-        return image;
-    }
 }

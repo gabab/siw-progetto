@@ -22,7 +22,7 @@
                             <td>#{o.opened}</td>
                             <td>#{o.closed}</td>
                             <td>#{o.processed}</td>
-                            <td><h:commandLink action="#{customerHandler.findOrder(o.productID)}" value="Details">
+                            <td><h:commandLink action="#{customerHandler.findOrder(o.id)}" value="Details">
                             </h:commandLink></td>
                         </tr>
                     </ui:repeat>

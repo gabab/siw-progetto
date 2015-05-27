@@ -23,7 +23,7 @@
                             <td>#{o.closed}</td>
                             <td>#{o.processed}</td>
                             <td><h:commandLink action="#{adminHandler.viewOrderDetails}" value="Details"/></td>
-                            <td><h:commandLink action="#{adminHandler.processOrder(o.productID)}" value="Process"/></td>
+                            <td><h:commandLink action="#{adminHandler.processOrder(o.id)}" value="Process"/></td>
                         </tr>
                     </ui:repeat>
                 </table>

@@ -2,11 +2,13 @@
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html">
+                xmlns:o="http://omnifaces.org/ui">
     <ui:define name="title">#{userController.product.name}</ui:define>
 
     <ui:define name="content">
-        <div><h:graphicImage value="/images/#{userController.product.image}"/></div>
+        <div>
+            <o:graphicImage value="#{imageController.getImage(userController.product.code)}"/>
+        </div>
         <div>
             <h1>#{userController.product.name}</h1><br/>
         </div>
