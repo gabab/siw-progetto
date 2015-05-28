@@ -70,7 +70,7 @@ public class AdminHandler {
     }
 
    //TODO: da sistemare
-    public String processOrder(Long orderID) {
+   /* public String processOrder(Long orderID) {
         Order current = this.of.getOrder(orderID);
         for (OrderLine ol : current.getOrderlines()) {
             Product p = ol.getProduct();
@@ -81,6 +81,15 @@ public class AdminHandler {
         }
         current.setState(OrderState.PROCESSED);
         return "success";
+    }*/
+    
+    public String processOrder(Long orderID){
+    	Order o = this.of.processOrder(orderID);
+    	return (o != null) ? "success" : "error";
+    	
+//    	Order current =  this.of.getOrder(orderID);
+//    	Product p = //trovo il prodotto usando la ProfuctFacade, nella producti facade cerco il prodotto
+//    			
     }
 
 

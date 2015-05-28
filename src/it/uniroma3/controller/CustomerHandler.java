@@ -2,14 +2,18 @@ package it.uniroma3.controller;
 
 
 import it.uniroma3.facades.OrderFacade;
+import it.uniroma3.facades.ProductFacade;
+import it.uniroma3.facades.UserFacade;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
+import it.uniroma3.model.Product;
+import it.uniroma3.model.enums.OrderState;
+
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import java.util.List;
 
 @ManagedBean
 @SessionScoped
@@ -19,11 +23,32 @@ public class CustomerHandler {
     private Customer currentCustomer;
     private List<Order> orders;
     private Order order;
+    private Order currentOrder;
     @EJB(name = "order")
     private OrderFacade orderFacade;
+    @EJB(name = "product")
+    private ProductFacade productFacade;
+    @EJB(name = "user")
+    private UserFacade userFacade;
+    
+    public void createOrder(){
+    	this.currentOrder = new Order(currentCustomer);
+    }
 
+    public void addProductToOrder(Long productID, int quantity){
+    	Product p = this.productFacade.getProduct(productID);
+    	this.currentOrder.addProductToOrder(p, quantity);
+    }
+    
     public OrderFacade getOrderFacade() {
         return orderFacade;
+    }
+    
+    public String closeOrder() {
+    	this.currentOrder.setState(OrderState.CLOSED);
+    	this.currentCustomer.addOrder(this.currentOrder);
+       	this.userFacade.updateUser(this.currentCustomer);// a cascata una volta che aggiorna il customer aggiorna tutto
+    	return "confirmation";
     }
 
     public void setOrderFacade(OrderFacade orderFacade) {

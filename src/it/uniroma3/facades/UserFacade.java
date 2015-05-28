@@ -28,7 +28,7 @@ public class UserFacade {
         return (User) this.em.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "'").getSingleResult();
     }
 
-    public void updateInfo(User u) {
+    public void updateUser(User u) {
         this.em.merge(u);
     }
 

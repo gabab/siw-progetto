@@ -16,12 +16,12 @@ public class OrderLine {
     @Column(nullable = false)
     private Integer quantity;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Product product;
 
-    public OrderLine(Product product, Float unitPrice, Integer quantity) {
+    public OrderLine(Product product, Integer quantity) {
     	this.product = product;
-        this.unitPrice = unitPrice;
+        this.unitPrice = product.getPrice();
         this.quantity = quantity;
     }
 

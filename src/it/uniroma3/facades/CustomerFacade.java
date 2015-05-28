@@ -1,14 +1,15 @@
 package it.uniroma3.facades;
 
 import it.uniroma3.model.Customer;
-import it.uniroma3.model.Order;
-import it.uniroma3.model.enums.UserGroup;
+
+
+
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.Query;
+
 
 @Stateless(name = "customer")
 public class CustomerFacade {
@@ -25,23 +26,19 @@ public class CustomerFacade {
     }
 
     public Customer getCustomer(Long id) {
-        return null;
+       
+        Customer customer = this.em.find(Customer.class, id);
+        return customer;
     }
 
     public Customer getCustomer(String email) {
-        return null;
+    	Query q = this.em.createQuery("SELECT c FROM Customer c WHERE c.email = " + email);
+        return (Customer) q.getSingleResult();
     }
 
 
 
-    public List<Order> getOrders() {
-        return null;
-    }
+    
   
-    public Order createOrder(){
-     Order order = new Order();
-     em.persist(order);
-     return order;
-    }
-
+   
 }

@@ -42,6 +42,11 @@ public class Customer extends User {
         super();
     }
 
+    
+    public void addOrder(Order o) {
+    	this.orders.add(o);
+    }
+    
     @Override
     public String toString() {
         return "Customer{" +

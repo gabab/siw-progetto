@@ -45,8 +45,8 @@ public class Order {
         return id;
     }
 
-    public void addOrderLine(OrderLine ol) {
-        this.orderlines.add(ol);
+    public void addProductToOrder(Product p, int quantity) {
+       this.orderlines.add(new OrderLine(p, quantity));
     }
 
     public OrderState getState() {
