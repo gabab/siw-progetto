@@ -9,6 +9,7 @@ import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
 import it.uniroma3.model.enums.OrderState;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -46,6 +47,7 @@ public class CustomerHandler {
     
     public String closeOrder() {
     	this.currentOrder.setState(OrderState.CLOSED);
+    	this.currentOrder.setClosed(new Date());
     	this.currentCustomer.addOrder(this.currentOrder);
        	this.userFacade.updateUser(this.currentCustomer);// a cascata una volta che aggiorna il customer aggiorna tutto
     	return "confirmation";
@@ -83,5 +85,11 @@ public class CustomerHandler {
     public String findOrder(Long orderID) {
         this.order = this.orderFacade.getOrder(orderID);
         return "orderDetail";
+    }
+    
+    public void addProductToCart(Long productID, int quantity) {
+    	if (currentOrder == null)
+    		this.createOrder();
+    	this.addProductToOrder(productID, quantity);
     }
 }

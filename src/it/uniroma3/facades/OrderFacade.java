@@ -5,6 +5,7 @@ import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Product;
 import it.uniroma3.model.enums.OrderState;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -58,16 +59,15 @@ public class OrderFacade {
 
 	public Order processOrder(Long orderID) {
 		Order o = this.getOrder(orderID);
-		for (OrderLine ol : o.getOrderlines()) {
+		for (OrderLine ol : o.getOrderlines().values()){
 			Product p = ol.getProduct();
 			if (ol.getQuantity() > p.getInStock())
 				return null;
 			p.setInStock(p.getInStock() - ol.getQuantity());
-
 		}
-
 		o.setState(OrderState.PROCESSED);
-		em.persist(o);
+		o.setClosed(new Date());
+		em.merge(o);
 		return o;
 	}
 	
