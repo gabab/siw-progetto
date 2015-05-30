@@ -2,7 +2,7 @@ package it.uniroma3.controller;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,22 +15,20 @@ import java.nio.file.Paths;
 @ApplicationScoped
 public class ImageController {
 
-    private String imagePath = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("imagesDirectory");
-    private String imageExt = ".jpg";
-
-    public InputStream getImage(String pcode) throws FileNotFoundException {
-        String filename = pcode + imageExt;
-        filename = (Files.exists(Paths.get(imagePath, filename))) ? filename : "default" + imageExt;
-        return new FileInputStream(new File(imagePath, filename));
+    public static String getDefaultPath() {
+        return getPath("default");
     }
 
-
-    public String getPath(String pcode) throws FileNotFoundException {
-        String filename = pcode + imageExt;
-        filename = (Files.exists(Paths.get(imagePath, filename))) ? filename : "default" + imageExt;
-        return imagePath + filename;
+    public static String getPath(String name) {
+        ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
+        String directory = ex.getInitParameter("imagesDirectory");
+        String ext = ".jpg";
+        return directory + "/" + name + ext;
     }
 
-
-
+    public InputStream getImage(String code) throws FileNotFoundException {
+        String filepath = getPath(code);
+        filepath = (Files.exists(Paths.get(filepath))) ? filepath : getDefaultPath();
+        return new FileInputStream(new File(filepath));
+    }
 }

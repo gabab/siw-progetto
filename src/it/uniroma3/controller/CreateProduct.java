@@ -7,8 +7,6 @@ import org.primefaces.model.UploadedFile;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -70,6 +68,8 @@ public class CreateProduct {
         this.name = name;
     }
 
+
+    //TODO: validazione codice prodotto
     public String insertProduct() {
         this.saveImage();
         this.product = this.productFacade.createProduct(name, code, price, description);
@@ -77,13 +77,9 @@ public class CreateProduct {
     }
 
     private void saveImage() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String directory = externalContext.getInitParameter("imagesDirectory");
-        String imagePath;
         try {
             InputStream input = image.getInputstream();
-            imagePath = code + ".jpg";
-            Path file = Paths.get(directory + "/" + imagePath);
+            Path file = Paths.get(ImageController.getPath(code));
             Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
 
         } catch (Exception e) {

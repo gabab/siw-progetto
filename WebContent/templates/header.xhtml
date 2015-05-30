@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
 <ui:composition>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -17,14 +18,18 @@
             <div class="navbar-collapse collapse">
                 <f:view>
                     <h:form>
+                        <h:outputText value="#{login.user.name}" rendered="#{login.loggedIn}"/>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><h:outputLink id="register" value="register.xhtml"
+                            <li><h:outputLink id="register" value="register"
                                               rendered="#{!login.loggedIn}">Register</h:outputLink>
                                 <h:outputLink id="page" value="userpage.xhtml"
                                               rendered="#{login.loggedIn}">My Page</h:outputLink></li>
+                            <li><h:outputLink id="cart" value="shoppingCart.xhtml"
+                                              rendered="#{login.customer}">Cart#{customerHandler.currentOrder.items}</h:outputLink>
+                            </li>
                             <li>
-                                <h:outputLink id="login" value="login.xhtml"
+                                <h:outputLink id="login" value="login"
                                               rendered="#{!login.loggedIn}">Login</h:outputLink>
                                 <h:commandLink id="logout" action="#{login.logout}" rendered="#{login.loggedIn}">
                                     Logout

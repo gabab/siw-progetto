@@ -10,7 +10,7 @@ http://ocpsoft.org/schema/rewrite-config-prettyfaces ">
         <action>#{userController.findProduct}</action>
     </url-mapping>
 
-    <url-mapping id="viewProduct">
+    <url-mapping id="home">
         <pattern value="/"/>
         <view-id value="/index.xhtml"/>
     </url-mapping>
@@ -27,5 +27,10 @@ http://ocpsoft.org/schema/rewrite-config-prettyfaces ">
         <action>#{userController.searchProducts}</action>
     </url-mapping>
 
+
+    <url-mapping id="sa">
+        <pattern value="/register"/>
+        <view-id value="register.xhtml"/>
+    </url-mapping>
 
 </pretty-config>

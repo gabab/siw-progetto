@@ -10,12 +10,6 @@ import java.util.List;
 @Entity
 public class Customer extends User {
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String surname;
-
     @OneToOne
     private Address address;
 
@@ -42,21 +36,21 @@ public class Customer extends User {
         super();
     }
 
-    
+
     public void addOrder(Order o) {
-    	this.orders.add(o);
+        this.orders.add(o);
     }
-    
+
     @Override
     public String toString() {
         return "Customer{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                "name='" + this.getName() + '\'' +
+                ", surname='" + this.getSurname() + '\'' +
                 ", email='" + this.getEmail() + '\'' +
                 ", password='" + this.getPassword() + '\'' +
-                ", address=" + address +
-                ", registrationDate=" + registrationDate +
-                ", birthDate=" + birthDate +
+                ", address=" + this.address +
+                ", registrationDate=" + this.registrationDate +
+                ", birthDate=" + this.birthDate +
                 '}';
     }
 
@@ -116,12 +110,8 @@ public class Customer extends User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-    
-    
-    
 
-    
-    		
-    }
+
+}
 
 

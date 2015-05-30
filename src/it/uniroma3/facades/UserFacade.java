@@ -25,7 +25,7 @@ public class UserFacade {
     }
 
     public User findUser(String email) {
-        return (User) this.em.createQuery("SELECT u FROM User u WHERE u.email = '" + email + "'").getSingleResult();
+        return this.em.find(User.class, email);
     }
 
     public void updateUser(User u) {
@@ -34,9 +34,8 @@ public class UserFacade {
 
     public User findUser(String email, UserGroup group) {
         return (User) this.em.createQuery("SELECT u FROM User u WHERE " +
-                "(u.email = '" + email + "' AND u.group = " + group + ")").getSingleResult();
+                "(u.email = :email AND u.group = :group)").getSingleResult();
     }
-
 
     public Customer findCustomer(String email) {
         return (Customer) findUser(email, UserGroup.CUSTOMER_CONFIRMED);

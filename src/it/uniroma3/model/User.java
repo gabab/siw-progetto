@@ -6,35 +6,19 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    public Long getId() {
-		return id;
-	}
-
-	@Column(unique = true, nullable = false)
     private String email;
-
     @Column(nullable = false)
     private String password;
-
     @Column(nullable = false)
     private String name;
-
     @Column(nullable = false)
     private String surname;
-
     @Column(nullable = false)
     private UserGroup group;
-    
-    
-
-
 
     public User(String email, String password, String name, String surname) {
         this.password = password;
@@ -43,9 +27,11 @@ public abstract class User {
         this.surname = surname;
     }
 
+
     public User() {
 
     }
+
 
     public String getName() {
         return name;

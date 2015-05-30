@@ -1,14 +1,10 @@
 package it.uniroma3.controller;
 
-import it.uniroma3.facades.CustomerFacade;
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.facades.UserFacade;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
-import it.uniroma3.model.OrderLine;
-import it.uniroma3.model.Product;
-import it.uniroma3.model.enums.OrderState;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -26,7 +22,7 @@ public class AdminHandler {
     private UserFacade uf;
     @EJB(beanName = "product")
     private ProductFacade pf;
-    @EJB(beanName = "orders")
+    @EJB(beanName = "order")
     private OrderFacade of;
 
     public Customer getCustomer() {
@@ -69,7 +65,7 @@ public class AdminHandler {
         return "orderDetails";
     }
 
-   //TODO: da sistemare
+
    /* public String processOrder(Long orderID) {
         Order current = this.of.getOrder(orderID);
         for (OrderLine ol : current.getOrderlines()) {
@@ -82,11 +78,12 @@ public class AdminHandler {
         current.setState(OrderState.PROCESSED);
         return "success";
     }*/
-    
-    public String processOrder(Long orderID){
-    	Order o = this.of.processOrder(orderID);
-    	return (o != null) ? "success" : "error";
-    	
+
+    //TODO: da sistemare
+    public String processOrder(Long orderID) {
+        Order o = this.of.processOrder(orderID);
+        return (o != null) ? "success" : "error";
+
 //    	Order current =  this.of.getOrder(orderID);
 //    	Product p = //trovo il prodotto usando la ProfuctFacade, nella producti facade cerco il prodotto
 //    			

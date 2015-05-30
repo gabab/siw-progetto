@@ -12,7 +12,7 @@ import java.util.List;
 @SessionScoped
 public class UserController {
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private String code;
     private Product product;
     private List products;
 
@@ -50,12 +50,12 @@ public class UserController {
     }
 
     public String findProduct() {
-        this.product = this.productFacade.getProduct(id);
+        this.product = this.productFacade.getProduct(code);
         return "product";
     }
 
-    public String findProduct(Long id) {
-        this.product = this.productFacade.getProduct(id);
+    public String findProduct(String code) {
+        this.product = this.productFacade.getProduct(code);
         return "product";
     }
 
@@ -72,15 +72,12 @@ public class UserController {
         return "products";
     }
 
-
-
-
-    public Long getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Product getProduct() {
@@ -113,5 +110,9 @@ public class UserController {
 
     public String getProductsViewTitle() {
         return productsViewTitle;
+    }
+
+    public void setProductsViewTitle(String productsViewTitle) {
+        this.productsViewTitle = productsViewTitle;
     }
 }

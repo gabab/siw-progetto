@@ -51,9 +51,12 @@ public class Login {
         return user;
     }
 
-
     public boolean isAdmin() {
         return isLoggedIn() && user.getGroup() == UserGroup.ADMINISTRATOR;
+    }
+
+    public boolean isCustomer() {
+        return isLoggedIn() && user.getGroup() == UserGroup.CUSTOMER_CONFIRMED;
     }
 
     public boolean isLoggedIn() {
@@ -62,14 +65,10 @@ public class Login {
 
     public String login() {
         User u = this.userFacade.findUser(email);
-        if (u == null) {
-            this.errorMessage = "Invalid email";
-            return "login";
-        } else if (!this.password.equals(u.getPassword())) {
-            this.errorMessage = "Invalid password";
+        if (u == null || !this.password.equals(u.getPassword())) {
+            this.errorMessage = "Invalid email or password";
             return "login";
         }
-        this.user = u;
         return "index";
     }
 
@@ -77,7 +76,4 @@ public class Login {
         user = null;
     }
 
-    public User getGetCustomer() {
-        return (!isAdmin()) ? user : null;
-    }
 }

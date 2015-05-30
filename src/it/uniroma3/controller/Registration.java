@@ -11,6 +11,8 @@ import java.util.Date;
 @ManagedBean
 @SessionScoped
 public class Registration {
+    @EJB(name = "customer")
+    private CustomerFacade cf;
     @EJB(name = "user")
     private UserFacade uf;
     private String name;
@@ -59,6 +61,7 @@ public class Registration {
         this.birthDate = birthDate;
     }
 
+    //TODO: verificare unicità email;
     public String requestRegistration() {
         this.uf.createCustomer(email, password, name, surname, birthDate);
         return "confirmation";

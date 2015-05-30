@@ -2,26 +2,33 @@
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:o="http://omnifaces.org/ui">
+                xmlns:o="http://omnifaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">#{userController.product.name}</ui:define>
 
     <ui:define name="content">
         <div>
+            #{imageController.getPath(userController.product.code)}
             <o:graphicImage value="#{imageController.getImage(userController.product.code)}"/>
         </div>
         <div>
             <h1>#{userController.product.name}</h1><br/>
         </div>
         <div>
-            <b>Price:</b> #{userController.product.price} €<br/>
+            <b>Price:</b> #{userController.product.price}€<br/>
         </div>
         <div>
-            <b>Code:</b>
-            #{userController.product.code}<br/>
+            <b>Code:</b> #{userController.product.code}<br/>
         </div>
         <div>
             <b>Description:</b><br/>
             #{userController.product.description}<br/>
         </div>
+        <f:view>
+            <h:form rendered="#{login.customer}">
+                <h:inputText value="#{customerHandler.quantity}"/>
+                <h:button value="#{customerHandler.addToCart(userController.product.code)}">Buy</h:button>
+            </h:form>
+        </f:view>
     </ui:define>
 </ui:composition>
