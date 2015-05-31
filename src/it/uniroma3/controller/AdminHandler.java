@@ -86,12 +86,17 @@ public class AdminHandler {
     //TODO: da sistemare
     public String processOrder(Long orderID) {
         Order o = this.of.processOrder(orderID);
-        return (o != null) ? "success" : "error";
+        if (o != null)
+            return "success";
+        else {
+            return "orderDetails";
+        }
+
+    }
 
 //    	Order current =  this.of.getOrder(orderID);
 //    	Product p = //trovo il prodotto usando la ProfuctFacade, nella producti facade cerco il prodotto
-//    			
-    }
+//
 
 
 }

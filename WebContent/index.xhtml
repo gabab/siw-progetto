@@ -7,19 +7,15 @@
     <ui:define name="title">Home Page</ui:define>
 
     <ui:define name="content">
-        #{login.loggedIn}
-        <br/>
-        <a href="insert.xhtml">Insert a product</a>
-        <br/>
+            <br/>
+            <a href="insert.xhtml">Insert a product</a>
+            <br/>
+            <f:view>
+                <h:outputLink value="/products">List products</h:outputLink>
+            </f:view>
+            <br/>
+            <a href="login.xhtml">Login</a>
+            <br/>
 
-        <button type="button" class="btn btn-default" aria-label="Left Align">
-            <span class="glyphicon glyphicon-align-left" aria-hidden="true"/>
-        </button>
-        <f:view>
-            <h:outputLink value="/products">List products</h:outputLink>
-        </f:view>
-        <br/>
-        <a href="login.xhtml">Login</a>
-        <br/>
     </ui:define>
 </ui:composition>

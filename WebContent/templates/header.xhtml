@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://java.sun.com/jsf/html">
 <ui:composition>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -45,11 +45,13 @@
                         </ul>
                     </h:form>
                     <h:form class="navbar-form navbar-right">
-                        <h:inputText class="form-control" value="#{userController.searchterm}"/>
-                        <h:commandLink action="#{userController.searchProducts}" value="" styleClass="btn btn-default"
-                                       aria-label="Left Align">
-                            <i class="glyphicon glyphicon-search" aria-hidden="true"/>
-                        </h:commandLink>
+                        <div class="input-group custom-search-form">
+                            <h:inputText type="text" class="form-control" value="#{userController.searchterm}"
+                                         placeholder="Search..."/>
+                                <span class="input-group-btn">
+                                    <p:commandButton styleClass="btn btn-default" action="#{userController.searchProducts}" image="glyphicon glyphicon-search"/>
+                            </span>
+                        </div>
                     </h:form>
                 </f:view>
             </div>

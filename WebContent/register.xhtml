@@ -18,31 +18,53 @@
                 <label>Name:
                     <h:inputText value="#{registration.name}"
                                  required="true"
-                                 requiredMessage="Name is mandatory" id="name"/></label><h:message for="name"/>
+                                 requiredMessage="Name is mandatory" id="name">
+                        <f:validateLength minimum="3"/>
+                    </h:inputText>
+                </label>
+                <br/>
+                <h:message for="name"/>
                 <br/><br/>
                 <label>Surname:
                     <h:inputText value="#{registration.surname}"
                                  required="true"
-                                 requiredMessage="Surname is mandatory" id="surname"/></label><h:message for="surname"/>
+                                 requiredMessage="Surname is mandatory" id="surname">
+                        <f:validateLength minimum="3"/>
+                    </h:inputText>
+                </label>
+                <br/>
+                <h:message for="surname"/>
+                <br/><br/>
                 <br/><br/>
                 <label>Date of Birth:
                     <h:inputText value="#{registration.birthDate}"
                                  required="true"
-                                 requiredMessage="Date is mandatory" id="birthdate"><f:convertDateTime pattern="dd-M-yyyy"/></h:inputText></label><h:message
-                    for="birthdate"/>
+                                 requiredMessage="Date is mandatory" id="birthdate">
+                        <f:convertDateTime pattern="dd-M-yyyy"/>
+                    </h:inputText>
+                </label>
+                <br/>
+                <h:message for="birthdate"/>
                 <br/><br/>
                 <label>Email:
                     <h:inputText value="#{registration.email}"
                                  required="true"
-                                 requiredMessage="Email is mandatory" id="email"/></label><h:message for="email"/>
+                                 requiredMessage="Email is mandatory" id="email" validator="ValidateEmail"/>
+                </label>
+                <br/>
+                <h:message for="email"/>
                 <br/><br/>
                 <label>Password:
                     <h:inputSecret value="#{registration.password}"
+                                   id="password"
                                    required="true"
                                    requiredMessage="Password is mandatory">
                         <f:validateLength minimum="6"/></h:inputSecret>
                 </label>
-                <h:commandButton value="Submit" action="#{registration.requestRegistration}"/>
+                <br/>
+                <h:message for="password"/>
+                <br/><br/>
+                <h:commandButton value="Register" action="#{registration.requestRegistration}" class="btn btn-default"/>
             </h:form>
         </f:view>
     </ui:define>

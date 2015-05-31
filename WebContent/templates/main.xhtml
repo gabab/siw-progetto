@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+        >
 <h:head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
@@ -16,11 +16,15 @@
         <ui:insert name="title">Some title</ui:insert> - SIWShop
     </title>
 </h:head>
-<ui:include src="header.xhtml"/>
 
 <h:body>
-    <ui:insert name="content"/>
+    <div id="wrap">
+        <ui:include src="header.xhtml"/>
+        <ui:insert name="content"/>
+    </div>
+    <div id="push"></div>
+    <div class="footer">
+        <ui:include src="footer.xhtml"/>
+    </div>
 </h:body>
-
-<ui:include src="footer.xhtml"/>
 </html>
