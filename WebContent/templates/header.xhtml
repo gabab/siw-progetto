@@ -25,15 +25,21 @@
                                               rendered="#{!login.loggedIn}">Register</h:outputLink>
                                 <h:outputLink id="page" value="userpage.xhtml"
                                               rendered="#{login.loggedIn}">My Page</h:outputLink></li>
-                            <li><h:outputLink id="cart" value="shoppingCart.xhtml"
-                                              rendered="#{login.customer}">Cart#{customerHandler.currentOrder.items}</h:outputLink>
+                            <li>
+                                <h:outputLink id="cart" value="shoppingCart.xhtml"
+                                              rendered="#{login.customer}">
+                                    Cart
+                                    <h:outputText rendered="#{customerHandler.currentOrder.items > 0}">
+                                        (#{customerHandler.currentOrder.items})
+                                    </h:outputText>
+                                </h:outputLink>
                             </li>
                             <li>
-                                <h:outputLink id="login" value="login"
+                                <h:outputLink id="login" value="/login"
                                               rendered="#{!login.loggedIn}">Login</h:outputLink>
-                                <h:commandLink id="logout" action="#{login.logout}" rendered="#{login.loggedIn}">
+                                <h:outputLink id="logout" value="/logout" rendered="#{login.loggedIn}">
                                     Logout
-                                </h:commandLink>
+                                </h:outputLink>
                             </li>
                             <li><a href="#">Help</a></li>
                         </ul>

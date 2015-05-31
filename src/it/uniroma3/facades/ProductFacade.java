@@ -35,19 +35,19 @@ public class ProductFacade {
     }
 
     public List searchProducts(String searchterm) {
-        searchterm = searchterm.toLowerCase();
+        searchterm = "%" + searchterm.toLowerCase() + "%";
         Query q = this.em.createQuery(
                 "SELECT p FROM Product p WHERE (" +
                         "LOWER(p.name) LIKE ?1" +
                         "OR LOWER(p.code) LIKE ?1" +
                         "OR LOWER(p.description) LIKE ?1)")
-                .setParameter(1, "%" + searchterm + "%");
+                .setParameter(1, searchterm);
         return q.getResultList();
     }
 
 
     public Product createProduct(String name, String code, Float price, String description) {
-        Product p = new Product(name, code, price, description);
+        Product p = new Product(name, code.toUpperCase(), price, description);
         this.em.persist(p);
         return p;
     }

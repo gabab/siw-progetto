@@ -32,23 +32,13 @@ public class OrderFacade {
     }
 
     public List getOrdersState(OrderState state, Long customerID) {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = :state AND o.customer = :customerID");
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state + " AND o.customer = " + customerID);
         return q.getResultList();
     }
 
     public Order getOrder(Long orderID) {
         return this.em.find(Order.class, orderID);
     }
-
-//	
-//
-//	public void addOrderLine(int quantity, Long idProduct, Long idOrder) {
-//		Order order = em.find(Order.class, idOrder);
-//		Product product = em.find(Product.class, idProduct);
-//		Float price = product.getPrice();
-//		order.addOrderLine(new OrderLine(product, price, quantity));
-//		em.persist(order);
-//	}
 
     public void updateOrder(Order o) {
         this.em.merge(o);

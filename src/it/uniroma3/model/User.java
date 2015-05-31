@@ -7,9 +7,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "usergroup")
 public abstract class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
     private String password;
@@ -17,7 +21,8 @@ public abstract class User {
     private String name;
     @Column(nullable = false)
     private String surname;
-    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false, name = "usergroup")
     private UserGroup group;
 
     public User(String email, String password, String name, String surname) {
@@ -31,7 +36,6 @@ public abstract class User {
     public User() {
 
     }
-
 
     public String getName() {
         return name;

@@ -18,7 +18,7 @@
                     </tr>
                     <ui:repeat var="p" value="#{userController.products}">
                         <tr>
-                            <td><h:outputLink value="/product/#{p.id}">#{p.name}</h:outputLink></td>
+                            <td><h:outputLink value="/product/#{p.code}">#{p.name}</h:outputLink></td>
                             <td>#{p.code}</td>
                             <td>#{p.price}</td>
                             <td>#{p.description}</td>

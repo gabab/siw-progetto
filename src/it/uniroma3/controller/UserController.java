@@ -5,13 +5,13 @@ import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.util.List;
 
 @ManagedBean
 @SessionScoped
 public class UserController {
-    private static final long serialVersionUID = 1L;
     private String code;
     private Product product;
     private List products;
@@ -22,6 +22,8 @@ public class UserController {
     private ProductFacade productFacade;
     private String searchterm;
     private String productsViewTitle;
+
+
 
     public UserController() {
 

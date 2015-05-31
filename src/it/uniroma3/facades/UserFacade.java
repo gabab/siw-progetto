@@ -24,8 +24,8 @@ public class UserFacade {
         this.em = em;
     }
 
-    public User findUser(String email) {
-        return this.em.find(User.class, email);
+    public User findUser(Long id) {
+        return this.em.find(User.class, id);
     }
 
     public void updateUser(User u) {
@@ -33,22 +33,42 @@ public class UserFacade {
     }
 
     public User findUser(String email, UserGroup group) {
+        String subQuery = (group == null) ? "'" + email + "'" : " AND u.group = " + group;
+        User u = null;
+        try {
+            u = (User) this.em.createQuery("SELECT u FROM User u WHERE " +
+                    "u.email = " + subQuery).getSingleResult();
+        } catch (Exception ignored) {
+        }
+        return u;
+    }
+
+
+    public User findUser(String email) {
         return (User) this.em.createQuery("SELECT u FROM User u WHERE " +
-                "(u.email = :email AND u.group = :group)").getSingleResult();
+                "u.email = '" + email + "'").getSingleResult();
+        //findUser(email, null);
     }
 
     public Customer findCustomer(String email) {
-        return (Customer) findUser(email, UserGroup.CUSTOMER_CONFIRMED);
+        return (Customer) findUser(email, UserGroup.CUSTOMER);
     }
 
     public Administrator findAdmin(String email) {
         return (Administrator) findUser(email, UserGroup.ADMINISTRATOR);
     }
 
-    public void createCustomer(String email, String password, String name, String surname, Date birthDate) {
-        Customer c = new Customer(email, password, name, surname, birthDate, UserGroup.CUSTOMER_PENDING);
+    public void createCustomer(String email, String password, String name, String surname, Date birthDate, UserGroup group) {
+        Customer c = new Customer(email, password, name, surname, birthDate, group);
         c.setRegistrationDate(new Date());
         this.em.persist(c);
     }
 
+    public void createPendingCustomer(String email, String password, String name, String surname, Date birthDate) {
+        createCustomer(email, password, name, surname, birthDate, UserGroup.CUSTOMER);
+    }
+
+    public void createRegisteredCustomer(String email, String password, String name, String surname, Date birthDate) {
+        createCustomer(email, password, name, surname, birthDate, UserGroup.CUSTOMER);
+    }
 }

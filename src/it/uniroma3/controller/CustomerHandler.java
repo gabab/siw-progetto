@@ -11,6 +11,7 @@ import it.uniroma3.model.enums.OrderState;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,16 @@ public class CustomerHandler {
     @EJB(name = "user")
     private UserFacade userFacade;
     private int quantity;
+    @ManagedProperty(value = "#{login}")
+    private Login login;
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
 
     public ProductFacade getProductFacade() {
         return productFacade;

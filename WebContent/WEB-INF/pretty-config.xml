@@ -1,11 +1,10 @@
 <pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
-                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd
-http://ocpsoft.org/schema/rewrite-config-prettyfaces ">
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
-    <url-mapping id="viewProduct">
-        <pattern value="/product/#{userController.id}"/>
+    <url-mapping id="product">
+        <pattern value="/product/#{userController.code}"/>
         <view-id value="/product.xhtml"/>
         <action>#{userController.findProduct}</action>
     </url-mapping>
@@ -28,9 +27,15 @@ http://ocpsoft.org/schema/rewrite-config-prettyfaces ">
     </url-mapping>
 
 
-    <url-mapping id="sa">
+    <url-mapping id="registration">
         <pattern value="/register"/>
         <view-id value="register.xhtml"/>
     </url-mapping>
+
+    <url-mapping id="login">
+        <pattern value="/login"/>
+        <view-id value="login.xhtml"/>
+    </url-mapping>
+
 
 </pretty-config>

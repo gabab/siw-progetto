@@ -63,7 +63,7 @@ public class Registration {
 
     //TODO: verificare unicità email;
     public String requestRegistration() {
-        this.uf.createCustomer(email, password, name, surname, birthDate);
+        this.uf.createPendingCustomer(email, password, name, surname, birthDate);
         return "confirmation";
     }
 

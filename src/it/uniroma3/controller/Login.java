@@ -56,7 +56,7 @@ public class Login {
     }
 
     public boolean isCustomer() {
-        return isLoggedIn() && user.getGroup() == UserGroup.CUSTOMER_CONFIRMED;
+        return isLoggedIn() && user.getGroup() == UserGroup.CUSTOMER;
     }
 
     public boolean isLoggedIn() {
@@ -65,10 +65,14 @@ public class Login {
 
     public String login() {
         User u = this.userFacade.findUser(email);
-        if (u == null || !this.password.equals(u.getPassword())) {
-            this.errorMessage = "Invalid email or password";
+        if (u == null) {
+            this.errorMessage = "Invalid email";
+            return "login";
+        } else if (!this.password.equals(u.getPassword())) {
+            this.errorMessage = "Invalid password";
             return "login";
         }
+        this.user = u;
         return "index";
     }
 
