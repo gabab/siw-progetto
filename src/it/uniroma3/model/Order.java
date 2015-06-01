@@ -94,6 +94,10 @@ public class Order {
         return orderlines;
     }
 
+    public Address getAddress(){
+        return this.address;
+    }
+
     public void setOrderlines(Map<String, OrderLine> orderlines) {
         this.orderlines = orderlines;
     }

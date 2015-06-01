@@ -36,6 +36,15 @@ public class OrderFacade {
         return q.getResultList();
     }
 
+    public void addAddress( Long orderID){
+        Order o = this.getOrder(orderID);
+        if(o.getAddress() == null)
+            o.setAddress(o.getCustomer().getAddress());
+        em.merge(o);
+
+
+    }
+
     public Order getOrder(Long orderID) {
         return this.em.find(Order.class, orderID);
     }

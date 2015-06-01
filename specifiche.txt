@@ -1,0 +1,162 @@
+﻿Requisiti
+
+Caso d'uso UC1: consulta listino
+
+- Attore primario: utente non registrato
+- Scenario principale di successo: 
+	1.  L'utente consulta il catalogo dei prodotti
+	2.  L'utente sceglie un prodotto e ne richiede i dettagli 
+	3.  Il sistema mostra i dettagli del prodotto scelto
+	4.  L'utente ripete i passi precedenti un numero indefinito di volte
+	
+- Estensioni	
+	1a.  L'utente usa il sistema per cercare nel catalogo dei prodotti
+
+
+	
+Caso d'uso UC2: effettua ordine
+
+- Attore primario: cliente (utente registrato)
+- Scenario principale di successo: 
+	1.  Il cliente crea un ordine
+	2.  Il cliente consulta il catalogo dei prodotti
+	3.  Il cliente sceglie un prodotto e aggiunge codice e quantità del prodotto scelto all'ordine
+	4.  Il sistema imposta il prezzo unitario del prodotto scelto al prezzo corrente di listino
+	5.  Il sistema registra la riga ordine
+	6.  Il cliente ripete i due passi precedenti finché necessario
+	7.  Il cliente "chiude" l'ordine
+	8.  Il sistema registra l'ordine
+
+- Precondizioni:	
+	Il cliente è identificato e autenticato
+
+
+
+Caso d'uso UC3: consulta i propri ordini
+
+- Attore primario: cliente
+- Scenario principale:
+	1.  Il cliente consulta l'elenco dei propri ordini
+	2.  Il sistema mostra al cliente l'elenco dei suoi ordini
+	3.  Il cliente chiede il dettaglio di un ordine
+	4.  Il sistema mostra il dettaglio dell'ordine
+	5.  Il cliente ripete i due passi precedenti finché necessario
+
+- Precondizioni: 
+	Il cliente è identificato e autenticato
+
+
+
+Caso d'uso UC4: inserimento prodotti nel catalogo
+
+- Attore primario: amministrazione
+- Scenario principale:
+	1.  L'amministratore inserisce un nuovo prodotto nel catalogo specificandone i dettagli
+	2.  Il sistema verifica la correttezza dei dati e registra il prodotto
+	3.  I punti precedenti vengono ripetuti fino a che necessario
+
+- Precondizioni:
+	L'amministratore è identificato e autenticato
+
+- Eccezioni
+	2a.  L'amministratore inserisce dei dati non corretti. Il sistema mostra un messaggio di errore
+	
+
+
+Caso d'uso UC5: recupera indirizzo cliente
+
+- Attore primario: amministrazione
+- Scenario principale:
+	1.  L’amministratore fornisce l'id di un ordine 
+	2.  Il sistema mostra all’amministratore i dati del cliente che ha effettuato l’ordine
+
+- Precondizioni:
+	L’amministratore è identificato e autenticato
+
+
+
+Caso d'uso UC6: evasione ordine
+
+- Attore primario: amministrazione
+- Scenario principale:
+	1.  Il sistema presenta all'amministratore gli ordini chiusi, ma non evasi
+	2.  L'amministratore sceglie un ordine
+	3.  Il sistema evade l'ordine: aggiorna l'ordine inserendo la data di spedizione e aggiorna la quantità dei prodotti in magazzino (sottraendo la quantità di prodotti usati per l'ordine)
+
+- Precondizioni:
+	L'amministratore è identificato e autenticato
+
+- Eccezioni:
+	3a.  Alcuni prodotti potrebbero non essere presenti in magazzino nella quantità specificata dall'ordine. In questo caso l'ordine rimane in sospeso e l'ordine viene ripristinato allo stato iniziale
+
+
+	
+Caso d'uso UC7: login
+
+- Attore primario: utente registrato (amministratore o cliente)
+- Scenario principale:
+	1.  L’utente inserisce il suo indirizzo di posta elettronica e la sua password.
+	2.  Il sistema verifica la correttezza dei dati immessi, e autentica l’utente.
+	3.  Il sistema mostra all'utente la sua pagina personale
+
+- Eccezioni
+	2a.  L'utente inserisce dei dati non corretti. Il sistema mostra un messaggio di errore
+	
+
+	
+	
+Caso d'uso UC8: registrazione cliente
+
+- Attore primario: utente non registrato
+- Scenario principale:
+	1.  L’utente inserisce i suoi dati (nome, cognome, data di nascita, email e password) nel sistema.
+	2.  Il sistema verifica la correttezza dei dati immessi, e registra il cliente.
+	3.  Il sistema mostra all'utente la sua pagina personale
+
+- Eccezioni
+	2a.  L'utente inserisce dei dati non corretti. Il sistema mostra un messaggio di errore
+	
+- Regole di dominio
+	A.  L'indirizzo email deve essere univoco per ogni cliente e quindi non può essere già presente nel sistema.
+	
+	
+	
+Caso d'uso UC9: effettua ordine (Carrello)
+
+
+- Attore primario: cliente (utente registrato)
+- Scenario principale di successo: 
+	1.  Il cliente vuole comprare dei prodotti
+	2.  Il cliente consulta il catalogo dei prodotti
+	3.  Il cliente sceglie un prodotto e lo aggiunge al carrello
+	4.  Il sistema imposta il prezzo unitario del prodotto scelto al prezzo corrente di listino
+	5.  Il sistema registra la riga ordine
+	6.  Il cliente ripete i passi 2-3 finché necessario
+	7.  Il cliente seleziona il carrello
+	8.  Il sistema mostra l'elenco delle righe d'ordine, mostrando i prodotti scelti, la quantità e il totale.
+	9.  Il cliente sceglie una riga d'ordine e modifica la quantità
+	10.  Il cliente ripete il passo 9 finché necessario
+	11.  Il cliente "chiude" l'ordine
+	12.  Il sistema registra l'ordine
+
+- Precondizioni:	
+	Il cliente è identificato e autenticato
+	
+- Eccezioni
+	11a.  Il cliente non ha inserito un indirizzo nel sistema. Il sistema mostra un messaggio d'errore e chiede all'utente di inserire un indirizzo (caso d'uso UC10)
+	
+	
+	
+Caso d'uso UC10: inserimento indirizzo
+
+- Attore primario: cliente (utente registrato)
+- Scenario principale di successo: 
+	1.  Il cliente vuole inserire un indirizzo
+	2.  Il cliente inserisce nel sistema i dettagli.
+	3. 	Il sistema verifica la correttezza dei dati, e registra l'indirizzo
+	
+- Precondizioni:	
+	Il cliente è identificato e autenticato
+
+- Eccezioni
+	3.	I dati inseriti dal cliente non sono corretti. Il sistema mostra un messaggio di errore.

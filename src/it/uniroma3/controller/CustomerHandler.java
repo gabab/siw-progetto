@@ -4,6 +4,7 @@ package it.uniroma3.controller;
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.facades.UserFacade;
+import it.uniroma3.model.Address;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
@@ -43,6 +44,10 @@ public class CustomerHandler {
 
     public ProductFacade getProductFacade() {
         return productFacade;
+    }
+
+    public void insertAddressInOrder(Long orderID){
+        this.orderFacade.addAddress(orderID);
     }
 
     public void setProductFacade(ProductFacade productFacade) {

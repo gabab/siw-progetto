@@ -15,7 +15,6 @@ public class ValidateEmail implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component,
                          Object value) throws ValidatorException {
-
         EmailValidator emailValidator = EmailValidator.getInstance();
         if (!emailValidator.isValid((String) value)) {
             throw new ValidatorException(new FacesMessage("Not a valid email"));
