@@ -3,9 +3,7 @@ package it.uniroma3.model;
 import it.uniroma3.model.enums.OrderState;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 @Table(name = "orders")
@@ -24,8 +22,8 @@ public class Order {
     private Date processed;
     @ManyToOne
     private Customer customer;
-    @OneToMany
-    @JoinColumn(name = "orders_id")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "orders_id"))
     private Map<String, OrderLine> orderlines;
 
     public Order() {
@@ -43,11 +41,35 @@ public class Order {
         return id;
     }
 
-    public void addProductToOrder(Product p, int quantity) {
+    public void addProduct(Product p, int quantity) {
         OrderLine a = orderlines.get(p.getCode());
-        if (a != null)
-            a.setQuantity(a.getQuantity() + quantity);
-        orderlines.put(p.getCode(), new OrderLine(p, quantity));
+        if (a == null)
+            a = new OrderLine(p, 0);
+        int s = a.getQuantity();
+        a.setQuantity(s + quantity);
+        orderlines.put(p.getCode(), a);
+    }
+
+
+    public List<OrderLine> getItems(){
+        return new ArrayList<>(orderlines.values());
+    }
+
+    public float getTotal() {
+        float total = 0;
+        for (OrderLine ol : orderlines.values())
+            total += ol.getSubTotal();
+        return total;
+    }
+
+    public void close(){
+        this.closed = new Date();
+        this.state = OrderState.CLOSED;
+    }
+
+    public void process() {
+        this.processed = new Date();
+        this.state = OrderState.PROCESSED;
     }
 
     public OrderState getState() {
@@ -94,15 +116,11 @@ public class Order {
         return orderlines;
     }
 
-    public Address getAddress(){
-        return this.address;
-    }
-
     public void setOrderlines(Map<String, OrderLine> orderlines) {
         this.orderlines = orderlines;
     }
 
-    public int getItems() {
+    public int getSize() {
         return this.orderlines.size();
     }
 }

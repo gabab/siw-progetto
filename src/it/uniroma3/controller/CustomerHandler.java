@@ -4,17 +4,15 @@ package it.uniroma3.controller;
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.facades.UserFacade;
-import it.uniroma3.model.Address;
+import it.uniroma3.model.Cart;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
-import it.uniroma3.model.enums.OrderState;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import java.util.Date;
 import java.util.List;
 
 @ManagedBean
@@ -23,6 +21,7 @@ public class CustomerHandler {
     private Customer currentCustomer;
     private List<Order> orders;
     private Order order;
+    private Cart cart;
     private Order currentOrder;
     @EJB(name = "order")
     private OrderFacade orderFacade;
@@ -30,9 +29,26 @@ public class CustomerHandler {
     private ProductFacade productFacade;
     @EJB(name = "user")
     private UserFacade userFacade;
+    private String productCode;
     private int quantity;
     @ManagedProperty(value = "#{login}")
     private Login login;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
 
     public Login getLogin() {
         return login;
@@ -44,10 +60,6 @@ public class CustomerHandler {
 
     public ProductFacade getProductFacade() {
         return productFacade;
-    }
-
-    public void insertAddressInOrder(Long orderID){
-        this.orderFacade.addAddress(orderID);
     }
 
     public void setProductFacade(ProductFacade productFacade) {
@@ -79,8 +91,7 @@ public class CustomerHandler {
     }
 
     public String closeOrder() {
-        this.currentOrder.setState(OrderState.CLOSED);
-        this.currentOrder.setClosed(new Date());
+        this.currentOrder.close();
         this.currentCustomer.addOrder(this.currentOrder);
         this.userFacade.updateUser(this.currentCustomer);
         return "confirmation";
@@ -116,6 +127,11 @@ public class CustomerHandler {
         return "orderDetail";
     }
 
+    public String createOrder() {
+        this.currentOrder = new Order(currentCustomer);
+        return "insertOrder";
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -125,9 +141,21 @@ public class CustomerHandler {
     }
 
     public void addToCart(String productCode) {
-        if (currentOrder == null)
-            this.currentOrder = new Order(currentCustomer);
+        if (cart == null)
+            this.cart = new Cart(currentCustomer);
         Product p = this.productFacade.getProduct(productCode);
-        this.currentOrder.addProductToOrder(p, quantity);
+        this.cart.addProduct(p);
+    }
+
+    public void closeCart() {
+        this.currentOrder = cart;
+        closeOrder();
+    }
+
+    public String addToOrder() {
+        Product p = this.productFacade.getProduct(productCode);
+        if (p != null)
+            this.currentOrder.addProduct(p, quantity);
+        return "insertOrder";
     }
 }

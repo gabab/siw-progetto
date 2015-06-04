@@ -18,19 +18,18 @@
             <div class="navbar-collapse collapse">
                 <f:view>
                     <h:form>
-                        <h:outputText value="#{login.user.name}" rendered="#{login.loggedIn}"/>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Dashboard</a></li>
                             <li><h:outputLink id="register" value="register"
                                               rendered="#{!login.loggedIn}">Register</h:outputLink>
-                                <h:outputLink id="page" value="userpage.xhtml"
+                                <h:outputLink id="page" value="customerPage.xhtml"
                                               rendered="#{login.loggedIn}">My Page</h:outputLink></li>
                             <li>
                                 <h:outputLink id="cart" value="shoppingCart.xhtml"
                                               rendered="#{login.customer}">
                                     Cart
-                                    <h:outputText rendered="#{customerHandler.currentOrder.items > 0}">
-                                        (#{customerHandler.currentOrder.items})
+                                    <h:outputText rendered="#{customerHandler.cart.size > 0}">
+                                        (#{customerHandler.cart.size})
                                     </h:outputText>
                                 </h:outputLink>
                             </li>

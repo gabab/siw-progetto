@@ -2,13 +2,8 @@ package it.uniroma3.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "order_line")
+@Embeddable
 public class OrderLine {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     @Column(nullable = false)
     private Float unitPrice;
@@ -27,6 +22,10 @@ public class OrderLine {
 
     public OrderLine() {
 
+    }
+
+    public float getSubTotal() {
+        return unitPrice * quantity;
     }
 
     public Float getUnitPrice() {

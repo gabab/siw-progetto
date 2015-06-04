@@ -27,15 +27,14 @@
                     <h:inputText value="#{createProduct.code}"
                                  required="true"
                                  requiredMessage="Code is mandatory"
-                                 validatorMessage="Code: min 6 max 10 characters" id="productCode">
-                        <f:validateLength minimum="6" maximum="10"/>
+                                 validator = "CodeValidator" id="productCode">
                     </h:inputText></label>
                 <h:message for="productCode" styleClass="error"/><br/><br/>
                 <label>Description:
                     <h:inputTextarea rows="6" cols="30" value="#{createProduct.description}" required="false"/>
                 </label><br/><br/>
                     <p:fileUpload id="fileuploader" value="#{createProduct.image}" mode="simple"/>
-                <p:commandButton value="Submit" action="#{createProduct.insertProduct}" ajax="false"/>
+                <p:commandButton value="Submit" action="#{createProduct.insertProduct}" ajax="false" class="btn btn-default"/>
             </h:form>
         </f:view>
     </ui:define>

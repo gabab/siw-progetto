@@ -27,7 +27,7 @@
         <f:view>
             <h:form rendered="#{login.customer}">
                 <h:inputText value="#{customerHandler.quantity}"/>
-                <h:button value="#{customerHandler.addToCart(userController.product.code)}">Buy</h:button>
+                <h:commandButton value="Add to Cart" action="#{customerHandler.addToCart}" class="btn default-btn"/>
             </h:form>
         </f:view>
     </ui:define>

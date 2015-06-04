@@ -36,15 +36,6 @@ public class OrderFacade {
         return q.getResultList();
     }
 
-    public void addAddress( Long orderID){
-        Order o = this.getOrder(orderID);
-        if(o.getAddress() == null)
-            o.setAddress(o.getCustomer().getAddress());
-        em.merge(o);
-
-
-    }
-
     public Order getOrder(Long orderID) {
         return this.em.find(Order.class, orderID);
     }
@@ -57,8 +48,10 @@ public class OrderFacade {
         Order o = this.getOrder(orderID);
         for (OrderLine ol : o.getOrderlines().values()) {
             Product p = ol.getProduct();
-            if (ol.getQuantity() > p.getInStock())
+            if (ol.getQuantity() > p.getInStock()) {
+                em.refresh(o);
                 return null;
+            }
             p.setInStock(p.getInStock() - ol.getQuantity());
         }
         o.setState(OrderState.PROCESSED);

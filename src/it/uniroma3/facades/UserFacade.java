@@ -64,7 +64,7 @@ public class UserFacade {
         this.em.persist(c);
     }
 
-    public void createPendingCustomer(String email, String password, String name, String surname, Date birthDate) {
+    public void createCustomer(String email, String password, String name, String surname, Date birthDate) {
         createCustomer(email, password, name, surname, birthDate, UserGroup.CUSTOMER);
     }
 

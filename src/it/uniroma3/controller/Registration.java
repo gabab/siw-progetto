@@ -1,6 +1,5 @@
 package it.uniroma3.controller;
 
-import it.uniroma3.facades.CustomerFacade;
 import it.uniroma3.facades.UserFacade;
 
 import javax.ejb.EJB;
@@ -11,8 +10,6 @@ import java.util.Date;
 @ManagedBean
 @SessionScoped
 public class Registration {
-    @EJB(name = "customer")
-    private CustomerFacade cf;
     @EJB(name = "user")
     private UserFacade uf;
     private String name;
@@ -63,7 +60,7 @@ public class Registration {
 
     //TODO: verificare unicità email;
     public String requestRegistration() {
-        this.uf.createPendingCustomer(email, password, name, surname, birthDate);
+        this.uf.createCustomer(email, password, name, surname, birthDate);
         return "confirmation";
     }
 

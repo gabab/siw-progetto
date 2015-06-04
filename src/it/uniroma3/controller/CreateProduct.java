@@ -5,6 +5,7 @@ import it.uniroma3.model.Product;
 import org.primefaces.model.UploadedFile;
 
 import javax.ejb.EJB;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.InputStream;
@@ -14,7 +15,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class CreateProduct {
 
     private Product product;
@@ -41,7 +42,7 @@ public class CreateProduct {
     }
 
     public void setCode(String code) {
-        this.code = code;
+        this.code = code.toUpperCase();
     }
 
     public String getDescription() {

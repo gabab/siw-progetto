@@ -87,7 +87,7 @@ Caso d'uso UC6: evasione ordine
 	L'amministratore è identificato e autenticato
 
 - Eccezioni:
-	3a.  Alcuni prodotti potrebbero non essere presenti in magazzino nella quantità specificata dall'ordine. In questo caso l'ordine rimane in sospeso e l'ordine viene ripristinato allo stato iniziale
+	3a.  Alcuni prodotti potrebbero non essere presenti in magazzino nella quantità specificata dall'ordine. In questo caso il magazzino viene ripristinato allo stato iniziale e l'ordine rimane in sospeso.
 
 
 	

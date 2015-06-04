@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="title">Order no. #{customerHandler.order.id}</ui:define>
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">My Cart</ui:define>
 
     <ui:define name="content">
-            <h1>Order no. #{customerHandler.order.id}</h1>
-            Opened: #{customerHandler.order.opened}
-            Closed: #{customerHandler.order.closed}
-            Processed: #{customerHandler.order.processed}
         <f:view>
             <h:form>
                 <table>
@@ -31,5 +27,6 @@
                 </table>
             </h:form>
         </f:view>
+
     </ui:define>
 </ui:composition>

@@ -47,7 +47,7 @@ public class ProductFacade {
 
 
     public Product createProduct(String name, String code, Float price, String description) {
-        Product p = new Product(name, code.toUpperCase(), price, description);
+        Product p = new Product(name, code, price, description);
         this.em.persist(p);
         return p;
     }

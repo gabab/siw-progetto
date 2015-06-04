@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">Insert Order</ui:define>
+
+    <ui:define name="content">
+        <h1>New Order</h1>
+        Opened: #{customerHandler.currentOrder.opened}
+        <f:view>
+            <h:form>
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>UnitPrice</th>
+                        <th>Quantity</th>
+                        <th>Sub Total</th>
+                    </tr>
+                    <ui:repeat var="ol" value="#{customerHandler.currentOrder.items}">
+                        <tr>
+                            <td>#{ol.product.name}</td>
+                            <td>#{ol.unitPrice}</td>
+                            <td>#{ol.quantity}</td>
+                            <td>#{ol.subTotal}</td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+                <br/>
+
+                <h1>Total: </h1> #{customerHandler.currentOrder.total}
+                <br/>
+                Add another item:
+
+                <label>Product Code:
+                    <h:inputText value="#{customerHandler.productCode}"
+                                 required="true"
+                                 requiredMessage="Code is mandatory"
+                                 /></label>
+                <label>Quantity:
+                    <h:inputText value="#{customerHandler.quantity}"/>
+                </label>
+                <h:commandButton value="Add" action="#{customerHandler.addToOrder}" class="btn btn-default"/>
+
+                <br/>
+                <br/>
+                <h:commandButton value="Close Order" action="#{customerHandler.closeOrder}" class="btn btn-default"/>
+            </h:form>
+        </f:view>
+
+    </ui:define>
+</ui:composition>
