@@ -5,8 +5,10 @@ import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 @ManagedBean
@@ -22,7 +24,6 @@ public class UserController {
     private ProductFacade productFacade;
     private String searchterm;
     private String productsViewTitle;
-
 
 
     public UserController() {
@@ -52,13 +53,13 @@ public class UserController {
     }
 
     public String findProduct() {
-        this.product = this.productFacade.getProduct(code);
-        return "product";
+        return findProduct(code);
     }
 
     public String findProduct(String code) {
         this.product = this.productFacade.getProduct(code);
         return "product";
+        //return (this.product != null) ? "product" : "notFound";
     }
 
     public String searchProducts() {
@@ -104,10 +105,6 @@ public class UserController {
 
     public void setProducts(List<Product> products) {
         this.products = products;
-    }
-
-    public String userLogin() {
-        return "prova";
     }
 
     public String getProductsViewTitle() {

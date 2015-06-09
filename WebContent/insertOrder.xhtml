@@ -21,15 +21,15 @@
                     <ui:repeat var="ol" value="#{customerHandler.currentOrder.items}">
                         <tr>
                             <td>#{ol.product.name}</td>
-                            <td>#{ol.unitPrice}</td>
+                            <td>#{utils.getPrice(ol.unitPrice)}</td>
                             <td>#{ol.quantity}</td>
-                            <td>#{ol.subTotal}</td>
+                            <td>#{utils.getPrice(ol.subTotal)}</td>
                         </tr>
                     </ui:repeat>
                 </table>
                 <br/>
 
-                <h1>Total: </h1> #{customerHandler.currentOrder.total}
+                <h1>Total: </h1> #{utils.getPrice(customerHandler.currentOrder.total)}
                 <br/>
                 Add another item:
 

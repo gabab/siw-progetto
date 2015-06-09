@@ -4,9 +4,9 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:event type="preRenderView" listener="#{login.checkIsLoggedIn}" />
     <ui:define name="title">Request registration</ui:define>
     <ui:define name="content">
-
         <h1>Registration</h1>
 
         Insert your data here. All fields are mandatory.

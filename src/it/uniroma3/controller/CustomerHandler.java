@@ -140,11 +140,14 @@ public class CustomerHandler {
         this.quantity = quantity;
     }
 
-    public void addToCart(String productCode) {
+    public String addToCart(String productCode) {
+        if (!login.isLoggedIn())
+            return "pretty:login";
         if (cart == null)
             this.cart = new Cart(currentCustomer);
         Product p = this.productFacade.getProduct(productCode);
         this.cart.addProduct(p);
+        return "pretty:";
     }
 
     public void closeCart() {

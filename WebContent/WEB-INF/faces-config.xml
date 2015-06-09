@@ -5,7 +5,9 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
               version="2.1">
 
-    <factory>
-        <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>
-    </factory>
+    <application>
+        <resource-handler>
+            org.omnifaces.resourcehandler.CombinedResourceHandler
+        </resource-handler>
+    </application>
 </faces-config>

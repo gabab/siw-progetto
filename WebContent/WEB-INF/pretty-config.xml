@@ -14,6 +14,11 @@
         <view-id value="/index.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="cart">
+        <pattern value="/cart"/>
+        <view-id value="/cart.xhtml"/>
+    </url-mapping>
+
     <url-mapping id="viewCatalog">
         <pattern value="/products"/>
         <view-id value="/products.xhtml"/>
@@ -26,7 +31,6 @@
         <action>#{userController.searchProducts}</action>
     </url-mapping>
 
-
     <url-mapping id="registration">
         <pattern value="/register"/>
         <view-id value="register.xhtml"/>
@@ -37,5 +41,10 @@
         <view-id value="login.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="logout">
+        <pattern value="/logout"/>
+        <view-id value="logout.xhtml"/>
+        <action>#{login.logout}</action>
+    </url-mapping>
 
 </pretty-config>

@@ -2,11 +2,13 @@ package it.uniroma3.controller;
 
 import it.uniroma3.facades.UserFacade;
 import it.uniroma3.model.User;
-import it.uniroma3.model.enums.UserGroup;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 
 
 @ManagedBean(name = "login")
@@ -51,12 +53,16 @@ public class Login {
         return user;
     }
 
-    public boolean isAdmin() {
-        return isLoggedIn() && user.getGroup() == UserGroup.ADMINISTRATOR;
+    private void redirectHome() throws IOException {
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect("/");
     }
 
-    public boolean isCustomer() {
-        return isLoggedIn() && user.getGroup() == UserGroup.CUSTOMER;
+
+    public void checkIsLoggedIn() throws IOException {
+        if (isLoggedIn()) {
+            redirectHome();
+        }
     }
 
     public boolean isLoggedIn() {
@@ -73,11 +79,12 @@ public class Login {
             return "login";
         }
         this.user = u;
-        return "index";
+        return "pretty:home";
     }
 
-    public void logout() {
+    public String logout() {
         user = null;
+        return "pretty:home";
     }
 
 }

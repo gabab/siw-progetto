@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 @ApplicationScoped
 public class ImageController {
 
-    public static String getDefaultPath() {
+    private String getDefaultPath() {
         return getPath("default");
     }
 
@@ -26,9 +26,15 @@ public class ImageController {
         return directory + "/" + name + ext;
     }
 
+    public static boolean existsFile(String filepath){
+        return Files.exists(Paths.get(filepath));
+    }
+
+
     public InputStream getImage(String code) throws FileNotFoundException {
         String filepath = getPath(code);
-        filepath = (Files.exists(Paths.get(filepath))) ? filepath : getDefaultPath();
+        boolean exists = Files.exists(Paths.get(filepath));
+        filepath = (exists) ? filepath : getDefaultPath();
         return new FileInputStream(new File(filepath));
     }
 }
