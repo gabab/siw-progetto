@@ -3,13 +3,74 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
-    <f:event type="preRenderView" listener="#{login.checkIsLoggedIn}" />
-    <ui:define name="title">Request registration</ui:define>
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="title">Registration</ui:define>
     <ui:define name="content">
+
+        <b:container>
+            <b:row>
+                <b:column>
+                    <b:alert severity="danger"
+                             rendered="#{not empty facesContext.messageList}">
+                        There where errors:<br/>
+                        <h:messages/>
+                    </b:alert>
+                    <f:view><h:form>
+                        <b:panel title="Registration">
+                            Insert your data here. All fields are mandatory.
+                            <fieldset>
+                                <label>Name:
+                                    <b:inputText value="#{registration.name}"
+                                                 required="true"
+                                                 requiredMessage="Name is mandatory"
+                                                 validatorMessage="Name 3 character minimum"
+                                                 id="name">
+                                        <f:validateLength minimum="3"/>
+                                    </b:inputText>
+                                </label>
+                                <label>Surname:
+                                    <b:inputText value="#{registration.surname}"
+                                                 required="true"
+                                                 requiredMessage="Surname is mandatory" id="surname">
+                                        <f:validateLength minimum="3"/>
+                                    </b:inputText>
+                                </label>
+                                <label>Date of Birth:
+                                    <b:inputText value="#{registration.birthDate}"
+                                                 required="true"
+                                                 requiredMessage="Date is mandatory" id="birthdate"
+                                                 converterMessage="Date must be DD-MM-YYYY">
+                                        <f:convertDateTime pattern="dd-M-yyyy"/>
+                                    </b:inputText>
+                                </label>
+                                <label>Email:
+                                    <b:inputText value="#{registration.email}"
+                                                 required="true"
+                                                 requiredMessage="Email is mandatory" id="email" validator="EmailValidator">
+                                        <f:facet name="prepend">
+                                            <b:icon name="envelope"/>
+                                        </f:facet>
+                                    </b:inputText>
+                                </label>
+                                <label>Password:
+                                    <b:inputSecret value="#{registration.password}"
+                                                   id="password"
+                                                   required="true"
+                                                   requiredMessage="Password is mandatory">
+                                        <f:validateLength minimum="6"/></b:inputSecret>
+                                </label>
+                                <b:commandButton look="primary" value="Register" action="#{registration.requestRegistration}" size="lg"/>
+                            </fieldset>
+                        </b:panel>
+                    </h:form></f:view>
+                </b:column>
+            </b:row>
+        </b:container>
+
         <h1>Registration</h1>
 
-        Insert your data here. All fields are mandatory.
+
         <br/>
         <br/>
 
@@ -25,42 +86,20 @@
                 <br/>
                 <h:message for="name"/>
                 <br/><br/>
-                <label>Surname:
-                    <h:inputText value="#{registration.surname}"
-                                 required="true"
-                                 requiredMessage="Surname is mandatory" id="surname">
-                        <f:validateLength minimum="3"/>
-                    </h:inputText>
-                </label>
+
                 <br/>
                 <h:message for="surname"/>
                 <br/><br/>
                 <br/><br/>
-                <label>Date of Birth:
-                    <h:inputText value="#{registration.birthDate}"
-                                 required="true"
-                                 requiredMessage="Date is mandatory" id="birthdate">
-                        <f:convertDateTime pattern="dd-M-yyyy"/>
-                    </h:inputText>
-                </label>
+
                 <br/>
                 <h:message for="birthdate"/>
                 <br/><br/>
-                <label>Email:
-                    <h:inputText value="#{registration.email}"
-                                 required="true"
-                                 requiredMessage="Email is mandatory" id="email" validator="ValidateEmail"/>
-                </label>
+
                 <br/>
                 <h:message for="email"/>
                 <br/><br/>
-                <label>Password:
-                    <h:inputSecret value="#{registration.password}"
-                                   id="password"
-                                   required="true"
-                                   requiredMessage="Password is mandatory">
-                        <f:validateLength minimum="6"/></h:inputSecret>
-                </label>
+
                 <br/>
                 <h:message for="password"/>
                 <br/><br/>

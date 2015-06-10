@@ -3,46 +3,50 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:b="http://bootsfaces.net/ui">
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{login.checkIsLoggedIn}"/>
+    </f:metadata>
     <ui:define name="title">Login</ui:define>
 
     <ui:define name="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-md-offset-4">
-                    <div class="login-panel panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Please Sign In</h3>
-                        </div>
-                        <div class="panel-body">
-                            <f:view>
-                                <h:form role="form">
 
-                                    <fieldset>
-                                        <div class="form-group">
-                                            <h:inputText class="form-control" placeholder="E-mail" name="email"
-                                                         type="email"
-                                                         autofocus="true" value="#{login.email}"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <h:inputSecret class="form-control" placeholder="Password" name="password"
-                                                           type="password" value="#{login.password}"/>
-                                        </div>
-                                        <!--<div class="checkbox">-->
-                                        <!--<label>-->
-                                        <!--<input name="remember" type="checkbox" value="Remember Me">Remember Me-->
-                                        <!--</label>-->
-                                        <!--</div>-->
-                                        <!-- Change this to a button or input when using this as a form -->
-                                        <h:commandButton value="Login" action="#{login.login}"
-                                                         class="btn btn-lg btn-success btn-block"/>
-                                    </fieldset>
-                                </h:form>
-                            </f:view>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <b:container>
+            <b:row>
+                <b:column col-md="4" offset="4">
+                    <f:view><h:form>
+                        <b:panel title="Please Sign In">
+                            <fieldset>
+
+                                <b:inputText autofocus="true" placeholder="E-mail" id="email"
+                                             required="true"
+                                             value="#{login.email}"
+                                             requiredMessage="Email is required"/>
+
+                                <b:inputSecret placeholder="Password" id="password"
+                                               required="true"
+                                               value="#{login.password}"
+                                               requiredMessage="Password is required"/>
+
+                                <b:commandButton value="Login" action="#{login.login}"
+                                                 look="success" size="lg" styleClass="btn-block"/>
+
+                            </fieldset>
+                        </b:panel>
+                        <b:alert severity="danger"
+                                 rendered="#{not empty facesContext.messageList or login.errorMessage != null}">
+                            <h:message for="email"/>
+                            <br/>
+                            <h:message for="password"/>
+                            <br/>#{login.errorMessage}
+                        </b:alert>
+                    </h:form>
+                    </f:view>
+                </b:column>
+            </b:row>
+
+
+        </b:container>
+
     </ui:define>
 </ui:composition>

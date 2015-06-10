@@ -73,12 +73,14 @@ public class Login {
         User u = this.userFacade.findUser(email);
         if (u == null) {
             this.errorMessage = "Invalid email";
-            return "login";
+            return "pretty:login";
         } else if (!this.password.equals(u.getPassword())) {
             this.errorMessage = "Invalid password";
-            return "login";
+            return "pretty:login";
         }
+        this.errorMessage = null;
         this.user = u;
+
         return "pretty:home";
     }
 
@@ -87,4 +89,7 @@ public class Login {
         return "pretty:home";
     }
 
+    public User getCustomer() {
+        return null;
+    }
 }

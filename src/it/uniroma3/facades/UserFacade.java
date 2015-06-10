@@ -33,11 +33,13 @@ public class UserFacade {
     }
 
     public User findUser(String email, UserGroup group) {
-        String subQuery = (group == null) ? "'" + email + "'" : " AND u.group = " + group;
+        String subQuery = (group == null) ? "" : " AND u.group = " + group;
         User u = null;
         try {
             u = (User) this.em.createQuery("SELECT u FROM User u WHERE " +
-                    "u.email = " + subQuery).getSingleResult();
+                    "u.email = :email" + subQuery)
+                    .setParameter("email", email)
+                    .getSingleResult();
         } catch (Exception ignored) {
         }
         return u;
@@ -45,9 +47,7 @@ public class UserFacade {
 
 
     public User findUser(String email) {
-        return (User) this.em.createQuery("SELECT u FROM User u WHERE " +
-                "u.email = '" + email + "'").getSingleResult();
-        //findUser(email, null);
+        return findUser(email, null);
     }
 
     public Customer findCustomer(String email) {

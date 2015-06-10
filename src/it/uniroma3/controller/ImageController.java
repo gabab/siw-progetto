@@ -4,26 +4,40 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 @ManagedBean
 @ApplicationScoped
 public class ImageController {
 
     private String getDefaultPath() {
-        return getPath("default");
+        return getPath(getProperty("defaultImage"));
     }
 
     public static String getPath(String name) {
-        ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
-        String directory = ex.getInitParameter("imagesDirectory");
-        String ext = ".jpg";
+        String directory = getProperty("imagePath");
+        String ext = getProperty("extension");
         return directory + "/" + name + ext;
+    }
+
+    private static String getProperty(String s) {
+        String result = null;
+        try {
+            result = getProperties().getProperty(s);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private static Properties getProperties() throws IOException {
+        ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
+        Properties properties = new Properties();
+        properties.load(ex.getResourceAsStream("/WEB-INF/config.properties"));
+        return properties;
     }
 
     public static boolean existsFile(String filepath){

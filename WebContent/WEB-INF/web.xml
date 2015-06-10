@@ -8,10 +8,6 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <context-param>
-        <param-name>imagesDirectory</param-name>
-        <param-value>C:/siw-progetto/images</param-value>
-    </context-param>
-    <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>

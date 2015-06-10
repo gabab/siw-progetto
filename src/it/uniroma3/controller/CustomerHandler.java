@@ -18,6 +18,7 @@ import java.util.List;
 @ManagedBean
 @SessionScoped
 public class CustomerHandler {
+    @ManagedProperty(value = "#{login.user}")
     private Customer currentCustomer;
     private List<Order> orders;
     private Order order;
@@ -40,6 +41,11 @@ public class CustomerHandler {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public String getCartSize() {
+        int size = (cart == null) ? 0 : cart.getSize();
+        return (size == 0) ? "" : "(" + size + ")";
     }
 
     public String getProductCode() {

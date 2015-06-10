@@ -13,7 +13,7 @@ import javax.faces.validator.ValidatorException;
 
 
 @FacesValidator("EmailValidator")
-public class ValidateEmailRegistration implements Validator {
+public class ValidateEmail implements Validator {
 
     @EJB(name = "user")
     private UserFacade uf;

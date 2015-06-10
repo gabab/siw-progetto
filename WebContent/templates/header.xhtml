@@ -9,9 +9,10 @@
         <b:navbarLinks pull="right">
             <b:navLink value="Register" rendered="#{!login.loggedIn}" href="/register"/>
             <b:navLink value="Login" rendered="#{!login.loggedIn}" href="/login"/>
+            <b:navLink value="Cart" href="/cart"/>
             <b:dropMenu value="#{login.user.fullname}" rendered="#{login.loggedIn}">
                 <b:navLink value="My Page" href="/mypage"/>
-                <b:navLink value="Cart" href="/cart"/>
+                <b:navLink value="Cart #{customerHandler.cartSize}" href="/cart"/>
                 <b:navLink/>
                 <!-- bruttissimo hack per superare le limitazioni di b:navLink -->
                 <b:navLink value="Logout" href="/logout"/>
