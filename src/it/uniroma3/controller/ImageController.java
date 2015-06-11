@@ -13,10 +13,6 @@ import java.util.Properties;
 @ApplicationScoped
 public class ImageController {
 
-    private String getDefaultPath() {
-        return getPath(getProperty("defaultImage"));
-    }
-
     public static String getPath(String name) {
         String directory = getProperty("imagePath");
         String ext = getProperty("extension");
@@ -40,10 +36,13 @@ public class ImageController {
         return properties;
     }
 
-    public static boolean existsFile(String filepath){
+    public static boolean existsFile(String filepath) {
         return Files.exists(Paths.get(filepath));
     }
 
+    private String getDefaultPath() {
+        return getPath(getProperty("defaultImage"));
+    }
 
     public InputStream getImage(String code) throws FileNotFoundException {
         String filepath = getPath(code);

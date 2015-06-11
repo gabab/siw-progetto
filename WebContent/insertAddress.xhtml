@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="title">Insert address</ui:define>
+
+    <ui:define name="content">
+
+        <b:container>
+            <b:row>
+                <b:column>
+                    <b:alert severity="danger"
+                             closable="true"
+                             rendered="#{not empty facesContext.messageList}">
+                        There where errors:<br/>
+                        <h:messages/>
+                    </b:alert>
+                    <b:panel title="Insert Address">
+                        <fieldset>
+                            <f:view><h:form>
+                                <label>Street:
+                                    <b:inputText value="#{addressController.street}"
+                                                 required="true"
+                                                 requiredMessage="Street is mandatory"
+                                                 id="street"/></label>
+                                <br/>
+                                <label>City:
+                                    <b:inputText value="#{addressController.city}"
+                                                 required="true"
+                                                 requiredMessage="City is mandatory"
+                                                 id="city"/>
+                                </label>
+                                <br/>
+                                <label>State:
+                                    <b:inputText value="#{addressController.state}"/></label>
+                                <br/>
+                                <label>Zipcode:
+                                    <b:inputText value="#{addressController.zipcode}"
+                                                 required="true"
+                                                 requiredMessage="Zipcode is mandatory"
+                                                 id="zipcode"/>
+                                </label>
+                                <br/>
+                                <label>Country:
+                                    <b:inputText value="#{addressController.country}"
+                                                             required="true"
+                                                             requiredMessage="Country is mandatory"
+                                                             id="country"/></label>
+                                <br/>
+                                <b:commandButton value="Confirm"
+                                                 look="warning"
+                                                 size="lg"
+                                                 action="#{addressController.insertAddress(customerHandler.currentCustomer)}"/>
+
+                            </h:form></f:view>
+                        </fieldset>
+                    </b:panel>
+                </b:column>
+            </b:row>
+        </b:container>
+    </ui:define>
+</ui:composition>

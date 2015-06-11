@@ -6,9 +6,6 @@ import it.uniroma3.model.Product;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 @ManagedBean

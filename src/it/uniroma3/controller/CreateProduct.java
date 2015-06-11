@@ -5,9 +5,8 @@ import it.uniroma3.model.Product;
 import org.primefaces.model.UploadedFile;
 
 import javax.ejb.EJB;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
