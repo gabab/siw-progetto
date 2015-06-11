@@ -46,8 +46,7 @@ public class CustomerHandler {
     }
 
     public String getCartSize() {
-        int size = (cart == null) ? 0 : cart.getSize();
-        return (size == 0) ? "" : "(" + size + ")";
+        return (cart == null || cart.getSize() == 0) ? "" : "(" + cart.getSize() + ")";
     }
 
     public String getProductCode() {

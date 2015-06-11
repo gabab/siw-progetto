@@ -4,14 +4,17 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui">
-
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{login.checkIsLoggedIn}"/>
+    </f:metadata>
     <ui:define name="title">Registration</ui:define>
     <ui:define name="content">
 
         <b:container>
             <b:row>
-                <b:column>
+                <b:column col-md="6" offset="3">
                     <b:alert severity="danger"
+                             closable="true"
                              rendered="#{not empty facesContext.messageList}">
                         There where errors:<br/>
                         <h:messages/>
@@ -27,13 +30,21 @@
                                                  validatorMessage="Name 3 character minimum"
                                                  id="name">
                                         <f:validateLength minimum="3"/>
+                                        <f:facet name="prepend">
+                                            <b:icon name="user"/>
+                                        </f:facet>
                                     </b:inputText>
                                 </label>
                                 <label>Surname:
                                     <b:inputText value="#{registration.surname}"
                                                  required="true"
-                                                 requiredMessage="Surname is mandatory" id="surname">
+                                                 requiredMessage="Surname is mandatory"
+                                                 validatorMessage="Surname 3 character minimum"
+                                                 id="surname">
                                         <f:validateLength minimum="3"/>
+                                        <f:facet name="prepend">
+                                            <b:icon name="user"/>
+                                        </f:facet>
                                     </b:inputText>
                                 </label>
                                 <label>Date of Birth:
@@ -42,6 +53,9 @@
                                                  requiredMessage="Date is mandatory" id="birthdate"
                                                  converterMessage="Date must be DD-MM-YYYY">
                                         <f:convertDateTime pattern="dd-M-yyyy"/>
+                                        <f:facet name="prepend">
+                                            <b:icon name="calendar"/>
+                                        </f:facet>
                                     </b:inputText>
                                 </label>
                                 <label>Email:
@@ -58,7 +72,11 @@
                                                    id="password"
                                                    required="true"
                                                    requiredMessage="Password is mandatory">
-                                        <f:validateLength minimum="6"/></b:inputSecret>
+                                        <f:validateLength minimum="6"/>
+                                        <f:facet name="prepend">
+                                            <b:iconAwesome name="key"/>
+                                        </f:facet>
+                                    </b:inputSecret>
                                 </label>
                                 <b:commandButton look="primary" value="Register" action="#{registration.requestRegistration}" size="lg"/>
                             </fieldset>
@@ -67,45 +85,6 @@
                 </b:column>
             </b:row>
         </b:container>
-
-        <h1>Registration</h1>
-
-
-        <br/>
-        <br/>
-
-        <f:view>
-            <h:form>
-                <label>Name:
-                    <h:inputText value="#{registration.name}"
-                                 required="true"
-                                 requiredMessage="Name is mandatory" id="name">
-                        <f:validateLength minimum="3"/>
-                    </h:inputText>
-                </label>
-                <br/>
-                <h:message for="name"/>
-                <br/><br/>
-
-                <br/>
-                <h:message for="surname"/>
-                <br/><br/>
-                <br/><br/>
-
-                <br/>
-                <h:message for="birthdate"/>
-                <br/><br/>
-
-                <br/>
-                <h:message for="email"/>
-                <br/><br/>
-
-                <br/>
-                <h:message for="password"/>
-                <br/><br/>
-                <h:commandButton value="Register" action="#{registration.requestRegistration}" class="btn btn-default"/>
-            </h:form>
-        </f:view>
     </ui:define>
 
 </ui:composition>

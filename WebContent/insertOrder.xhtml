@@ -29,6 +29,8 @@
                 </table>
                 <br/>
 
+                <h1>Total before taxes: </h1> #{customerHandler.currentOrder.total}
+                <h1>Taxes: </h1> #{utils.getTaxes(customerHandler.currentOrder.total)}
                 <h1>Total: </h1> #{utils.getPrice(customerHandler.currentOrder.total)}
                 <br/>
                 Add another item:

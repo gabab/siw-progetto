@@ -2,8 +2,8 @@
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:b="http://bootsfaces.net/ui" xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:b="http://bootsfaces.net/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">Home Page</ui:define>
 
 
@@ -21,15 +21,17 @@
     </ui:define>
 
     <ui:define name="content">
-    <br/>
-    <a href="insert.xhtml">Insert a product</a>
-    <br/>
-    <f:view>
-    <h:outputLink value="/products">List products</h:outputLink>
-    </f:view>
-    <br/>
-    <a href="login.xhtml">Login</a>
-    <br/>
+        <br/>
+        <a href="insert.xhtml">Insert a product</a>
+        <br/>
+        <a href="insertAddress.xhtml">Insert Address</a><br/>
+        <a href="customerPage.xhtml">customer Page</a><br/>
+        <f:view>
+            <h:outputLink value="/products">List products</h:outputLink>
+        </f:view>
+        <br/>
+        <a href="login.xhtml">Login</a>
+        <br/>
 
     </ui:define>
 </ui:composition>

@@ -2,16 +2,11 @@ package it.uniroma3.controller;
 
 import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.model.Product;
-import org.primefaces.model.UploadedFile;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @ManagedBean
 @RequestScoped
@@ -24,9 +19,24 @@ public class CreateProduct {
     private String code;
     @EJB(name = "product")
     private ProductFacade productFacade;
+    @ManagedProperty(value = "#{userController}")
+    private UserController uc;
 
-    private UploadedFile image;
+    public UserController getUc() {
+        return uc;
+    }
 
+    public void setUc(UserController uc) {
+        this.uc = uc;
+    }
+
+    public ProductFacade getProductFacade() {
+        return productFacade;
+    }
+
+    public void setProductFacade(ProductFacade productFacade) {
+        this.productFacade = productFacade;
+    }
 
     public Product getProduct() {
         return product;
@@ -68,30 +78,9 @@ public class CreateProduct {
         this.name = name;
     }
 
-
-    //TODO: validazione codice prodotto
     public String insertProduct() {
-        this.saveImage();
         this.product = this.productFacade.createProduct(name, code, price, description);
-        return "product";
-    }
 
-    private void saveImage() {
-        try {
-            InputStream input = image.getInputstream();
-            Path file = Paths.get(ImageController.getPath(code));
-            Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public UploadedFile getImage() {
-        return image;
-    }
-
-    public void setImage(UploadedFile image) {
-        this.image = image;
+        return "pretty:product";
     }
 }

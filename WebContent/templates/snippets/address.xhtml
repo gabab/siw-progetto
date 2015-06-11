@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+<ui:composition>
+    <fieldset>
+        <label>Street:
+            <b:inputText value="#{addressController.street}"
+                         required="true"
+                         requiredMessage="Street is mandatory"
+                         id="street"/></label>
+        <br/>
+        <label>City:
+            <b:inputText value="#{addressController.city}"
+                         required="true"
+                         requiredMessage="City is mandatory"
+                         id="city"/>
+        </label>
+        <br/>
+        <label>State:
+            <b:inputText value="#{addressController.state}"/></label>
+        <br/>
+        <label>Zipcode:
+            <b:inputText value="#{addressController.zipcode}"
+                         required="true"
+                         requiredMessage="Zipcode is mandatory"
+                         id="zipcode"/>
+        </label>
+        <br/>
+        <label>Country:
+            <b:inputText value="#{addressController.country}"
+                         required="true"
+                         requiredMessage="Country is mandatory"
+                         id="country"/></label>
+        <br/>
+        <b:commandButton value="Confirm"
+                         look="warning"
+                         size="lg"
+                         action="#{addressController.insertAddress(customerHandler.currentCustomer)}"/>
+
+    </fieldset>
+</ui:composition>
+</html>

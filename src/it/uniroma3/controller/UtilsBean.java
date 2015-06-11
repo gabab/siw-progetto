@@ -1,31 +1,51 @@
 package it.uniroma3.controller;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
-@ManagedBean(name = "utils")
+@ManagedBean(name = "utils", eager = true)
 @ApplicationScoped
 public class UtilsBean {
 
-    private static Properties getProperties() throws IOException {
+    private Properties properties;
+
+    @PostConstruct
+    private void readProperties(){
         ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
-        Properties properties = new Properties();
-        properties.load(ex.getResourceAsStream("/WEB-INF/config.properties"));
-        return properties;
+        Properties p = new Properties();
+        try {
+            p.load(ex.getResourceAsStream("/WEB-INF/config.properties"));
+            properties = p;
+        } catch (Exception ignored) {}
+    }
+
+    private boolean imageExits(String path) {
+        return FacesContext.getCurrentInstance().getApplication()
+                .getResourceHandler().createResource(path) != null;
+    }
+
+    public String getImagePath(String code) {
+        String extension = properties.getProperty("extension");
+        String imagePath = properties.getProperty("imagePath");
+        String defaultImage = properties.getProperty("defaultImage");
+        String filepath = imagePath + code + extension;
+        return imageExits(filepath) ? filepath : imagePath + defaultImage + extension;
+    }
+
+    public String getTaxes(float p) {
+        p *= (Float.parseFloat(properties.getProperty("VAT")));
+        return properties.getProperty("currency") + " " + String.format("%.2f", p);
     }
 
     public String getPrice(float p) {
-        try {
-            Properties prop = getProperties();
-            p = p * (1 + Float.parseFloat(prop.getProperty("VAT")));
-            return prop.getProperty("currency") + " " + String.format("%.2f", p);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        p *= (1 + Float.parseFloat(properties.getProperty("VAT")));
+        return properties.getProperty("currency") + " " + String.format("%.2f", p);
     }
 }

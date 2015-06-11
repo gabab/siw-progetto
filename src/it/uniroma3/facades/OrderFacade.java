@@ -1,5 +1,6 @@
 package it.uniroma3.facades;
 
+import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Product;
@@ -31,8 +32,13 @@ public class OrderFacade {
         return q.getResultList();
     }
 
-    public List getOrdersState(OrderState state, Long customerID) {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state + " AND o.customer = " + customerID);
+    public List getClosedOrders(Customer c) {
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + OrderState.CLOSED);
+        return getOrdersState(OrderState.CLOSED, c);
+    }
+
+    public List getOrdersState(OrderState state, Customer customer) {
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state + " AND o.customer = " + customer);
         return q.getResultList();
     }
 

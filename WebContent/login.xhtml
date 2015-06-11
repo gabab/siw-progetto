@@ -21,12 +21,20 @@
                                 <b:inputText autofocus="true" placeholder="E-mail" id="email"
                                              required="true"
                                              value="#{login.email}"
-                                             requiredMessage="Email is required"/>
+                                             requiredMessage="Email is required">
+                                    <f:facet name="prepend">
+                                        <b:icon name="user"/>
+                                    </f:facet>
+                                </b:inputText>
 
                                 <b:inputSecret placeholder="Password" id="password"
                                                required="true"
                                                value="#{login.password}"
-                                               requiredMessage="Password is required"/>
+                                               requiredMessage="Password is required">
+                                    <f:facet name="prepend">
+                                        <b:iconAwesome name="key"/>
+                                    </f:facet>
+                                </b:inputSecret>
 
                                 <b:commandButton value="Login" action="#{login.login}"
                                                  look="success" size="lg" styleClass="btn-block"/>
@@ -34,11 +42,12 @@
                             </fieldset>
                         </b:panel>
                         <b:alert severity="danger"
+                                 closable="true"
                                  rendered="#{not empty facesContext.messageList or login.errorMessage != null}">
+                            #{login.errorMessage}<br/>
                             <h:message for="email"/>
                             <br/>
                             <h:message for="password"/>
-                            <br/>#{login.errorMessage}
                         </b:alert>
                     </h:form>
                     </f:view>
