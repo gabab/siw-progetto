@@ -32,6 +32,8 @@ public class CustomerHandler {
     private UserFacade userFacade;
     private String productCode;
     private int quantity;
+
+    private boolean existsAddress;
     @ManagedProperty(value = "#{login}")
     private Login login;
 
@@ -145,6 +147,11 @@ public class CustomerHandler {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public boolean getExistsAddress(){
+        return currentCustomer != null && currentCustomer.hasAddress();
+    }
+
 
     public String addToCart(String productCode) {
         if (!login.isLoggedIn())

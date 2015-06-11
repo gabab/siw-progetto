@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
 <ui:composition>
 
     <b:navBar brand="SIWShop" brandHref="/">
 
+
         <b:navbarLinks pull="right">
+
             <b:navLink value="Register" rendered="#{!login.loggedIn}" href="/register"/>
             <b:navLink value="Login" rendered="#{!login.loggedIn}" href="/login"/>
-            <b:navLink value="Cart" href="/cart"/>
+            <b:navLink value="Cart #{customerHandler.cartSize}" href="/cart" rendered="#{login.loggedIn}"/>
             <b:dropMenu value="#{login.user.fullname}" rendered="#{login.loggedIn}">
                 <b:navLink value="My Page" href="/mypage"/>
                 <b:navLink value="Cart #{customerHandler.cartSize}" href="/cart"/>
@@ -18,6 +20,15 @@
                 <b:navLink value="Logout" href="/logout"/>
             </b:dropMenu>
         </b:navbarLinks>
+        <h:form styleClass="navbar-form navbar-right">
+            <div class="form-group">
+                <b:inputText placeholder="Search..." value="#{searchBean.searchterm}" span="4">
+                    <f:facet name="append">
+                        <b:commandButton value="" icon="search" action="#{searchBean.searchProducts}"/>
+                    </f:facet>
+                </b:inputText>
+            </div>
+        </h:form>
 
     </b:navBar>
 </ui:composition>

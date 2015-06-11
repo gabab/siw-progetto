@@ -113,6 +113,9 @@ public class Customer extends User {
     }
 
 
+    public boolean hasAddress() {
+        return address != null;
+    }
 }
 
 

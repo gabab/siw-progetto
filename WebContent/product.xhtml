@@ -5,8 +5,10 @@
                 xmlns:o="http://omnifaces.org/ui"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://java.sun.com/jsf/composite">
     <ui:define name="title">#{userController.product.name}</ui:define>
+
+
 
     <ui:define name="content">
         <b:container>
@@ -32,8 +34,28 @@
                                     look="success"
                                     action="#{customerHandler.addToCart(userController.product.code)}">
                             </b:commandButton>
+
+
                         </h:form>
                     </f:view>
+                    <b:modal id="amodal" title="Insert Address">
+                        <ui:include src="templates/address.xhtml"/>
+                        <f:facet name="footer">
+                            <h:form>
+                            <!--<b:commandButton look="primary" value="Insert" action="#{addressController.insertAddress(customerHandler.currentCustomer)}"/>-->
+                            <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;" disabled="#{!customerHandler.existsAddress}"/>
+                        </h:form>
+                        </f:facet>
+                    </b:modal>
+
+
+                    <a id="atrigger" class="btn btn-primary btn-lg" href="#amodal" data-toggle="modal">Trigger (HTML A tag)</a>
+
+                    <!--<b:button value="Trigger (JSF passthrough)" look="success" p:data-target="#amodal" p:data-toggle="modal" onclick="return false;" size="lg"/>-->
+
+                    <button id="btrigger" class="btn btn-info btn-lg" data-target="#amodal" data-toggle="modal">Trigger (HTML Button)</button>
+
+
                     <br/>
                 </b:column>
             </b:row>

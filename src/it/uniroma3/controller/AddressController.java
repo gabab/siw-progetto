@@ -23,9 +23,11 @@ public class AddressController {
     private UserFacade uf;
 
     public String insertAddress(Customer c) {
-        Address a = new Address(street, city, state, zipcode, country);
-        c.setAddress(a);
-        uf.updateUser(c);
+        if (c != null) {
+            Address a = new Address(street, city, state, zipcode, country);
+            c.setAddress(a);
+            uf.updateUser(c);
+        }
         return "pretty:home";
     }
 
