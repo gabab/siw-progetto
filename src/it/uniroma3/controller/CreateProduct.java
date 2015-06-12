@@ -80,7 +80,8 @@ public class CreateProduct {
 
     public String insertProduct() {
         this.product = this.productFacade.createProduct(name, code, price, description);
-
-        return "pretty:product";
+        uc.setCode(code);
+        uc.setProduct(product);
+        return "product";
     }
 }

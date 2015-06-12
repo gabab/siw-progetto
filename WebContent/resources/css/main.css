@@ -1,4 +1,9 @@
 .pricebox {
-    color: midnightblue;
+    color: red;
     font-weight: bold;
+}
+
+.product-link {
+    color: black;
+    font-size: large;
 }

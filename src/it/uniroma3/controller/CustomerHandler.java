@@ -134,7 +134,7 @@ public class CustomerHandler {
         return "orderDetail";
     }
 
-    public String createOrder() {
+    public String createOrder(Customer currentCustomer) {
         this.currentOrder = new Order(currentCustomer);
         return "insertOrder";
     }

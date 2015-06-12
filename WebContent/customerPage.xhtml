@@ -4,37 +4,43 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:b="http://bootsfaces.net/ui">
+        >
     <ui:define name="title">My Page</ui:define>
 
     <ui:define name="content">
 
         <f:view><h:form>
-            <h:commandLink value="Insert Order" action="#{customerHandler.createOrder}"/>
-        </h:form></f:view>
+            <h:commandLink value="Insert Order" action=""/>
+        </h:form>
+        </f:view>
+
+        <h:outputLink value="/ss">AAd</h:outputLink>
+
+        <h:outputLink value="insertAddress.xhtml">AA</h:outputLink>
+
 
         <!--My Orders-->
 
         <!--<b:tabView activeIndex="1">-->
-            <!--<b:tab title="Open">-->
-                <!--<ui:repeat var="o" value="#{customerHandler.closedOrders}">-->
+        <!--<b:tab title="Open">-->
+        <!--<ui:repeat var="o" value="#{customerHandler.closedOrders}">-->
 
-                <!--</ui:repeat>-->
-            <!--</b:tab>-->
-            <!--<b:tab title="Processed">-->
-                <!--<ui:repeat var="o" value="#{customerHandler.processedOrders}">-->
+        <!--</ui:repeat>-->
+        <!--</b:tab>-->
+        <!--<b:tab title="Processed">-->
+        <!--<ui:repeat var="o" value="#{customerHandler.processedOrders}">-->
 
 
-                <!--</ui:repeat>-->
+        <!--</ui:repeat>-->
 
-            <!--</b:tab>-->
+        <!--</b:tab>-->
 
-            <!--<b:tab title="All">-->
-                <!--<ui:repeat var="o" value="#{customerHandler.orders}">-->
+        <!--<b:tab title="All">-->
+        <!--<ui:repeat var="o" value="#{customerHandler.orders}">-->
 
-                <!--</ui:repeat>-->
+        <!--</ui:repeat>-->
 
-            <!--</b:tab>-->
+        <!--</b:tab>-->
 
         <!--</b:tabView>-->
 

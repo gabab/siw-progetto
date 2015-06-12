@@ -41,6 +41,12 @@
         <view-id value="login.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="ss">
+        <pattern value="/ss"/>
+        <view-id value="insertOrder.xhtml"/>
+        <action>#{customerHandler.createOrder(login.user)}</action>
+    </url-mapping>
+
     <url-mapping id="logout">
         <pattern value="/logout"/>
         <view-id value="logout.xhtml"/>

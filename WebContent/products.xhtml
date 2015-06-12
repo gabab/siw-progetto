@@ -11,13 +11,17 @@
             <ui:repeat var="p" value="#{userController.products}">
                 <b:row>
                     <b:column col-xs="2" col-md="2">
-                        <b:thumbnail>
-                            <h:graphicImage name="#{utils.getImagePath(p.code)}" height="100" width="100"/>
-                        </b:thumbnail>
+                        <h:outputLink style="" value="/product/#{p.code}">
+                            <b:thumbnail>
+                                <h:graphicImage name="#{utils.getImagePath(p.code)}" height="100" width="100"/>
+                            </b:thumbnail>
+                        </h:outputLink>
                     </b:column>
                     <b:column col-xs="6" col-md="4">
-                        <h2><h:outputLink value="/product/#{p.code}">#{p.name}</h:outputLink></h2>
-                        <div class="pricebox">#{utils.getPrice(p.price)}</div>
+                        <div class="product-link" style="color: black; font-size: large;"><h:outputLink
+                                style="color:black;" value="/product/#{p.code}">#{p.name}</h:outputLink></div>
+                        <div class="pricebox"
+                             style=" color: red;font-weight: bold; font-size: large;">#{utils.getPrice(p.price)}</div>
                     </b:column>
                 </b:row>
             </ui:repeat>
