@@ -10,11 +10,11 @@
     <ui:define name="home">
         <b:jumbotron>
             <b:container>
-                <h1>Hello, world!</h1>
+                <h1 style="text-align: center">Welcome to SIW Shop</h1>
 
-                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <p style="text-align: center"> <img src="resources/images/cart.png" alt="SIWShop" align="middle" style="width:256px;height:256px;"></img>   </p>
 
-                <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+                <p style="text-align: center"><h:outputLink value="products" class="btn btn-primary btn-lg" >Access Now to the Products List</h:outputLink></p>
             </b:container>
         </b:jumbotron>
 
@@ -25,9 +25,9 @@
         <a href="insert.xhtml">Insert a product</a>
         <br/>
         <a href="insertAddress.xhtml">Insert Address</a><br/>
-        <a href="customerPage.xhtml">customer Page</a><br/>
+        <a href="customerPage.xhtml">Customer Page</a><br/>
         <f:view>
-            <h:outputLink value="/products">List products</h:outputLink>
+            <h:outputLink value="products">List products</h:outputLink>
         </f:view>
         <br/>
         <a href="login.xhtml">Login</a>
