@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">#{search.searchTitle} - Page #{search.currentPage + 1}</ui:define>
+    <ui:define name="content">
+        <h1>Products</h1>
+        <b:container>
+            <ui:repeat var="p" value="#{search.page}">
+                <b:row>
+                    <b:column col-xs="2" col-md="2">
+                        <h:outputLink value="/product/#{p.code}">
+                            <b:thumbnail>
+                                <h:graphicImage name="#{utils.getImagePath(p.code)}" height="100" width="100"/>
+                            </b:thumbnail>
+                        </h:outputLink>
+                    </b:column>
+                    <b:column col-xs="6" col-md="4">
+                        <h:outputLink styleClass="productLink" value="/product/#{p.code}">#{p.name}</h:outputLink>
+                        <div class="pricebox">#{utils.getPrice(p.price)}</div>
+                    </b:column>
+                </b:row>
+            </ui:repeat>
+            <b:row><b:column col-md="4" offset="4">
+                <f:view><h:form>
+
+                    <b:buttonToolbar rendered="#{search.totalPages > 1}">
+                        <b:buttonGroup>
+                            <b:commandButton value="First" action="#{search.goToFirst}"
+                                             disabled="#{search.firstPage}"/>
+                            <b:commandButton value="Prev" action="#{search.goToPrev}" disabled="#{!search.hasPrev()}"/>
+                        </b:buttonGroup>
+                        <b:buttonGroup>
+                            <b:button look="link" disabled="true"
+                                      value="Page #{search.currentPage + 1} of #{search.totalPages}"/>
+                        </b:buttonGroup>
+                        <b:buttonGroup>
+                            <b:commandButton value="Next" action="#{search.goToNext}"
+                                             disabled="#{!search.hasNext()}"/>
+                            <b:commandButton value="Last" action="#{search.goToLast}"
+                                             disabled="#{search.lastPage}"/>
+                        </b:buttonGroup>
+                    </b:buttonToolbar>
+                </h:form></f:view>
+            </b:column></b:row>
+        </b:container>
+    </ui:define>
+</ui:composition>

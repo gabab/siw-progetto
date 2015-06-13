@@ -48,4 +48,15 @@ public class UtilsBean {
         p *= (1 + Float.parseFloat(properties.getProperty("VAT")));
         return properties.getProperty("currency") + " " + String.format("%.2f", p);
     }
+
+    public String getBrand() {
+        return properties.getProperty("brand");
+    }
+
+    public int getItemsPerPage() {
+        try {
+            return Integer.parseInt(properties.getProperty("itemsPerPage"));
+        } catch(Exception ignored) {}
+        return 0;
+    }
 }

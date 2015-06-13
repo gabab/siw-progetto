@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
 <ui:composition>
-    <b:navBar fixed="bottom">2015 SIWShop</b:navBar>
+    <b:navBar fixed="bottom" inverse="true">
+        <h:outputText value="&#169; 2015 #{utils.brand}" styleClass="navbar-text"/>
+    </b:navBar>
 </ui:composition>
 </html>

@@ -20,9 +20,6 @@ public class UserController {
     private String password;
     @EJB(beanName = "product")
     private ProductFacade productFacade;
-    private String searchterm;
-    private String productsViewTitle;
-
 
     public UserController() {
 
@@ -46,7 +43,6 @@ public class UserController {
 
     public String listProducts() {
         this.products = this.productFacade.getAllProducts();
-        this.productsViewTitle = "Products Catalog";
         return "products";
     }
 
@@ -58,19 +54,6 @@ public class UserController {
         this.product = this.productFacade.getProduct(code);
         return "product";
         //return (this.product != null) ? "product" : "notFound";
-    }
-
-    public String searchProducts() {
-        if (searchterm.equals(""))
-            return listProducts();
-        this.products = this.productFacade.searchProducts(searchterm);
-        this.productsViewTitle = "Search results for \"" + searchterm + "\"";
-        this.searchterm = null;
-        if (this.products.size() == 1) {
-            this.product = (Product) this.products.get(0);
-            return "product";
-        }
-        return "products";
     }
 
     public String getCode() {
@@ -89,27 +72,11 @@ public class UserController {
         this.product = product;
     }
 
-    public String getSearchterm() {
-        return searchterm;
-    }
-
-    public void setSearchterm(String searchterm) {
-        this.searchterm = searchterm;
-    }
-
     public List getProducts() {
         return products;
     }
 
     public void setProducts(List<Product> products) {
         this.products = products;
-    }
-
-    public String getProductsViewTitle() {
-        return productsViewTitle;
-    }
-
-    public void setProductsViewTitle(String productsViewTitle) {
-        this.productsViewTitle = productsViewTitle;
     }
 }

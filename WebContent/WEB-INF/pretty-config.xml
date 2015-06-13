@@ -26,9 +26,8 @@
     </url-mapping>
 
     <url-mapping id="search">
-        <pattern value="/search/#{searchBean.searchterm}"/>
-        <view-id value="/products.xhtml"/>
-        <action>#{searchBean.searchProducts}</action>
+        <pattern value="/search"/>
+        <view-id value="/searchresults.xhtml"/>
     </url-mapping>
 
     <url-mapping id="registration">

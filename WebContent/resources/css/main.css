@@ -3,7 +3,11 @@
     font-weight: bold;
 }
 
-.product-link {
+.hiddenElement {
+    display: none;
+}
+
+.productLink {
     color: black;
     font-size: large;
 }

@@ -4,7 +4,7 @@
       xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
 <ui:composition>
 
-    <b:navBar brand="SIWShop" brandHref="/">
+    <b:navBar static="true" brand="#{utils.brand}" brandHref="/">
 
 
         <b:navbarLinks pull="right">
@@ -22,11 +22,8 @@
         </b:navbarLinks>
         <h:form styleClass="navbar-form navbar-right">
             <div class="form-group">
-                <b:inputText placeholder="Search..." value="#{searchBean.searchterm}" span="4">
-                    <f:facet name="append">
-                        <b:commandButton value="" style="display: none;" action="#{searchBean.searchProducts}"/>
-                    </f:facet>
-                </b:inputText>
+                <b:inputText placeholder="Search..." value="#{search.searchterm}" span="4"/>
+                <b:commandButton value="" styleClass="hiddenElement" style="display: none;" action="#{search.searchProducts}"/>
             </div>
         </h:form>
 
