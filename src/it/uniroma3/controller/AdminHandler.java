@@ -54,10 +54,7 @@ public class AdminHandler {
     }
 
 
-    public String getClosedOrders() {
-        this.orders = this.of.getClosedOrders();
-        return "openOrders";
-    }
+
 
     public String getCustomerInfo(Long orderID) {
         this.customer = this.of.getOrder(orderID).getCustomer();

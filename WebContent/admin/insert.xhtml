@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="../templates/admin.xhtml"
+<ui:composition template="../templates/adminsidebar.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="admintitle">Insert Product</ui:define>
-    <ui:define name="admincontent">
-        <f:view>
-            <h:form>
-                <label>Name:
-                    <h:inputText value="#{createProduct.name}"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="title">Insert Product</ui:define>
+    <ui:define name="main">
+        <b:alert severity="danger"
+                 closable="true"
+                 rendered="#{not empty facesContext.messageList}">
+            There where errors:<br/>
+            <h:messages/>
+        </b:alert>
+        <h1>Insert Products</h1>
+        <hr/>
+            <b:panelGrid colSpans="12">
+                <f:view><h:form>
+                    <b:inputText label="Name"
+                                 value="#{insert.name}"
                                  required="true"
-                                 requiredMessage="Name is mandatory" id="name"/></label><h:message for="name"/>
-                <br/><br/>
-                <label>Price:
-                    <h:inputText value="#{createProduct.price}"
+                                 requiredMessage="Name is mandatory"
+                                 placeholder="Name"/>
+                    <b:inputText label="Price"
+                                 value="#{insert.price}"
                                  required="true"
                                  requiredMessage="Price is mandatory"
-                                 converterMessage="Price must be a number" id="price">
-                        <f:validateDoubleRange minimum="0.01"/></h:inputText>
-                    <h:message for="price"/>
-                </label>
-                <br/><br/>
-                <label>Code:
-                    <h:inputText value="#{createProduct.code}"
+                                 converterMessage="Price must be a number"/>
+                    <b:inputText label="Product Code"
+                                 value="#{insert.code}"
                                  required="true"
                                  requiredMessage="Code is mandatory"
-                                 validator = "CodeValidator" id="productCode">
-                    </h:inputText></label>
-                <h:message for="productCode" styleClass="error"/><br/><br/>
-                <label>Description:
-                    <h:inputTextarea rows="6" cols="30" value="#{createProduct.description}" required="false"/>
-                </label><br/><br/>
-                <h:commandButton value="Submit" action="#{createProduct.insertProduct}" class="btn btn-default"/>
-            </h:form>
-        </f:view>
+                                 validator="CodeValidator"/>
+                    <h:outputLabel value="Description"/>
+                    <h:inputTextarea value="#{insert.description}"
+                                     styleClass="input-group form-control"/>
+                    <b:commandButton value="Submit" look="primary" action="#{insert.insertProduct}"/>
+                </h:form></f:view>
+            </b:panelGrid>
     </ui:define>
-
 </ui:composition>

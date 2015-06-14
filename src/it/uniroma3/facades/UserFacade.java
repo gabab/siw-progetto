@@ -3,7 +3,7 @@ package it.uniroma3.facades;
 import it.uniroma3.model.Administrator;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.User;
-import it.uniroma3.model.enums.UserGroup;
+import it.uniroma3.enums.UserGroup;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,6 +26,10 @@ public class UserFacade {
 
     public User findUser(Long id) {
         return this.em.find(User.class, id);
+    }
+
+    public Customer findCustomer(Long id) {
+        return this.em.find(Customer.class, id);
     }
 
     public void updateUser(User u) {
@@ -70,5 +74,9 @@ public class UserFacade {
 
     public void createRegisteredCustomer(String email, String password, String name, String surname, Date birthDate) {
         createCustomer(email, password, name, surname, birthDate, UserGroup.CUSTOMER);
+    }
+
+    public void updateCustomer(Customer c) {
+        this.em.merge(c);
     }
 }

@@ -4,9 +4,9 @@
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
     <url-mapping id="product">
-        <pattern value="/product/#{userController.code}"/>
+        <pattern value="/product/#{products.code}"/>
         <view-id value="/product.xhtml"/>
-        <action>#{userController.findProduct}</action>
+        <action>#{products.findProduct}</action>
     </url-mapping>
 
     <url-mapping id="home">
@@ -19,15 +19,15 @@
         <view-id value="/cart.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="viewCatalog">
-        <pattern value="/products"/>
-        <view-id value="/products.xhtml"/>
-        <action>#{userController.listProducts}</action>
+    <url-mapping id="product">
+        <pattern value="/product/#{products.code}"/>
+        <view-id value="/product.xhtml"/>
+        <action>#{products.findProduct}</action>
     </url-mapping>
 
     <url-mapping id="search">
         <pattern value="/search"/>
-        <view-id value="/searchresults.xhtml"/>
+        <view-id value="products.xhtml"/>
     </url-mapping>
 
     <url-mapping id="registration">
@@ -38,12 +38,6 @@
     <url-mapping id="login">
         <pattern value="/login"/>
         <view-id value="login.xhtml"/>
-    </url-mapping>
-
-    <url-mapping id="ss">
-        <pattern value="/ss"/>
-        <view-id value="insertOrder.xhtml"/>
-        <action>#{customerHandler.createOrder(login.user)}</action>
     </url-mapping>
 
     <url-mapping id="logout">

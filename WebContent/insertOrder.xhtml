@@ -3,53 +3,74 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:b="http://bootsfaces.net/ui">
     <ui:define name="title">Insert Order</ui:define>
 
     <ui:define name="content">
-        <!--<h1>New Order</h1>-->
-        <!--Opened: #{customerHandler.currentOrder.opened}-->
-        <!--<f:view>-->
-            <!--<h:form>-->
-                <!--<table>-->
-                    <!--<tr>-->
-                        <!--<th>Product</th>-->
-                        <!--<th>UnitPrice</th>-->
-                        <!--<th>Quantity</th>-->
-                        <!--<th>Sub Total</th>-->
-                    <!--</tr>-->
-                    <!--<ui:repeat var="ol" value="#{customerHandler.currentOrder.items}">-->
-                        <!--<tr>-->
-                            <!--<td>#{ol.product.name}</td>-->
-                            <!--<td>#{utils.getPrice(ol.unitPrice)}</td>-->
-                            <!--<td>#{ol.quantity}</td>-->
-                            <!--<td>#{utils.getPrice(ol.subTotal)}</td>-->
-                        <!--</tr>-->
-                    <!--</ui:repeat>-->
-                <!--</table>-->
-                <!--<br/>-->
+        <b:container>
+            <f:view>
+                <!--<h1>New Order</h1>-->
+                <!--<hr/>-->
+                <!--Opened on: #{customer.currentOrder.opened}-->
+                <!--<b:row styleClass="table-responsive">-->
+                    <!--<h:dataTable styleClass="table table-striped" value="#{customer.currentOrder}" var="ol">-->
+                        <!--<h:column>-->
+                            <!--<f:facet name="header">Product</f:facet>-->
+                            <!--<h:outputText value="#{ol.product.name}"/>-->
+                        <!--</h:column>-->
+                        <!--<h:column>-->
+                            <!--<f:facet name="header">Unit Price</f:facet>-->
+                            <!--<h:outputText value="#{config.getPrice(ol.unitPrice)}"/>-->
+                        <!--</h:column>-->
+                        <!--<h:column>-->
+                            <!--<f:facet name="header">Quantity</f:facet>-->
+                            <!--<h:outputText value="#{ol.quantity}"/>-->
+                        <!--</h:column>-->
+                        <!--<h:column>-->
+                            <!--<f:facet name="header">Subtotal</f:facet>-->
+                            <!--<h:outputText value="#{config.getPrice(ol.subTotal)}"/>-->
+                        <!--</h:column>-->
+                    <!--</h:dataTable></b:row>-->
+                <h:form>
+                <table>
+                <tr>
+                <th>Product</th>
+                <th>UnitPrice</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+                </tr>
+                <ui:repeat var="ol" value="#{customer.currentOrder.items}">
+                <tr>
+                <td>#{ol.product.name}</td>
+                <td>#{config.getPrice(ol.unitPrice)}</td>
+                <td>#{ol.quantity}</td>
+                <td>#{config.getPrice(ol.subTotal)}</td>
+                </tr>
+                </ui:repeat>
+                </table>
+                <br/>
 
-                <!--<h1>Total before taxes: </h1> #{customerHandler.currentOrder.total}-->
-                <!--<h1>Taxes: </h1> #{utils.getTaxes(customerHandler.currentOrder.total)}-->
-                <!--<h1>Total: </h1> #{utils.getPrice(customerHandler.currentOrder.total)}-->
-                <!--<br/>-->
-                <!--Add another item:-->
 
-                <!--<label>Product Code:-->
-                    <!--<h:inputText value="#{customerHandler.productCode}"-->
-                                 <!--required="true"-->
-                                 <!--requiredMessage="Code is mandatory"-->
-                                 <!--/></label>-->
-                <!--<label>Quantity:-->
-                    <!--<h:inputText value="#{customerHandler.quantity}"/>-->
-                <!--</label>-->
-                <!--<h:commandButton value="Add" action="#{customerHandler.addToOrder}" class="btn btn-default"/>-->
+                <!--<h:form>-->
+                    <h1>Total before taxes: </h1> #{customer.currentOrder.total}
+                    <h1>Taxes: </h1> #{config.getTaxes(customer.currentOrder.total)}
+                    <h1>Total: </h1> #{config.getPrice(customer.currentOrder.total)}
+                    <br/>
+                    Add another item:
+                    <b:inputText label="Product Code"
+                                 value="#{customer.productCode}"
+                                 required="true"
+                                 requiredMessage="Code is mandatory"
+                            />
+                    <b:inputText label="Quantity" value="#{customer.quantity}"/>
+                    <b:commandButton value="Add" action="#{customer.addToOrder()}"/>
 
-                <!--<br/>-->
-                <!--<br/>-->
-                <!--<h:commandButton value="Close Order" action="#{customerHandler.closeOrder}" class="btn btn-default"/>-->
-            <!--</h:form>-->
-        <!--</f:view>-->
-
+                    <br/>
+                    <br/>
+                    <h:commandButton value="Close Order" action="#{customer.closeOrder}"
+                                     class="btn btn-default"/>
+                </h:form>
+            </f:view>
+        </b:container>
     </ui:define>
 </ui:composition>

@@ -8,21 +8,19 @@
 
 <h:head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
-    <h:outputStylesheet name="css/main.css"/>
+    <h:outputStylesheet library="css" name="main.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>
-        <ui:insert name="title"/>: #{utils.brand}
+        <ui:insert name="title"/>: #{config.brand}
     </title>
 </h:head>
 
 <h:body>
-    <ui:include src="header.xhtml"/>
-    <ui:insert name="home"/>
+    <ui:include src="navbar.xhtml"/>
+    <ui:insert name="content_nocontainer"/>
     <b:container>
         <ui:insert name="content"/>
     </b:container>
     <ui:include src="footer.xhtml"/>
-<div style="height: 60px; clear: both;"></div>
-<!-- piccolo fix per far si che il footer non nasconda i link -->
 </h:body>
 </html>

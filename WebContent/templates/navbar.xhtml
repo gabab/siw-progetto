@@ -4,17 +4,17 @@
       xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
 <ui:composition>
 
-    <b:navBar static="true" brand="#{utils.brand}" brandHref="/">
+    <b:navBar static="true" brand="#{config.brand}" brandHref="/">
 
 
         <b:navbarLinks pull="right">
 
             <b:navLink value="Register" rendered="#{!login.loggedIn}" href="/register"/>
             <b:navLink value="Login" rendered="#{!login.loggedIn}" href="/login"/>
-            <b:navLink value="Cart #{customerHandler.cartSize}" href="/cart" rendered="#{login.loggedIn}"/>
+            <b:navLink value="Cart #{customer.cartSize}" href="/cart" rendered="#{login.loggedIn}"/>
             <b:dropMenu value="#{login.user.fullname}" rendered="#{login.loggedIn}">
                 <b:navLink value="My Page" href="/mypage"/>
-                <b:navLink value="Cart #{customerHandler.cartSize}" href="/cart"/>
+                <b:navLink value="Cart #{customer.cartSize}" href="/cart"/>
                 <b:navLink/>
                 <!-- bruttissimo hack per superare le limitazioni di b:navLink -->
                 <b:navLink value="Logout" href="/logout"/>

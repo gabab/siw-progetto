@@ -1,6 +1,6 @@
 package it.uniroma3.model;
 
-import it.uniroma3.model.enums.UserGroup;
+import it.uniroma3.enums.UserGroup;
 
 import javax.persistence.*;
 
@@ -79,5 +79,13 @@ public abstract class User {
 
     public String getFullname() {
         return name + " " + surname;
+    }
+
+    public boolean isCustomer() {
+        return group == UserGroup.CUSTOMER;
+    }
+
+    public boolean isAdmin() {
+        return group == UserGroup.ADMINISTRATOR;
     }
 }

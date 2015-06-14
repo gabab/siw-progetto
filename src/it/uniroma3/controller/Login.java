@@ -1,6 +1,8 @@
 package it.uniroma3.controller;
 
 import it.uniroma3.facades.UserFacade;
+import it.uniroma3.model.Administrator;
+import it.uniroma3.model.Customer;
 import it.uniroma3.model.User;
 
 import javax.ejb.EJB;
@@ -89,7 +91,12 @@ public class Login {
         return "pretty:home";
     }
 
-    public User getCustomer() {
-        return null;
+    public Customer getCustomer() {
+        return (isLoggedIn() && user.isCustomer()) ? (Customer) user : null;
+    }
+
+
+    public Administrator getAdministrator() {
+        return (isLoggedIn() && user.isAdmin()) ? (Administrator) user : null;
     }
 }

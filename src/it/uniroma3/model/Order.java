@@ -1,6 +1,6 @@
 package it.uniroma3.model;
 
-import it.uniroma3.model.enums.OrderState;
+import it.uniroma3.enums.OrderState;
 
 import javax.persistence.*;
 import java.util.*;
@@ -9,6 +9,7 @@ import java.util.*;
 @Table(name = "orders")
 public class Order {
 
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     public OrderState state;
     @Id

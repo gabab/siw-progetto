@@ -1,18 +1,17 @@
-package it.uniroma3.controller;
+package it.uniroma3.utils;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
-@ManagedBean(name = "utils", eager = true)
+@ManagedBean(name = "config", eager = true)
 @ApplicationScoped
-public class UtilsBean {
+public class ConfigReader {
 
     private Properties properties;
 
@@ -52,6 +51,11 @@ public class UtilsBean {
     public String getBrand() {
         return properties.getProperty("brand");
     }
+
+    public String formatDate(Date date) {
+        return new SimpleDateFormat(properties.getProperty("dateFormat")).format(date);
+    }
+
 
     public int getItemsPerPage() {
         try {

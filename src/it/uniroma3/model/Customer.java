@@ -1,17 +1,15 @@
 package it.uniroma3.model;
 
-import it.uniroma3.model.enums.UserGroup;
+import it.uniroma3.enums.UserGroup;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @DiscriminatorValue(value = "CUSTOMER")
 public class Customer extends User {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Address address;
 
     @Column(nullable = false)
@@ -22,7 +20,7 @@ public class Customer extends User {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public Customer(String email, String password, String name, String surname, Date birthDate, UserGroup group) {

@@ -5,7 +5,7 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:define name="title">#{userController.product.name}</ui:define>
+    <ui:define name="title">#{products.product.name}</ui:define>
 
 
     <ui:define name="content">
@@ -13,27 +13,27 @@
             <b:row id="infobox">
                 <b:column span="5">
                     <b:thumbnail>
-                        <h:graphicImage name="#{utils.getImagePath(userController.product.code)}" height="500"
+                        <h:graphicImage name="#{config.getImagePath(products.product.code)}" height="500"
                                         width="500"/>
                     </b:thumbnail>
                 </b:column>
                 <b:column span="7">
-                    <h1>#{userController.product.name}</h1>
+                    <h1>#{products.product.name}</h1>
                     <br/>
-                    <b>Price:</b> #{utils.getPrice(userController.product.price)}
+                    <b>Price:</b> #{config.getPrice(products.product.price)}
                     <br/>
-                    <b>Code:</b> #{userController.product.code}
+                    <b>Code:</b> #{products.product.code}
                     <br/>
                     <br/>
                     <f:view>
                         <h:form>
-                            <b:inputText type="number" value="#{customerHandler.quantity}" span="1"/>
+                            <b:inputText type="number" value="#{customer.quantity}" span="1"/>
 
                             <b:commandButton
                                     value="Add to Cart"
                                     icon="shopping-cart"
                                     look="success"
-                                    action="#{customerHandler.addToCart(userController.product.code)}">
+                                    action="#{customer.addToCart(products.product.code)}">
                             </b:commandButton>
 
 
@@ -72,7 +72,7 @@
             <b:row id="descbox">
                 <b:column>
                     <b:panel title="Description" look="info">
-                        #{userController.product.description}
+                        #{products.product.description}
                     </b:panel>
                 </b:column>
             </b:row>

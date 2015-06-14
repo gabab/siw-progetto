@@ -7,10 +7,10 @@
     <ui:define name="title">Home Page</ui:define>
 
 
-    <ui:define name="home">
+    <ui:define name="content_nocontainer">
         <b:jumbotron>
             <b:container>
-                <h1 style="text-align: center">Welcome to #{utils.brand}</h1>
+                <h1 style="text-align: center">Welcome to #{config.brand}</h1>
 
                 <p style="text-align: center"> <img src="resources/images/cart.png" alt="SIWShop" align="middle" style="width:256px;height:256px;"/>   </p>
 
@@ -27,6 +27,9 @@
         <a href="insertAddress.xhtml">Insert Address</a><br/>
         <a href="customerPage.xhtml">Customer Page</a><br/>
         <f:view>
+            <h:form>
+                <h:commandLink action="#{products.viewCatalog}">List products</h:commandLink>
+            </h:form>
             <h:outputLink value="products">List products</h:outputLink>
         </f:view>
         <br/>
