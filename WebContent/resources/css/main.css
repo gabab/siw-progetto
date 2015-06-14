@@ -50,3 +50,7 @@
 .sidebar-main .page-header {
     margin-top: 0;
 }
+
+.centred-form {
+    margin : 0 auto;
+}

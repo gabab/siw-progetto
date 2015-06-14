@@ -14,7 +14,7 @@
 
                 <p style="text-align: center"> <img src="resources/images/cart.png" alt="SIWShop" align="middle" style="width:256px;height:256px;"/>   </p>
 
-                <p style="text-align: center"><h:outputLink value="products" class="btn btn-primary btn-lg" >Access Now to the Products List</h:outputLink></p>
+                <h:form><h:panelGrid styleClass="centred-form"><h:commandLink action="#{products.viewCatalog}" class="btn btn-primary btn-lg">Access Now to the Products List</h:commandLink></h:panelGrid></h:form> 
             </b:container>
         </b:jumbotron>
 
@@ -30,7 +30,6 @@
             <h:form>
                 <h:commandLink action="#{products.viewCatalog}">List products</h:commandLink>
             </h:form>
-            <h:outputLink value="products">List products</h:outputLink>
         </f:view>
         <br/>
         <a href="login.xhtml">Login</a>
