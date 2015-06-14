@@ -45,5 +45,10 @@
         <view-id value="logout.xhtml"/>
         <action>#{login.logout}</action>
     </url-mapping>
+    
+    <url-mapping id="MyPage">
+        <pattern value="/mypage"/>
+        <view-id value="customerPage.xhtml"/>
+    </url-mapping>
 
 </pretty-config>
