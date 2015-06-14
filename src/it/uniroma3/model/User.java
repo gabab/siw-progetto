@@ -1,6 +1,6 @@
 package it.uniroma3.model;
 
-import it.uniroma3.model.enums.UserGroup;
+import it.uniroma3.enums.UserGroup;
 
 import javax.persistence.*;
 

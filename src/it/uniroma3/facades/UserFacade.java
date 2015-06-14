@@ -3,7 +3,7 @@ package it.uniroma3.facades;
 import it.uniroma3.model.Administrator;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.User;
-import it.uniroma3.model.enums.UserGroup;
+import it.uniroma3.enums.UserGroup;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -1,4 +1,4 @@
-package it.uniroma3.model.enums;
+package it.uniroma3.enums;
 
 public enum UserGroup {
     ADMINISTRATOR,
