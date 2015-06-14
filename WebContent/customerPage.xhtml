@@ -4,45 +4,92 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-        >
+                xmlns:b="http://bootsfaces.net/ui">
     <ui:define name="title">My Page</ui:define>
 
     <ui:define name="content">
 
-        <f:view><h:form>
-            <h:commandLink value="Insert Order" action=""/>
-        </h:form>
+
+        <h1>Welcome, #{customer.currentCustomer.fullname}</h1>
+        <hr/>
+
+        <h3>Your recent orders:</h3>
+        <hr/>
+        <f:view>
+            <h:form>
+                <b:tabView>
+                    <b:tab title="Closed">
+                        <h:dataTable styleClass="table table-striped" value="#{customer.closedOrders}" var="o" rows="10">
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Order Number:" /></f:facet>
+                                <h:outputText value="#{o.id}" />
+                            </h:column>
+                        <h:column>
+                                <f:facet name="header"><h:outputText value="Opened" /></f:facet>
+                                <h:outputText value="#{config.formatDate(o.opened)}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Closed" /></f:facet>
+                                <h:outputText value="#{config.formatDate(o.closed)}" />
+                            </h:column>
+                        </h:dataTable>
+                    </b:tab>
+                    <b:tab title="Processed">
+                        <h:dataTable styleClass="table table-striped" value="#{customer.processedOrders}" var="o" rows="10">
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Order Number:" /></f:facet>
+                                <h:outputText value="#{o.id}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Opened" /></f:facet>
+                                <h:outputText value="#{config.formatDate(o.opened)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Closed" /></f:facet>
+                                <h:outputText value="#{config.formatDate(o.closed)}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Processed" /></f:facet>
+                                <h:outputText value="#{config.formatDate(o.processed)}" />
+                            </h:column>
+                        </h:dataTable>
+                    </b:tab>
+                </b:tabView>
+                ViewAll
+                <h:commandLink value="Insert Order" action="#{customer.createOrder}"/>
+            </h:form>
         </f:view>
 
-        <h:outputLink value="/ss">AAd</h:outputLink>
+
+        <b:row>
+            <b:column col-md="4">
+                <h3>View Your Orders</h3>
+
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+                    ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+
+                <p><b:button outcome="" value="View details »"/></p>
+            </b:column>
+            <b:column col-md="4">
+                <h3>Address</h3>
+
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+                    ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+
+                <p><b:button outcome="" value="View details »"/></p>
+            </b:column>
+            <b:column col-md="4">
+                <h3>Heading</h3>
+
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+                    ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+
+                <p><b:button outcome="" value="View details »"/></p>
+            </b:column>
+        </b:row>
+        <hr/>
 
         <h:outputLink value="insertAddress.xhtml">AA</h:outputLink>
-
-
-        <!--My Orders-->
-
-        <!--<b:tabView activeIndex="1">-->
-        <!--<b:tab title="Open">-->
-        <!--<ui:repeat var="o" value="#{customerHandler.closedOrders}">-->
-
-        <!--</ui:repeat>-->
-        <!--</b:tab>-->
-        <!--<b:tab title="Processed">-->
-        <!--<ui:repeat var="o" value="#{customerHandler.processedOrders}">-->
-
-
-        <!--</ui:repeat>-->
-
-        <!--</b:tab>-->
-
-        <!--<b:tab title="All">-->
-        <!--<ui:repeat var="o" value="#{customerHandler.orders}">-->
-
-        <!--</ui:repeat>-->
-
-        <!--</b:tab>-->
-
-        <!--</b:tabView>-->
 
 
     </ui:define>

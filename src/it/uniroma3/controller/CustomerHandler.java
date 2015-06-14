@@ -9,16 +9,20 @@ import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-@ManagedBean
+@ManagedBean(name="customer")
 @SessionScoped
 public class CustomerHandler {
-    @ManagedProperty(value = "#{login.user}")
+    @ManagedProperty(value = "#{login.customer}")
     private Customer currentCustomer;
     private List<Order> orders;
     private Order order;
@@ -36,6 +40,7 @@ public class CustomerHandler {
     private boolean existsAddress;
     @ManagedProperty(value = "#{login}")
     private Login login;
+
 
     public Cart getCart() {
         return cart;
@@ -98,10 +103,12 @@ public class CustomerHandler {
     }
 
     public String closeOrder() {
+//        if (!this.currentCustomer.hasAddress())
+
         this.currentOrder.close();
         this.currentCustomer.addOrder(this.currentOrder);
         this.userFacade.updateUser(this.currentCustomer);
-        return "confirmation";
+        return "pretty:home";
     }
 
     public Customer getCurrentCustomer() {
@@ -134,7 +141,7 @@ public class CustomerHandler {
         return "orderDetail";
     }
 
-    public String createOrder(Customer currentCustomer) {
+    public String createOrder() {
         this.currentOrder = new Order(currentCustomer);
         return "insertOrder";
     }
@@ -153,7 +160,7 @@ public class CustomerHandler {
 
 
     public String addToCart(String productCode) {
-        if (!login.isLoggedIn())
+        if (currentCustomer == null)
             return "pretty:login";
         if (cart == null)
             this.cart = new Cart(currentCustomer);
@@ -172,5 +179,18 @@ public class CustomerHandler {
         if (p != null)
             this.currentOrder.addProduct(p, quantity);
         return "insertOrder";
+    }
+
+    public List getOpenOrders() {
+        return this.orderFacade.getOpenOrders(currentCustomer);
+    }
+
+    public List getClosedOrders() {
+        return this.orderFacade.getClosedOrders(currentCustomer);
+    }
+
+
+    public List getProcessedOrders() {
+        return this.orderFacade.getProcessedOrders(currentCustomer);
     }
 }

@@ -80,4 +80,12 @@ public abstract class User {
     public String getFullname() {
         return name + " " + surname;
     }
+
+    public boolean isCustomer() {
+        return group == UserGroup.CUSTOMER;
+    }
+
+    public boolean isAdmin() {
+        return group == UserGroup.ADMINISTRATOR;
+    }
 }

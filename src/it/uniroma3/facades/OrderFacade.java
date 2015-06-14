@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,19 +28,41 @@ public class OrderFacade {
         this.em = em;
     }
 
+    public List getOpenOrders() {
+        return getOrdersState(OrderState.OPENED);
+    }
+
     public List getClosedOrders() {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + OrderState.CLOSED);
+        return getOrdersState(OrderState.CLOSED);
+    }
+
+    public List getProcessedOrders() {
+        return getOrdersState(OrderState.PROCESSED);
+    }
+
+    private List getOrdersState(OrderState state) {
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state);
         return q.getResultList();
+    }
+
+    public List getOpenOrders(Customer c) {
+        return getOrdersState(OrderState.OPENED, c);
     }
 
     public List getClosedOrders(Customer c) {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + OrderState.CLOSED);
         return getOrdersState(OrderState.CLOSED, c);
     }
 
-    public List getOrdersState(OrderState state, Customer customer) {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state + " AND o.customer = " + customer);
-        return q.getResultList();
+    public List getProcessedOrders(Customer c) {
+        return getOrdersState(OrderState.PROCESSED, c);
+    }
+
+    private List getOrdersState(OrderState state, Customer c) {
+        List<Order> filtered = new ArrayList<>();
+        for (Order o : c.getOrders())
+            if (o.getState() == state)
+                filtered.add(o);
+        return filtered;
     }
 
     public Order getOrder(Long orderID) {

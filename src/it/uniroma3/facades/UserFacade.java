@@ -28,6 +28,10 @@ public class UserFacade {
         return this.em.find(User.class, id);
     }
 
+    public Customer findCustomer(Long id) {
+        return this.em.find(Customer.class, id);
+    }
+
     public void updateUser(User u) {
         this.em.merge(u);
     }
@@ -70,5 +74,9 @@ public class UserFacade {
 
     public void createRegisteredCustomer(String email, String password, String name, String surname, Date birthDate) {
         createCustomer(email, password, name, surname, birthDate, UserGroup.CUSTOMER);
+    }
+
+    public void updateCustomer(Customer c) {
+        this.em.merge(c);
     }
 }

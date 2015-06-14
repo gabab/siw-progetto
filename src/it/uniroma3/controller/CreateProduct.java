@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean
+@ManagedBean(name="insert")
 @RequestScoped
 public class CreateProduct {
 
@@ -19,19 +19,11 @@ public class CreateProduct {
     private String code;
     @EJB(name = "product")
     private ProductFacade productFacade;
-    @ManagedProperty(value = "#{userController}")
-    private UserController uc;
+    @ManagedProperty(value = "#{products}")
+    private ShowProducts sp;
 
-    public UserController getUc() {
-        return uc;
-    }
-
-    public void setUc(UserController uc) {
-        this.uc = uc;
-    }
-
-    public ProductFacade getProductFacade() {
-        return productFacade;
+    public void setSp(ShowProducts sp) {
+        this.sp = sp;
     }
 
     public void setProductFacade(ProductFacade productFacade) {
@@ -80,8 +72,8 @@ public class CreateProduct {
 
     public String insertProduct() {
         this.product = this.productFacade.createProduct(name, code, price, description);
-        uc.setCode(code);
-        uc.setProduct(product);
+        sp.setCode(code);
+        sp.setProduct(product);
         return "product";
     }
 }

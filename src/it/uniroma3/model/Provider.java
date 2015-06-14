@@ -12,7 +12,7 @@ public class Provider {
     private Long id;
     @Column(nullable = false)
     private String pIVA;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private List<Product> products;
     @OneToOne
     private Address address;

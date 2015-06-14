@@ -9,6 +9,7 @@ import java.util.*;
 @Table(name = "orders")
 public class Order {
 
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     public OrderState state;
     @Id
