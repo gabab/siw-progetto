@@ -18,43 +18,43 @@
     <url-mapping id="product">
         <pattern value="/product/#{products.code}"/>
         <view-id value="/product.xhtml"/>
-        <!--<action>#{products.findProduct}</action>-->
+        <action>#{products.loadProduct}</action>
     </url-mapping>
 
-    <url-mapping id="products">
-        <pattern value="/products"/>
-        <view-id value="/catalog.xhtml"/>
+    <url-mapping id="catalog">
+        <pattern value="/catalog"/>
+        <view-id value="/products.xhtml"/>
     </url-mapping>
 
     <url-mapping id="search">
         <pattern value="/search"/>
-        <view-id value="products.xhtml"/>
+        <view-id value="/products.xhtml"/>
     </url-mapping>
 
     <url-mapping id="registration">
         <pattern value="/register"/>
-        <view-id value="register.xhtml"/>
+        <view-id value="/register.xhtml"/>
     </url-mapping>
 
     <url-mapping id="login">
         <pattern value="/login"/>
-        <view-id value="login.xhtml"/>
+        <view-id value="/login.xhtml"/>
     </url-mapping>
 
     <url-mapping id="logout">
         <pattern value="/logout"/>
-        <view-id value="logout.xhtml"/>
+        <view-id value="/logout.xhtml"/>
         <action>#{login.logout}</action>
     </url-mapping>
     
     <url-mapping id="mypage">
         <pattern value="/mypage"/>
-        <view-id value="customerPage.xhtml"/>
+        <view-id value="/customerPage.xhtml"/>
     </url-mapping>
 
     <url-mapping id="address">
         <pattern value="/mypage/address"/>
-        <view-id value="insertAddress.xhtml"/>
+        <view-id value="/insertAddress.xhtml"/>
     </url-mapping>
 
 </pretty-config>

@@ -12,6 +12,10 @@ public abstract class Paginator {
 
     private List[] pages;
 
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage - 1;
+    }
+
     private int currentPage;
 
     public void paginate(List items) {
@@ -40,7 +44,7 @@ public abstract class Paginator {
     }
 
     public int getCurrentPage() {
-        return currentPage;
+        return currentPage + 1;
     }
 
     public boolean hasNext() {

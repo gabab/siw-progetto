@@ -182,6 +182,10 @@ public class CustomerHandler {
         this.currentOrder = cart;
         closeOrder();
     }
+    @PostConstruct
+    private void forceGetC(){
+        this.currentCustomer = login.getCustomer();
+    }
 
     public String addToOrder() {
         Product p = this.productFacade.getProduct(productCode);

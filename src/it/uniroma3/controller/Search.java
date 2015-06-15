@@ -32,6 +32,13 @@ public class Search {
     }
 
 
+    public void executeSearch() {
+        List results = this.productFacade.searchProducts(searchterm);
+        sp.setPageTitle(searchterm);
+        sp.setProducts(results);
+        sp.listProducts();
+    }
+
     public String searchProducts() {
         List results = this.productFacade.searchProducts(searchterm);
         sp.setPageTitle(searchterm);

@@ -6,31 +6,32 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
-        #{products.pageTitle}<h:outputText value=" - Page #{products.currentPage + 1}"
+        #{products.pageTitle}<h:outputText value=" - Page #{products.currentPage}"
                                            rendered="#{products.totalPages > 1}"/>
     </ui:define>
     <ui:define name="content">
         <h1>Products</h1>
         <hr/>
         <b:container>
-            <ui:repeat var="p" value="#{products.page}">
-                <b:row>
-                    <b:column col-xs="2" col-md="2">
-                        <h:outputLink value="/product/#{p.code}">
-                            <b:thumbnail>
-                                <h:graphicImage name="#{config.getImagePath(p.code)}" height="100" width="100"/>
-                            </b:thumbnail>
-                        </h:outputLink>
-                    </b:column>
-                    <b:column col-xs="6" col-md="4">
+            <f:view><h:form>
+                <ui:repeat var="p" value="#{products.page}">
+                    <b:row>
+                        <b:column col-xs="2" col-md="2">
+                            <h:outputLink value="/product/#{p.code}">
+                                <b:thumbnail>
+                                    <h:graphicImage name="#{config.getImagePath(p.code)}" height="100" width="100"/>
+                                </b:thumbnail>
+                            </h:outputLink>
+                        </b:column>
+                        <b:column col-xs="6" col-md="4">
                         <h:outputLink styleClass="productLink" value="/product/#{p.code}">#{p.name}</h:outputLink>
 
-                        <div class="pricebox">#{config.getPrice(p.price)}</div>
-                    </b:column>
-                </b:row>
-            </ui:repeat>
-            <b:row><b:column col-md="4" offset="4">
-                <f:view><h:form>
+                            <div class="pricebox">#{config.getPrice(p.price)}</div>
+                        </b:column>
+                    </b:row>
+                </ui:repeat>
+                <b:row><b:column col-md="4" offset="4">
+
                     <b:buttonGroup rendered="#{products.totalPages > 1}">
                         <b:commandButton value="First" action="#{products.goToFirst}"
                                          disabled="#{!products.hasPrev()}"/>
@@ -38,7 +39,7 @@
                                          disabled="#{!products.hasPrev()}"/>
 
                         <b:button look="link" disabled="true"
-                                  value="Page #{products.currentPage + 1} of #{products.totalPages}"/>
+                                  value="Page #{products.currentPage} of #{products.totalPages}"/>
 
                         <b:commandButton value="Next" action="#{products.goToNext}"
                                          disabled="#{!products.hasNext()}"/>
@@ -46,8 +47,9 @@
                                          disabled="#{!products.hasNext()}"/>
                     </b:buttonGroup>
 
-                </h:form></f:view>
-            </b:column></b:row>
+
+                </b:column></b:row>
+            </h:form></f:view>
         </b:container>
     </ui:define>
 </ui:composition>

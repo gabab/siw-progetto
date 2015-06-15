@@ -40,12 +40,28 @@ public class ShowProducts extends Paginator {
     public String viewCatalog() {
         this.products = this.productFacade.getAllProducts();
         this.setPageTitle("Products Catalog");
-        return listProducts("catalog");
+        return listProducts("pretty:catalog");
     }
 
     public String findProduct() {
         this.product = this.productFacade.getProduct(code);
-        return "product";
+        return "pretty:product";
+
+    }
+
+    public void loadProduct() {
+        if (this.product == null || !this.product.getCode().equals(code)) {
+            this.product = this.productFacade.getProduct(code);
+        }
+    }
+
+    public String findProduct(String code) {
+        this.code = code;
+        return findProduct();
+    }
+
+    public void listProducts(){
+        this.paginate(products);
     }
 
     public String listProducts(String s) {
