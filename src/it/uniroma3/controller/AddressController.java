@@ -8,10 +8,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-/**
- * Created by irene on 11/06/15.
- */
-@ManagedBean
+
+@ManagedBean(name="address")
 @RequestScoped
 public class AddressController {
     private String street;
@@ -28,7 +26,22 @@ public class AddressController {
             c.setAddress(a);
             uf.updateUser(c);
         }
-        return "pretty:home";
+        return "pretty:address";
+    }
+
+    public void loadAddress(Address a) {
+        this.street = a.getStreet();
+        this.city = a.getCity();
+        this.state = a.getState();
+        this.zipcode = a.getZipcode();
+        this.country = a.getCountry();
+    }
+
+    public String modifyAddress(Customer c){
+        loadAddress(c.getAddress());
+        c.setAddress(null);
+        return "pretty:address";
+
     }
 
 

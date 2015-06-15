@@ -5,27 +5,30 @@
 <ui:composition>
     <fieldset>
         <h:form styleClass="form-horizontal">
-            <h:outputLabel value="Street:"/>
-            <b:inputText value="#{addressController.street}"
+            <b:inputText value="#{address.street}"
+                         label="Street"
+                         placeholder="Street"
                          required="true"
                          requiredMessage="Street is mandatory"
                          id="street"/>
-            <h:outputLabel value="City:"/>
-            <b:inputText value="#{addressController.city}"
+            <b:inputText value="#{address.city}"
+                         label="City"
+                         placeholder="City"
                          required="true"
                          requiredMessage="City is mandatory"
                          id="city"/>
-            <h:outputLabel value="State:"/>
-            <b:inputText value="#{addressController.state}"
-                         span="5"/>
-            <h:outputLabel value="Zipcode:"/>
-            <b:inputText value="#{addressController.zipcode}"
+            <b:inputText value="#{address.state}"
+                         label="State"
+                         placeholder="State"/>
+            <b:inputText value="#{address.zipcode}"
+                         label="Zipcode"
+                         placeholder="Zipcode"
                          required="true"
                          requiredMessage="Zipcode is mandatory"
-                         id="zipcode"
-                         span="3"/>
-            <h:outputLabel value="Country:"/>
-            <b:inputText value="#{addressController.country}"
+                         id="zipcode"/>
+            <b:inputText value="#{address.country}"
+                         label="Country"
+                         placeholder="Country"
                          required="true"
                          requiredMessage="Country is mandatory"
                          id="country"/>
@@ -33,7 +36,7 @@
             <b:commandButton value="Confirm"
                              look="warning"
                              size="lg"
-                             action="#{addressController.insertAddress(customerHandler.currentCustomer)}"/>
+                             action="#{address.insertAddress(customer.currentCustomer)}"/>
         </h:form>
     </fieldset>
 </ui:composition>

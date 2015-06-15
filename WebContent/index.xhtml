@@ -12,9 +12,19 @@
             <b:container>
                 <h1 style="text-align: center">Welcome to #{config.brand}</h1>
 
-                <p style="text-align: center"> <img src="resources/images/cart.png" alt="SIWShop" align="middle" style="width:256px;height:256px;"/>   </p>
+                <p style="text-align: center"><img src="resources/images/cart.png"
+                                                   alt="#{config.brand}" align="middle"
+                                                   style="width:256px;height:256px;"/></p>
 
-                <h:form><h:panelGrid styleClass="centred-form"><h:commandLink action="#{products.viewCatalog}" class="btn btn-primary btn-lg">Access Now to the Products List</h:commandLink></h:panelGrid></h:form> 
+                <h:form>
+                    <h:panelGrid styleClass="centred-form">
+                        <b:commandButton look="primary"
+                                         action="#{products.viewCatalog}"
+                                         size="lg"
+                                         value="Access Now to the Products List"/>
+                    </h:panelGrid>
+                </h:form>
+
             </b:container>
         </b:jumbotron>
 

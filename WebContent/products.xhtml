@@ -7,7 +7,7 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
         #{products.pageTitle}<h:outputText value=" - Page #{products.currentPage + 1}"
-                                       rendered="#{products.totalPages > 1}"/>
+                                           rendered="#{products.totalPages > 1}"/>
     </ui:define>
     <ui:define name="content">
         <h1>Products</h1>
@@ -31,25 +31,21 @@
             </ui:repeat>
             <b:row><b:column col-md="4" offset="4">
                 <f:view><h:form>
+                    <b:buttonGroup rendered="#{products.totalPages > 1}">
+                        <b:commandButton value="First" action="#{products.goToFirst}"
+                                         disabled="#{!products.hasPrev()}"/>
+                        <b:commandButton value="Prev" action="#{products.goToPrev}"
+                                         disabled="#{!products.hasPrev()}"/>
 
-                    <b:buttonToolbar rendered="#{products.totalPages > 1}">
-                        <b:buttonGroup>
-                            <b:commandButton value="First" action="#{products.goToFirst}"
-                                             disabled="#{!products.hasPrev()}"/>
-                            <b:commandButton value="Prev" action="#{products.goToPrev}"
-                                             disabled="#{!products.hasPrev()}"/>
-                        </b:buttonGroup>
-                        <b:buttonGroup>
-                            <b:button look="link" disabled="true"
-                                      value="Page #{products.currentPage + 1} of #{products.totalPages}"/>
-                        </b:buttonGroup>
-                        <b:buttonGroup>
-                            <b:commandButton value="Next" action="#{products.goToNext}"
-                                             disabled="#{!products.hasNext()}"/>
-                            <b:commandButton value="Last" action="#{products.goToLast}"
-                                             disabled="#{!products.hasNext()}"/>
-                        </b:buttonGroup>
-                    </b:buttonToolbar>
+                        <b:button look="link" disabled="true"
+                                  value="Page #{products.currentPage + 1} of #{products.totalPages}"/>
+
+                        <b:commandButton value="Next" action="#{products.goToNext}"
+                                         disabled="#{!products.hasNext()}"/>
+                        <b:commandButton value="Last" action="#{products.goToLast}"
+                                         disabled="#{!products.hasNext()}"/>
+                    </b:buttonGroup>
+
                 </h:form></f:view>
             </b:column></b:row>
         </b:container>

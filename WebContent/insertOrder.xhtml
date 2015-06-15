@@ -9,53 +9,42 @@
     <ui:define name="content">
         <b:container>
             <f:view>
-                <!--<h1>New Order</h1>-->
-                <!--<hr/>-->
-                <!--Opened on: #{customer.currentOrder.opened}-->
-                <!--<b:row styleClass="table-responsive">-->
-                    <!--<h:dataTable styleClass="table table-striped" value="#{customer.currentOrder}" var="ol">-->
-                        <!--<h:column>-->
-                            <!--<f:facet name="header">Product</f:facet>-->
-                            <!--<h:outputText value="#{ol.product.name}"/>-->
-                        <!--</h:column>-->
-                        <!--<h:column>-->
-                            <!--<f:facet name="header">Unit Price</f:facet>-->
-                            <!--<h:outputText value="#{config.getPrice(ol.unitPrice)}"/>-->
-                        <!--</h:column>-->
-                        <!--<h:column>-->
-                            <!--<f:facet name="header">Quantity</f:facet>-->
-                            <!--<h:outputText value="#{ol.quantity}"/>-->
-                        <!--</h:column>-->
-                        <!--<h:column>-->
-                            <!--<f:facet name="header">Subtotal</f:facet>-->
-                            <!--<h:outputText value="#{config.getPrice(ol.subTotal)}"/>-->
-                        <!--</h:column>-->
-                    <!--</h:dataTable></b:row>-->
                 <h:form>
-                <table>
-                <tr>
-                <th>Product</th>
-                <th>UnitPrice</th>
-                <th>Quantity</th>
-                <th>Sub Total</th>
-                </tr>
-                <ui:repeat var="ol" value="#{customer.currentOrder.items}">
-                <tr>
-                <td>#{ol.product.name}</td>
-                <td>#{config.getPrice(ol.unitPrice)}</td>
-                <td>#{ol.quantity}</td>
-                <td>#{config.getPrice(ol.subTotal)}</td>
-                </tr>
-                </ui:repeat>
-                </table>
+                <f:view>
+                    <h:form>
+                        <h:dataTable styleClass="table table-striped" value="#{customer.currentOrder.items}" var="ol">
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Product"/></f:facet>
+                                <h:graphicImage name="#{config.getImagePath(ol.product.code)}" height="75" width="75"/>
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="#{ol.product.name}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Price"/></f:facet>
+                                <h:outputText value="#{config.getPrice(ol.unitPrice)}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
+                                <h:outputText value="#{ol.quantity}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Subtotal"/></f:facet>
+                                <h:outputText value="#{config.getPrice(ol.subTotal)}"/>
+                            </h:column>
+                        </h:dataTable>
+
+                    </h:form>
+                </f:view>
+                <hr/>
+
+                <hr/>
+                <b>Total before taxes:</b> #{customer.currentOrder.total}
                 <br/>
+                <b>Taxes:</b> #{config.getTaxes(customer.currentOrder.total)}
+                <br/>
+                <h2><b>Total:</b> #{config.getPrice(customer.currentOrder.total)}</h2>
 
-
-                <!--<h:form>-->
-                    <h1>Total before taxes: </h1> #{customer.currentOrder.total}
-                    <h1>Taxes: </h1> #{config.getTaxes(customer.currentOrder.total)}
-                    <h1>Total: </h1> #{config.getPrice(customer.currentOrder.total)}
-                    <br/>
                     Add another item:
                     <b:inputText label="Product Code"
                                  value="#{customer.productCode}"

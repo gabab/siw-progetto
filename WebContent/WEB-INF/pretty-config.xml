@@ -3,11 +3,7 @@
                xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
-    <url-mapping id="product">
-        <pattern value="/product/#{products.code}"/>
-        <view-id value="/product.xhtml"/>
-        <action>#{products.findProduct}</action>
-    </url-mapping>
+
 
     <url-mapping id="home">
         <pattern value="/"/>
@@ -22,7 +18,12 @@
     <url-mapping id="product">
         <pattern value="/product/#{products.code}"/>
         <view-id value="/product.xhtml"/>
-        <action>#{products.findProduct}</action>
+        <!--<action>#{products.findProduct}</action>-->
+    </url-mapping>
+
+    <url-mapping id="products">
+        <pattern value="/products"/>
+        <view-id value="/catalog.xhtml"/>
     </url-mapping>
 
     <url-mapping id="search">
@@ -46,9 +47,14 @@
         <action>#{login.logout}</action>
     </url-mapping>
     
-    <url-mapping id="MyPage">
+    <url-mapping id="mypage">
         <pattern value="/mypage"/>
         <view-id value="customerPage.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="address">
+        <pattern value="/mypage/address"/>
+        <view-id value="insertAddress.xhtml"/>
     </url-mapping>
 
 </pretty-config>

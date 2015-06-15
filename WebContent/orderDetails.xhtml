@@ -3,33 +3,73 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="title">Order no. #{customerHandler.order.id}</ui:define>
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="title">Order no. #{orderView.order.id}</ui:define>
 
     <ui:define name="content">
-            <h1>Order no. #{customerHandler.order.id}</h1>
-            Opened: #{customerHandler.order.opened}
-            Closed: #{customerHandler.order.closed}
-            Processed: #{customerHandler.order.processed}
+
+        <h3>Details for order no. #{orderView.order.id}</h3>
+        <hr/>
+        <b>Opened:</b> #{config.formatDate(orderView.order.opened)}
+        <br/>
+        <b>Closed:</b> #{config.formatDate(orderView.order.closed)}
+        <br/>
+        <b>Processed:</b> #{config.formatDate(orderView.order.processed)}
+        <br/>
+        <hr/>
+        <br/>
         <f:view>
             <h:form>
-                <table>
-                    <tr>
-                        <th>Product</th>
-                        <th>UnitPrice</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
-                    <ui:repeat var="ol" value="#{customerHandler.order.orderlines}">
-                        <tr>
-                            <td>#{ol.product.name}</td>
-                            <td>#{ol.unitPrice}</td>
-                            <td>#{ol.quantity}</td>
-                            <td>#{ol.quantity * ol.unitPrice}</td>
-                        </tr>
-                    </ui:repeat>
-                </table>
+                <h:dataTable styleClass="table table-striped" value="#{orderView.page}" var="ol">
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Product"/></f:facet>
+                        <h:graphicImage name="#{config.getImagePath(ol.product.code)}" height="75" width="75"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{ol.product.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Price"/></f:facet>
+                        <h:outputText value="#{config.getPrice(ol.unitPrice)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
+                        <h:outputText value="#{ol.quantity}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Subtotal"/></f:facet>
+                        <h:outputText value="#{config.getPrice(ol.subTotal)}"/>
+                    </h:column>
+                </h:dataTable>
+
+                <h:panelGrid styleClass="centred-form" rendered="#{orderView.totalPages > 1}">
+                    <b:buttonToolbar>
+                        <b:buttonGroup size="sm">
+                            <b:commandButton value="" icon="menu-left" action="#{orderView.goToPrev}"
+                                             disabled="#{!orderView.hasPrev()}"/>
+                        </b:buttonGroup>
+                        <b:buttonGroup size="sm">
+                            <b:button look="link" disabled="true"
+                                      value="#{orderView.currentPage + 1} of #{orderView.totalPages}"/>
+                        </b:buttonGroup>
+                        <b:buttonGroup size="sm">
+                            <b:commandButton value="" icon="menu-right" action="#{orderView.goToNext}"
+                                             disabled="#{!orderView.hasNext()}"/>
+                        </b:buttonGroup>
+                    </b:buttonToolbar>
+                </h:panelGrid>
             </h:form>
         </f:view>
+        <hr/>
+
+        <hr/>
+        <b>Total before taxes:</b> #{orderView.order.total}
+        <br/>
+        <b>Taxes:</b> #{config.getTaxes(orderView.order.total)}
+        <br/>
+
+        <h2><b>Total:</b> #{config.getPrice(orderView.order.total)}</h2>
+        <br/>
+
     </ui:define>
 </ui:composition>

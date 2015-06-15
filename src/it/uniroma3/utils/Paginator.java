@@ -15,15 +15,20 @@ public abstract class Paginator {
     private int currentPage;
 
     public void paginate(List items) {
+        paginate(items, this.itemsPerPage);
+    }
+
+    public void paginate(List items, int itemsPerPage) {
         this.currentPage = 0;
-        int numberOfPages = items.size() / this.itemsPerPage;
+        int numberOfPages = items.size() / itemsPerPage;
+
         //assicuriamoci che nessun elemento venga escluso aggiungendo una pagina se necessario
-        numberOfPages = ((this.itemsPerPage * numberOfPages) - items.size() >= 0) ? numberOfPages : numberOfPages + 1;
+        numberOfPages = ((itemsPerPage * numberOfPages) - items.size() >= 0) ? numberOfPages : numberOfPages + 1;
         this.pages = new List[numberOfPages];
         int index = 0;
         for (int i = 0; i < numberOfPages - 1; i++) {
-            this.pages[i] = items.subList(index, index + this.itemsPerPage);
-            index += this.itemsPerPage;
+            this.pages[i] = items.subList(index, index + itemsPerPage);
+            index += itemsPerPage;
         }
         // riempiamo l'ultima pagina
         this.pages[numberOfPages - 1] = items.subList(index, items.size());
@@ -47,7 +52,7 @@ public abstract class Paginator {
     }
 
     public int getTotalPages() {
-        return pages.length;
+        return this.pages.length;
     }
 
     public List[] getPages() {

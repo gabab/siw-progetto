@@ -16,13 +16,14 @@ public class ConfigReader {
     private Properties properties;
 
     @PostConstruct
-    private void readProperties(){
+    private void readProperties() {
         ExternalContext ex = FacesContext.getCurrentInstance().getExternalContext();
         Properties p = new Properties();
         try {
             p.load(ex.getResourceAsStream("/WEB-INF/config.properties"));
             properties = p;
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     private boolean imageExits(String path) {
@@ -53,14 +54,15 @@ public class ConfigReader {
     }
 
     public String formatDate(Date date) {
-        return new SimpleDateFormat(properties.getProperty("dateFormat")).format(date);
+        return date == null ? "" : new SimpleDateFormat(properties.getProperty("dateFormat")).format(date);
     }
 
 
     public int getItemsPerPage() {
         try {
             return Integer.parseInt(properties.getProperty("itemsPerPage"));
-        } catch(Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         return 0;
     }
 }

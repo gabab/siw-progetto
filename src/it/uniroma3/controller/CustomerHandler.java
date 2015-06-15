@@ -24,7 +24,6 @@ import java.util.List;
 public class CustomerHandler {
     @ManagedProperty(value = "#{login.customer}")
     private Customer currentCustomer;
-    private List<Order> orders;
     private Order order;
     private Cart cart;
     private Order currentOrder;
@@ -36,8 +35,6 @@ public class CustomerHandler {
     private UserFacade userFacade;
     private String productCode;
     private int quantity;
-
-    private boolean existsAddress;
     @ManagedProperty(value = "#{login}")
     private Login login;
 
@@ -102,14 +99,35 @@ public class CustomerHandler {
         this.orderFacade = orderFacade;
     }
 
-    public String closeOrder() {
-//        if (!this.currentCustomer.hasAddress())
 
-        this.currentOrder.close();
-        this.currentCustomer.addOrder(this.currentOrder);
-        this.userFacade.updateUser(this.currentCustomer);
-        return "pretty:home";
+    public String closeOrder(Long orderID) {
+        Order o = this.orderFacade.getOrder(orderID);
+        this.currentCustomer.getOrders().remove(o);
+        return closeOrder(o);
+
     }
+
+
+    private String closeOrder(Order o){
+        o.close();
+        this.currentCustomer.addOrder(o);
+        this.userFacade.updateUser(this.currentCustomer);
+        refreshOrders();
+        return "pretty:mypage";
+
+    }
+
+    private void refreshOrders() {
+        getOpenOrders();
+        getClosedOrders();
+        getProcessedOrders();
+    }
+
+    public String closeOrder() {
+        return closeOrder(this.currentOrder);
+    }
+
+
 
     public Customer getCurrentCustomer() {
         return currentCustomer;
@@ -127,18 +145,9 @@ public class CustomerHandler {
         this.order = order;
     }
 
-    public String getOrders() {
-        this.orders = this.currentCustomer.getOrders();
-        return "myOrders";
-    }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public String findOrder(Long orderID) {
-        this.order = this.orderFacade.getOrder(orderID);
-        return "orderDetail";
+    public String viewCart(){
+        return null;
     }
 
     public String createOrder() {

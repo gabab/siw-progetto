@@ -17,10 +17,55 @@
                         There where errors:<br/>
                         <h:messages/>
                     </b:alert>
+                    <h:form rendered="#{customer.currentCustomer.hasAddress()}">
+                        <h:outputText>
+                            #{customer.currentCustomer.fullname}
+                            <br/>
+                            #{customer.currentCustomer.address.street}<br/>
+                            #{customer.currentCustomer.address.city}, #{customer.currentCustomer.address.state}<br/>
+                            #{customer.currentCustomer.address.zipcode}<br/>
+                            #{customer.currentCustomer.address.country}<br/>
+                        </h:outputText>
+                        <b:commandButton value="Modify" look="primary" action="#{address.modifyAddress(customer.currentCustomer)}"/>
+                    </h:form>
                     <b:panel title="Insert Address">
                         <f:view>
-                            <h:form>
-                                <ui:include src="snippets/address.xhtml"/>
+                            <h:form rendered="#{!customer.currentCustomer.hasAddress()}">
+                                <fieldset>
+                                    <b:inputText value="#{address.street}"
+                                                 label="Street"
+                                                 placeholder="Street"
+                                                 required="true"
+                                                 requiredMessage="Street is mandatory"
+                                                 id="street"/>
+                                    <b:inputText value="#{address.city}"
+                                                 label="City"
+                                                 placeholder="City"
+                                                 required="true"
+                                                 requiredMessage="City is mandatory"
+                                                 id="city"/>
+                                    <b:inputText value="#{address.state}"
+                                                 label="State"
+                                                 placeholder="State"/>
+                                    <b:inputText value="#{address.zipcode}"
+                                                 label="Zipcode"
+                                                 placeholder="Zipcode"
+                                                 required="true"
+                                                 requiredMessage="Zipcode is mandatory"
+                                                 id="zipcode"
+                                                 span="3"/>
+                                    <b:inputText value="#{address.country}"
+                                                 label="Country"
+                                                 placeholder="Country"
+                                                 required="true"
+                                                 requiredMessage="Country is mandatory"
+                                                 id="country"/>
+                                    <br/>
+                                    <b:commandButton value="Confirm"
+                                                     look="warning"
+                                                     size="lg"
+                                                     action="#{address.insertAddress(customer.currentCustomer)}"/>
+                                </fieldset>
                             </h:form>
                         </f:view>
                     </b:panel>

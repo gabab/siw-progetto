@@ -9,7 +9,7 @@ import java.util.*;
 @DiscriminatorValue(value = "CUSTOMER")
 public class Customer extends User {
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
 
     @Column(nullable = false)

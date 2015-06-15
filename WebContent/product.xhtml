@@ -7,14 +7,22 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">#{products.product.name}</ui:define>
 
-
     <ui:define name="content">
+
+
         <b:container>
+            <b:modal id="image-popup" title="">
+                <h:graphicImage name="#{config.getImagePath(products.product.code)}"/>
+            </b:modal>
             <b:row id="infobox">
                 <b:column span="5">
                     <b:thumbnail>
                         <h:graphicImage name="#{config.getImagePath(products.product.code)}" height="500"
                                         width="500"/>
+                        <f:facet name="caption">
+                            <button class="btn btn-default btn-sm" data-target="#image-popup" data-toggle="modal">
+                                <b:icon name="zoom-in"/></button>
+                        </f:facet>
                     </b:thumbnail>
                 </b:column>
                 <b:column span="7">

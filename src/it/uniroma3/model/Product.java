@@ -18,7 +18,7 @@ public class Product {
     private Float price;
     @Column(nullable = false)
     private Integer inStock;
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private List<Provider> providers;
 
     public Product(String name, String code, Float price, String description) {
