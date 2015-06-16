@@ -26,7 +26,8 @@
                             #{customer.currentCustomer.address.zipcode}<br/>
                             #{customer.currentCustomer.address.country}<br/>
                         </h:outputText>
-                        <b:commandButton value="Modify" look="primary" action="#{address.modifyAddress(customer.currentCustomer)}"/>
+                        <b:commandButton value="Modify" look="primary"
+                                         action="#{address.modifyAddress(customer.currentCustomer)}"/>
                     </h:form>
                     <b:panel title="Insert Address">
                         <f:view>

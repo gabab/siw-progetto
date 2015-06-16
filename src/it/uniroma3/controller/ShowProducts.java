@@ -1,8 +1,8 @@
 package it.uniroma3.controller;
 
-import it.uniroma3.utils.Paginator;
 import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.model.Product;
+import it.uniroma3.utils.Paginator;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -60,7 +60,7 @@ public class ShowProducts extends Paginator {
         return findProduct();
     }
 
-    public void listProducts(){
+    public void listProducts() {
         this.paginate(products);
     }
 

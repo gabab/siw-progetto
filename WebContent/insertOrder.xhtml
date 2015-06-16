@@ -9,40 +9,42 @@
     <ui:define name="content">
         <b:container>
 
-                <f:view>
-                    <h:form>
-                        <h:dataTable styleClass="table table-striped" value="#{customer.currentOrder.items}" var="ol">
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Product"/></f:facet>
-                                <h:graphicImage name="#{config.getImagePath(ol.product.code)}" styleClass="prod-img prod-img-xs"/>
-                            </h:column>
-                            <h:column>
-                                <h:outputText value="#{ol.product.name}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Price"/></f:facet>
-                                <h:outputText value="#{config.getPrice(ol.unitPrice)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
-                                <h:outputText value="#{ol.quantity}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Subtotal"/></f:facet>
-                                <h:outputText value="#{config.getPrice(ol.subTotal)}"/>
-                            </h:column>
-                        </h:dataTable>
+            <f:view>
+                <h:form>
+                    <h:dataTable styleClass="table table-striped" value="#{customer.currentOrder.items}" var="ol">
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Product"/></f:facet>
+                            <h:graphicImage name="#{config.getImagePath(ol.product.code)}"
+                                            styleClass="prod-img prod-img-xs"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{ol.product.name}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Price"/></f:facet>
+                            <h:outputText value="#{config.getPrice(ol.unitPrice)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
+                            <h:outputText value="#{ol.quantity}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><h:outputText value="Subtotal"/></f:facet>
+                            <h:outputText value="#{config.getPrice(ol.subTotal)}"/>
+                        </h:column>
+                    </h:dataTable>
 
-                    </h:form>
-                </f:view>
-                <hr/>
+                </h:form>
+            </f:view>
+            <hr/>
 
-                <hr/>
-                <b>Total before taxes:</b> #{customer.currentOrder.total}
-                <br/>
-                <b>Taxes:</b> #{config.getTaxes(customer.currentOrder.total)}
-                <br/>
-                <h2><b>Total:</b> #{config.getPrice(customer.currentOrder.total)}</h2>
+            <hr/>
+            <b>Total before taxes:</b> #{customer.currentOrder.total}
+            <br/>
+            <b>Taxes:</b> #{config.getTaxes(customer.currentOrder.total)}
+            <br/>
+
+            <h2><b>Total:</b> #{config.getPrice(customer.currentOrder.total)}</h2>
             <f:view>
                 <h:form>
                     Add another item:

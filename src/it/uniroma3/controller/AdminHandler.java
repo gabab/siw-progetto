@@ -54,8 +54,6 @@ public class AdminHandler {
     }
 
 
-
-
     public String getCustomerInfo(Long orderID) {
         this.customer = this.of.getOrder(orderID).getCustomer();
         return "customerDetails";

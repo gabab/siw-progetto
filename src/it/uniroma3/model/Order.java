@@ -11,7 +11,7 @@ public class Order {
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    public OrderState state;
+    private OrderState state;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -52,7 +52,7 @@ public class Order {
     }
 
 
-    public List<OrderLine> getItems(){
+    public List<OrderLine> getItems() {
         return new ArrayList<>(orderlines.values());
     }
 
@@ -63,7 +63,7 @@ public class Order {
         return total;
     }
 
-    public void close(){
+    public void close() {
         this.closed = new Date();
         this.state = OrderState.CLOSED;
     }

@@ -2,8 +2,6 @@ package it.uniroma3.controller;
 
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.facades.ProductFacade;
-import it.uniroma3.model.Customer;
-import it.uniroma3.model.Order;
 import it.uniroma3.utils.Paginator;
 
 import javax.ejb.EJB;
@@ -39,8 +37,8 @@ public class CreateOrder extends Paginator {
         this.pf = pf;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public String getProductCode() {
+        return productCode;
     }
 
 //    public String closeOrder(Long orderID) {
@@ -58,7 +56,7 @@ public class CreateOrder extends Paginator {
 //
 //    }
 
-    public String getProductCode() {
-        return productCode;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 }

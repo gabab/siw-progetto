@@ -25,13 +25,16 @@
                                 <h:outputText value="#{o.size}"/>
                             </h:column>
                             <h:column>
-                                <b:commandButton look="success" icon-align="left" icon="ok" value="Close" action="#{customer.closeOrder(o.id)}" size="sm"/>
+                                <b:commandButton look="success" icon-align="left" icon="ok" value="Close"
+                                                 action="#{customer.closeOrder(o.id)}" size="sm"/>
                             </h:column>
                             <h:column>
-                                <b:commandButton look="primary" icon-align="left" icon="plus" value="Modify" action="#" size="sm"/>
+                                <b:commandButton look="primary" icon-align="left" icon="plus" value="Modify" action="#"
+                                                 size="sm"/>
                             </h:column>
                             <h:column>
-                                <b:commandButton look="danger" icon-align="left" icon="remove" value="Delete" action="#" size="sm"/>
+                                <b:commandButton look="danger" icon-align="left" icon="remove" value="Delete" action="#"
+                                                 size="sm"/>
                             </h:column>
                         </h:dataTable>
                     </b:tab>

@@ -12,30 +12,31 @@
             There where errors:<br/>
             <h:messages/>
         </b:alert>
+
         <h1>Insert Products</h1>
         <hr/>
-            <b:panelGrid colSpans="12">
-                <f:view><h:form>
-                    <b:inputText label="Name"
-                                 value="#{insert.name}"
-                                 required="true"
-                                 requiredMessage="Name is mandatory"
-                                 placeholder="Name"/>
-                    <b:inputText label="Price"
-                                 value="#{insert.price}"
-                                 required="true"
-                                 requiredMessage="Price is mandatory"
-                                 converterMessage="Price must be a number"/>
-                    <b:inputText label="Product Code"
-                                 value="#{insert.code}"
-                                 required="true"
-                                 requiredMessage="Code is mandatory"
-                                 validator="CodeValidator"/>
-                    <h:outputLabel value="Description"/>
-                    <h:inputTextarea value="#{insert.description}"
-                                     styleClass="input-group form-control"/>
-                    <b:commandButton value="Submit" look="primary" action="#{insert.insertProduct}"/>
-                </h:form></f:view>
-            </b:panelGrid>
+        <b:panelGrid colSpans="12">
+            <f:view><h:form>
+                <b:inputText label="Name"
+                             value="#{insert.name}"
+                             required="true"
+                             requiredMessage="Name is mandatory"
+                             placeholder="Name"/>
+                <b:inputText label="Price"
+                             value="#{insert.price}"
+                             required="true"
+                             requiredMessage="Price is mandatory"
+                             converterMessage="Price must be a number"/>
+                <b:inputText label="Product Code"
+                             value="#{insert.code}"
+                             required="true"
+                             requiredMessage="Code is mandatory"
+                             validator="CodeValidator"/>
+                <h:outputLabel value="Description"/>
+                <h:inputTextarea value="#{insert.description}"
+                                 styleClass="input-group form-control"/>
+                <b:commandButton value="Submit" look="primary" action="#{insert.insertProduct}"/>
+            </h:form></f:view>
+        </b:panelGrid>
     </ui:define>
 </ui:composition>

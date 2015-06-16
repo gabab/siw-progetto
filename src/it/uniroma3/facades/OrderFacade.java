@@ -1,10 +1,10 @@
 package it.uniroma3.facades;
 
+import it.uniroma3.enums.OrderState;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Product;
-import it.uniroma3.enums.OrderState;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -1,6 +1,9 @@
 package it.uniroma3.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 
 @Embeddable
 public class OrderLine {

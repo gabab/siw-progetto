@@ -33,10 +33,6 @@ public class Provider {
 
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -80,8 +76,7 @@ public class Provider {
     @Override
     public String toString() {
         return "Provider{" +
-                "id=" + id +
-                ", pIVA='" + pIVA + '\'' +
+                "pIVA='" + pIVA + '\'' +
                 ", products=" + products +
                 ", address=" + address +
                 ", phone='" + phone + '\'' +
@@ -96,8 +91,9 @@ public class Provider {
 
         Provider provider = (Provider) o;
 
-        if (!getId().equals(provider.getId())) return false;
         if (!getpIVA().equals(provider.getpIVA())) return false;
+        if (getProducts() != null ? !getProducts().equals(provider.getProducts()) : provider.getProducts() != null)
+            return false;
         if (!getAddress().equals(provider.getAddress())) return false;
         if (!getPhone().equals(provider.getPhone())) return false;
         return getEmail().equals(provider.getEmail());
@@ -106,8 +102,8 @@ public class Provider {
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getpIVA().hashCode();
+        int result = getpIVA().hashCode();
+        result = 31 * result + (getProducts() != null ? getProducts().hashCode() : 0);
         result = 31 * result + getAddress().hashCode();
         result = 31 * result + getPhone().hashCode();
         result = 31 * result + getEmail().hashCode();

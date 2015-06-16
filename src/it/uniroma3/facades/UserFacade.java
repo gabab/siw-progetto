@@ -1,9 +1,9 @@
 package it.uniroma3.facades;
 
+import it.uniroma3.enums.UserGroup;
 import it.uniroma3.model.Administrator;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.User;
-import it.uniroma3.enums.UserGroup;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -62,18 +62,10 @@ public class UserFacade {
         return (Administrator) findUser(email, UserGroup.ADMINISTRATOR);
     }
 
-    public void createCustomer(String email, String password, String name, String surname, Date birthDate, UserGroup group) {
-        Customer c = new Customer(email, password, name, surname, birthDate, group);
+    public void createCustomer(String email, String password, String name, String surname, Date birthDate) {
+        Customer c = new Customer(email, password, name, surname, birthDate, UserGroup.CUSTOMER);
         c.setRegistrationDate(new Date());
         this.em.persist(c);
-    }
-
-    public void createCustomer(String email, String password, String name, String surname, Date birthDate) {
-        createCustomer(email, password, name, surname, birthDate, UserGroup.CUSTOMER);
-    }
-
-    public void createRegisteredCustomer(String email, String password, String name, String surname, Date birthDate) {
-        createCustomer(email, password, name, surname, birthDate, UserGroup.CUSTOMER);
     }
 
     public void updateCustomer(Customer c) {

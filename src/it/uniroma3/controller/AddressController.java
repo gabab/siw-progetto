@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 
-@ManagedBean(name="address")
+@ManagedBean(name = "address")
 @RequestScoped
 public class AddressController {
     private String street;
@@ -37,7 +37,7 @@ public class AddressController {
         this.country = a.getCountry();
     }
 
-    public String modifyAddress(Customer c){
+    public String modifyAddress(Customer c) {
         loadAddress(c.getAddress());
         c.setAddress(null);
         return "pretty:address";

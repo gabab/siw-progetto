@@ -3,7 +3,9 @@ package it.uniroma3.model;
 import it.uniroma3.enums.UserGroup;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue(value = "CUSTOMER")

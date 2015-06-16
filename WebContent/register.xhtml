@@ -61,7 +61,8 @@
                                 <label>Email:
                                     <b:inputText value="#{registration.email}"
                                                  required="true"
-                                                 requiredMessage="Email is mandatory" id="email" validator="EmailValidator">
+                                                 requiredMessage="Email is mandatory" id="email"
+                                                 validator="EmailValidator">
                                         <f:facet name="prepend">
                                             <b:icon name="envelope"/>
                                         </f:facet>
@@ -78,7 +79,8 @@
                                         </f:facet>
                                     </b:inputSecret>
                                 </label>
-                                <b:commandButton look="primary" value="Register" action="#{registration.requestRegistration}" size="lg"/>
+                                <b:commandButton look="primary" value="Register"
+                                                 action="#{registration.requestRegistration}" size="lg"/>
                             </fieldset>
                         </b:panel>
                     </h:form></f:view>
