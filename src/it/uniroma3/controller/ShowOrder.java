@@ -36,17 +36,17 @@ public class ShowOrder extends Paginator {
 
     public String showOrder() {
         paginate(this.order.getItems(), 2);
-        return "orderDetails";
+        return "pretty:orderdetail";
     }
 
     public String getPlacedOrders() {
         this.orders = this.of.getClosedOrders();
-        return listOrders("pretty:orders", "Closed Orders");
+        return listOrders(null, "Closed Orders");
     }
 
     public String getPlacedOrders(Customer c) {
         this.orders = this.of.getClosedOrders();
-        return listOrders("pretty:orders", "Closed Orders");
+        return listOrders(null, "Closed Orders");
     }
 
     private String listOrders(String page, String title) {

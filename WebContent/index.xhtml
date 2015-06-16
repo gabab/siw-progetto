@@ -10,31 +10,45 @@
     <ui:define name="content_nocontainer">
         <b:jumbotron>
             <b:container>
-                <h1 style="text-align: center">Welcome to #{config.brand}</h1>
-
-                <p style="text-align: center"><img src="resources/images/cart.png"
-                                                   alt="#{config.brand}" align="middle"
-                                                   style="width:256px;height:256px;"/></p>
-
                 <h:form>
-                    <h:panelGrid styleClass="centred-form">
-                        <b:commandButton look="primary"
-                                         action="#{products.viewCatalog}"
-                                         size="lg"
-                                         value="Access Now to the Products List"/>
+                    <h:panelGrid styleClass="centered-form">
+                        <h1>Welcome to #{config.brand}</h1>
+
+                        <h:graphicImage name="images/cart.png" alt="#{config.brand}"
+                                        styleClass="img-main"/>
+                        <b:button look="primary"
+                                  outcome="catalog"
+                                  size="lg"
+                                  value="View Product Catalog"/>
                     </h:panelGrid>
                 </h:form>
-
             </b:container>
         </b:jumbotron>
 
     </ui:define>
 
     <ui:define name="content">
-        <br/>
-        <a href="admin/insert.xhtml">Insert a product</a>
-        <br/>
-        <a href="insertAddress.xhtml">Insert Address</a><br/>
+        <h2>Hot Now:</h2>
+        <hr/>
+        <b:row>
+            <ui:repeat value="#{products.lastProducts}" var="p">
+                <b:column col-sm="2" col-md="2">
+                    <h:outputLink value="/product/#{p.code}">
+                        <div class="hotseat">
+                            <div class="imgbox-main">
+                                <h:graphicImage name="#{config.getImagePath(p.code)}"
+                                                styleClass="prod-img prod-img-sm"/>
 
+                            </div>
+
+                            <div class="descbox-main">
+                                #{p.name}
+                                #{p.price}
+                            </div>
+                        </div>
+                    </h:outputLink>
+                </b:column>
+            </ui:repeat>
+        </b:row>
     </ui:define>
 </ui:composition>

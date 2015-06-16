@@ -3,6 +3,7 @@ package it.uniroma3.controller;
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.facades.UserFacade;
+import it.uniroma3.model.Administrator;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 
@@ -12,7 +13,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.util.List;
 
-@ManagedBean
+@ManagedBean(name = "admin")
 @SessionScoped
 public class AdminHandler {
 
@@ -26,8 +27,10 @@ public class AdminHandler {
     @EJB(beanName = "order")
     private OrderFacade of;
 
-    @ManagedProperty(value = "#{login}")
-    private Login login;
+    @ManagedProperty(value = "#{login.administrator}")
+    private Administrator admin;
+    private String alert;
+    private String message;
 
     public Customer getCustomer() {
         return customer;
@@ -64,33 +67,14 @@ public class AdminHandler {
         return "orderDetails";
     }
 
-
-   /* public String processOrder(Long orderID) {
-        Order current = this.of.getOrder(orderID);
-        for (OrderLine ol : current.getOrderlines()) {
-            Product p = ol.getProduct();
-            if (ol.getQuantity() > p.getInStock())
-                return "error";
-            p.setInStock(p.getInStock() - ol.getQuantity());
-            this.pf.updateProduct(p);
-        }
-        current.setState(OrderState.PROCESSED);
-        return "success";
-    }*/
-
     public String processOrder(Long orderID) {
         Order o = this.of.processOrder(orderID);
         if (o != null)
-            return "success";
+            return "pretty:admin";
         else {
-            return "orderDetails";
+            this.alert = "Not enough items in stock";
+            return "pretty:adminorder";
         }
-
     }
-
-//    	Order current =  this.of.getOrder(orderID);
-//    	Product p = //trovo il prodotto usando la ProfuctFacade, nella producti facade cerco il prodotto
-//
-
 
 }

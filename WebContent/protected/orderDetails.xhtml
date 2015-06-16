@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="templates/main.xhtml"
+<ui:composition template="/templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -7,15 +7,29 @@
     <ui:define name="title">Order no. #{orderView.order.id}</ui:define>
 
     <ui:define name="content">
-
         <h3>Details for order no. #{orderView.order.id}</h3>
-        <hr/>
-        <b>Opened:</b> #{config.formatDate(orderView.order.opened)}
-        <br/>
-        <b>Closed:</b> #{config.formatDate(orderView.order.closed)}
-        <br/>
-        <b>Processed:</b> #{config.formatDate(orderView.order.processed)}
-        <br/>
+        <b:row>
+            <div style="float: left">
+                <p>
+                    <b>Customer:</b> #{orderView.order.customer}
+                    <br/>
+                    <h:form>
+                        <b:commandButton value="View Address" action="#{address.loadAddress(orderView.order.customer.address)}"/>
+                    </h:form>
+                </p>
+            </div>
+
+            <div style="float: right">
+                <p>
+                    <b>Opened:</b> #{config.formatDate(orderView.order.opened)}
+                    <br/>
+                    <b>Closed:</b> #{config.formatDate(orderView.order.closed)}
+                    <br/>
+                    <b>Processed:</b> #{config.formatDate(orderView.order.processed)}
+                </p>
+            </div>
+
+        </b:row>
         <hr/>
         <br/>
         <f:view>
@@ -61,15 +75,21 @@
             </h:form>
         </f:view>
         <hr/>
+        <b:row>
 
-        <hr/>
-        <b>Total before taxes:</b> #{orderView.order.total}
+            <div style="float: right">
+                <p>
+                    <b>Total before taxes:</b> #{orderView.order.total}
+                    <br/>
+                    <b>Taxes:</b> #{config.getTaxes(orderView.order.total)}
+                    <br/>
+                    <b>Total:</b> #{config.getPrice(orderView.order.total)}
+                </p>
+            </div>
+
+        </b:row>
         <br/>
-        <b>Taxes:</b> #{config.getTaxes(orderView.order.total)}
-        <br/>
-        <hr/>
-        <h2><b>Total:</b> #{config.getPrice(orderView.order.total)}</h2>
-        <br/>
+
 
     </ui:define>
 </ui:composition>

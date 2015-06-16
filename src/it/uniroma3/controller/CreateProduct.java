@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name = "insert")
+@ManagedBean(name = "insertProduct")
 @RequestScoped
 public class CreateProduct {
 

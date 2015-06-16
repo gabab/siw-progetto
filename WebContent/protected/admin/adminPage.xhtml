@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="title">Insert Product</ui:define>
+    <ui:define name="content">
+        <b:row>
+            <b:column col-sm="3" col-md="2" styleClass="sidebar">
+                <b:listLinks>
+                    <b:navLink href="/manage" value="Main" active="true"/>
+                </b:listLinks>
+                <b:listLinks>
+                    <b:navLink header="Orders" styleClass="sidebar-header"/>
+                    <b:navLink href="/manage/orders" value="View unprocessed orders"/>
+                </b:listLinks>
+                <b:listLinks>
+                    <b:navLink header="Products" styleClass="sidebar-header"/>
+                    <b:navLink href="/manage/insert" value="Insert Product"/>
+                    <b:navLink href="/manage/providers" value="View Providers"/>
+                </b:listLinks>
+                <b:listLinks>
+                    <b:navLink header="Users" styleClass="sidebar-header"/>
+                    <b:navLink href="/manage/users" value="Users"/>
+                </b:listLinks>
+            </b:column>
+            <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="sidebar-main">
+            </b:column>
+        </b:row>
+    </ui:define>
+</ui:composition>

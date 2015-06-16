@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="templates/main.xhtml"
+<ui:composition template="/templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui">
-    <ui:define name="title">My Orders</ui:define>
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="title">My Page</ui:define>
 
     <ui:define name="content">
+
+
+        <h1>Welcome, #{customer.currentCustomer.fullname}</h1>
+        <hr/>
+
+        <h3>Your last orders:</h3>
+        <br/>
         <f:view>
             <h:form>
                 <b:tabView>
                     <b:tab title="Opened">
-                        <h:dataTable styleClass="table table-striped" value="#{customer.openOrders}" var="o">
+                        <div style="text-align: center; color: grey; font-size: large; font-weight: bold;"><h:outputText
+                                rendered="#{empty customer.openOrders}">
+                            <p>You don't have open orders</p>
+                        </h:outputText>
+                        </div>
+                        <h:dataTable styleClass="table table-striped" value="#{config.getLastN(customer.openOrders)}"
+                                     var="o" rendered="#{customer.openOrders.size() > 0}">
                             <h:column>
                                 <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
                                 <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -25,21 +39,22 @@
                                 <h:outputText value="#{o.size}"/>
                             </h:column>
                             <h:column>
-                                <b:commandButton look="success" icon-align="left" icon="ok" value="Close"
+                                <b:commandButton look="success" icon-align="left" icon="ok" value="Place"
                                                  action="#{customer.closeOrder(o.id)}" size="sm"/>
                             </h:column>
                             <h:column>
-                                <b:commandButton look="primary" icon-align="left" icon="plus" value="Modify" action="#"
-                                                 size="sm"/>
+                                <b:commandButton look="primary" icon-align="left" icon="plus" value="Modify"
+                                                 action="#{customer.modifyOrder(o.id)}" size="sm"/>
                             </h:column>
                             <h:column>
-                                <b:commandButton look="danger" icon-align="left" icon="remove" value="Delete" action="#"
-                                                 size="sm"/>
+                                <b:commandButton look="danger" icon-align="left" icon="remove" value="Delete"
+                                                 action="#{customer.removeOrder(o.id)}" size="sm"/>
                             </h:column>
                         </h:dataTable>
                     </b:tab>
                     <b:tab title="Closed">
-                        <h:dataTable styleClass="table table-striped" value="#{customer.closedOrders}" var="o">
+                        <h:dataTable styleClass="table table-striped" value="#{config.getLastN(customer.closedOrders)}"
+                                     var="o">
                             <h:column>
                                 <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
                                 <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -59,7 +74,8 @@
                         </h:dataTable>
                     </b:tab>
                     <b:tab title="Processed">
-                        <h:dataTable styleClass="table table-striped" value="#{customer.processedOrders}" var="o">
+                        <h:dataTable styleClass="table table-striped"
+                                     value="#{config.getLastN(customer.processedOrders)}" var="o">
                             <h:column>
                                 <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
                                 <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -83,9 +99,32 @@
                         </h:dataTable>
                     </b:tab>
                 </b:tabView>
+                <b:button value="View All" href="/mypage/orders"/>
+                <a href="orders.xhtml">View All</a>
+                <hr/>
 
+                <b:row>
+                    <b:column col-md="4">
+                        <h3>Make a new order</h3>
+
+                        <p>Make a new order or modify an opened one</p>
+
+                        <p><b:commandButton look="default" value="Insert Order" action="#{customer.createOrder}"/></p>
+                    </b:column>
+                    <b:column col-md="4">
+                        <h3>Address</h3>
+
+                        <p>Insert or modify your address</p>
+
+                        <p><a href="insertAddress.xhtml">View All</a>
+
+                            <b:commandButton look="default"
+                                             value="#{customer.currentCustomer.hasAddress() ? 'Modify address' : 'Insert address'}"
+                                             action="#{address.showAddress(customer.currentCustomer.address)}"/></p>
+                    </b:column>
+                </b:row>
+                <hr/>
             </h:form>
         </f:view>
-
     </ui:define>
 </ui:composition>

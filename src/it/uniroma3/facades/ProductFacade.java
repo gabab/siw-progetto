@@ -52,5 +52,10 @@ public class ProductFacade {
         return p;
     }
 
+    public List getLastProducts(int limit) {
+        Query q = this.em.createQuery("SELECT p FROM Product p").setMaxResults(limit);
+        return q.getResultList();
+    }
+
 
 }

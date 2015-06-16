@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="templates/main.xhtml"
+<ui:composition template="/templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -21,10 +21,10 @@
                         <h:outputText>
                             #{customer.currentCustomer.fullname}
                             <br/>
-                            #{customer.currentCustomer.address.street}<br/>
-                            #{customer.currentCustomer.address.city}, #{customer.currentCustomer.address.state}<br/>
-                            #{customer.currentCustomer.address.zipcode}<br/>
-                            #{customer.currentCustomer.address.country}<br/>
+                            #{address.street}<br/>
+                            #{address.city}, #{address.state}<br/>
+                            #{address.zipcode}<br/>
+                            #{address.country}<br/>
                         </h:outputText>
                         <b:commandButton value="Modify" look="primary"
                                          action="#{address.modifyAddress(customer.currentCustomer)}"/>

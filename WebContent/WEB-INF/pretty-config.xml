@@ -23,6 +23,7 @@
     <url-mapping id="catalog">
         <pattern value="/catalog"/>
         <view-id value="/products.xhtml"/>
+        <action>#{products.viewCatalog}</action>
     </url-mapping>
 
     <url-mapping id="search">
@@ -46,31 +47,44 @@
         <action>#{login.logout}</action>
     </url-mapping>
 
+    <!--Customer-->
+
     <url-mapping id="mypage">
         <pattern value="/mypage"/>
-        <view-id value="/customerPage.xhtml"/>
+        <view-id value="/protected/customer/customerPage.xhtml"/>
     </url-mapping>
 
     <url-mapping id="orderdetail">
         <pattern value="/mypage/detail"/>
-        <view-id value="orderDetail.xhtml"/>
+        <view-id value="/protected/orderDetails.xhtml"/>
     </url-mapping>
 
     <url-mapping id="customerorders">
-        <pattern value="/mypage/orders"/>
-        <view-id value="/orders.xhtml"/>
-        <action>#{}</action>
-    </url-mapping>
-
-    <url-mapping id="adminorders">
-        <pattern value="/admin/orders"/>
-        <view-id value="/orders.xhtml"/>
-        <action>#{}</action>
+    <pattern value="mypage/orders"/>
+    <view-id value="/protected/customer/orders.xhtml"/>
     </url-mapping>
 
     <url-mapping id="address">
-        <pattern value="/mypage/address"/>
+        <pattern value="mypage/address"/>
         <view-id value="insertAddress.xhtml"/>
+    </url-mapping>
+
+    <!--Admin-->
+
+    <url-mapping id="admin">
+    <pattern value="/manage"/>
+    <view-id value="/protected/admin/adminPage.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="adminorders">
+        <pattern value="/manage/orders"/>
+        <view-id value="/protected/admin/orders.xhtml"/>
+        <action>#{admin.loadPlacedOrders}</action>
+    </url-mapping>
+
+    <url-mapping id="adminorders">
+        <pattern value="/manage/insert"/>
+        <view-id value="/protected/admin/insert.xhtml"/>
     </url-mapping>
 
 </pretty-config>

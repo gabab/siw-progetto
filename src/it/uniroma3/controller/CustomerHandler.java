@@ -32,8 +32,6 @@ public class CustomerHandler {
     private UserFacade userFacade;
     private String productCode;
     private int quantity;
-    @ManagedProperty(value = "#{login}")
-    private Login login;
 
 
     public Cart getCart() {
@@ -54,14 +52,6 @@ public class CustomerHandler {
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
-    }
-
-    public Login getLogin() {
-        return login;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
     }
 
     public ProductFacade getProductFacade() {
@@ -179,10 +169,6 @@ public class CustomerHandler {
         closeOrder();
     }
 
-    @PostConstruct
-    private void forceGetC() {
-        this.currentCustomer = login.getCustomer();
-    }
 
     public String addToOrder() {
         Product p = this.productFacade.getProduct(productCode);
@@ -191,21 +177,20 @@ public class CustomerHandler {
         return "insertOrder";
     }
 
+    //getCurrentCustomer per forzare il caricamento di User
+
     public List getOpenOrders() {
-        List orders = this.orderFacade.getOpenOrders(currentCustomer);
-        //Collections.reverse(orders);
+        List orders = this.orderFacade.getOpenOrders(getCurrentCustomer());
         return orders;
     }
 
     public List getClosedOrders() {
-        List orders = this.orderFacade.getClosedOrders(currentCustomer);
-        //Collections.reverse(orders);
+        List orders = this.orderFacade.getClosedOrders(getCurrentCustomer());
         return orders;
     }
 
     public List getProcessedOrders() {
-        List orders = this.orderFacade.getProcessedOrders(currentCustomer);
-        //Collections.reverse(orders);
+        List orders = this.orderFacade.getProcessedOrders(getCurrentCustomer());
         return orders;
     }
 

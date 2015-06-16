@@ -82,12 +82,14 @@ public class Login {
         }
         this.errorMessage = null;
         this.user = u;
-
+        if (this.user.isAdmin())
+            return "pretty:admin";
         return "pretty:home";
     }
 
     public String logout() {
         user = null;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "pretty:home";
     }
 

@@ -7,11 +7,13 @@ import it.uniroma3.model.Customer;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 
 
 @ManagedBean(name = "address")
-@RequestScoped
-public class AddressController {
+@ViewScoped
+public class AddressController implements Serializable {
     private String street;
     private String city;
     private String state;
@@ -20,13 +22,18 @@ public class AddressController {
     @EJB(beanName = "user")
     private UserFacade uf;
 
-    public String insertAddress(Customer c) {
+
+    public void showAddress(Customer c){
+
+    }
+
+
+    public void insertAddress(Customer c) {
         if (c != null) {
             Address a = new Address(street, city, state, zipcode, country);
             c.setAddress(a);
             uf.updateUser(c);
         }
-        return "pretty:address";
     }
 
     public void loadAddress(Address a) {
@@ -37,11 +44,8 @@ public class AddressController {
         this.country = a.getCountry();
     }
 
-    public String modifyAddress(Customer c) {
+    public void modifyAddress(Customer c) {
         loadAddress(c.getAddress());
-        c.setAddress(null);
-        return "pretty:address";
-
     }
 
 

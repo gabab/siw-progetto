@@ -75,7 +75,7 @@ public class OrderFacade {
 
     public Order processOrder(Long orderID) {
         Order o = this.getOrder(orderID);
-        for (OrderLine ol : o.getOrderlines().values()) {
+        for (OrderLine ol : o.getItems()) {
             Product p = ol.getProduct();
             if (ol.getQuantity() > p.getInStock()) {
                 em.refresh(o);
