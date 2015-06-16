@@ -52,9 +52,26 @@
         <view-id value="/customerPage.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="orderdetail">
+        <pattern value="/mypage/detail"/>
+        <view-id value="orderDetail.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="customerorders">
+        <pattern value="/mypage/orders"/>
+        <view-id value="/orders.xhtml"/>
+        <action>#{}</action>
+    </url-mapping>
+
+    <url-mapping id="adminorders">
+        <pattern value="/admin/orders"/>
+        <view-id value="/orders.xhtml"/>
+        <action>#{}</action>
+    </url-mapping>
+
     <url-mapping id="address">
         <pattern value="/mypage/address"/>
-        <view-id value="/insertAddress.xhtml"/>
+        <view-id value="insertAddress.xhtml"/>
     </url-mapping>
 
 </pretty-config>

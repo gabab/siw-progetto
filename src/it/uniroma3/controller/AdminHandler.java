@@ -80,7 +80,6 @@ public class AdminHandler {
         return "success";
     }*/
 
-    //TODO: da sistemare
     public String processOrder(Long orderID) {
         Order o = this.of.processOrder(orderID);
         if (o != null)

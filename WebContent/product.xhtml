@@ -11,21 +11,21 @@
 
 
         <b:container>
-            <b:modal id="image-popup" title="">
-                <h:graphicImage name="#{config.getImagePath(products.product.code)}"/>
-            </b:modal>
+            <div class=".modal-sm"></div>
             <b:row id="infobox">
-                <b:column span="5">
+                <b:column span="4">
                     <b:thumbnail>
-                        <h:graphicImage name="#{config.getImagePath(products.product.code)}" height="500"
-                                        width="500"/>
-                        <f:facet name="caption">
-                            <button class="btn btn-default btn-sm" data-target="#image-popup" data-toggle="modal">
-                                <b:icon name="zoom-in"/></button>
-                        </f:facet>
+                        <div class="prod-img-container">
+                            <h:graphicImage styleClass="prod-img prod-img-lg"
+                                            name="#{config.getImagePath(products.product.code)}"/>
+                            <button class="btn btn-default btn-sm zoom-btn" data-target="#img-modal"
+                                    data-toggle="modal">
+                                <b:icon name="zoom-in"/>
+                            </button>
+                        </div>
                     </b:thumbnail>
                 </b:column>
-                <b:column span="7">
+                <b:column span="8">
                     <h1>#{products.product.name}</h1>
                     <br/>
                     <b>Price:</b> #{config.getPrice(products.product.price)}
@@ -35,8 +35,9 @@
                     <br/>
                     <f:view>
                         <h:form>
-                            <b:inputText type="number" value="#{customer.quantity}" span="1"/>
-
+                            <p><b:inputText label="Quantity" type="number" value="#{customer.quantity}" span="2"
+                                            styleClass="prod-quantity"/></p>
+                            <br/>
                             <b:commandButton
                                     value="Add to Cart"
                                     icon="shopping-cart"
@@ -48,36 +49,10 @@
                         </h:form>
                     </f:view>
 
-                    <!--DA SPOSTARE-->
-                    <!--<b:modal id="amodal" title="Insert Address">-->
-                    <!--<b:alert severity="danger"-->
-                    <!--closable="true"-->
-                    <!--rendered="#{not empty facesContext.messageList}">-->
-                    <!--There where errors:<br/>-->
-                    <!--<h:messages/>-->
-                    <!--</b:alert>-->
-                    <!--<f:view>-->
-                    <!--<h:form>-->
-                    <!--<ui:include src="templates/snippets/address.xhtml"/>-->
-                    <!--</h:form>-->
-                    <!--</f:view>-->
-                    <!--</b:modal>-->
-
-
-                    <!--<a id="atrigger" class="btn btn-primary btn-lg" href="#amodal"-->
-                    <!--data-toggle="modal">Trigger (HTML A tag)</a>-->
-
-                    <!--&lt;!&ndash;<b:button value="Trigger (JSF passthrough)" look="success" p:data-target="#amodal" p:data-toggle="modal" onclick="return false;" size="lg"/>&ndash;&gt;-->
-
-                    <!--<button id="btrigger" class="btn btn-info btn-lg" data-target="#amodal"-->
-                    <!--data-toggle="modal">Trigger (HTML Button)-->
-                    <!--</button>-->
-
-
                     <br/>
                 </b:column>
             </b:row>
-            <b:row id="descbox">
+            <b:row id="description">
                 <b:column>
                     <b:panel title="Description" look="info">
                         #{products.product.description}
@@ -85,5 +60,12 @@
                 </b:column>
             </b:row>
         </b:container>
+
+        <b:modal id="img-modal" title="">
+            <div class="prod-img-container">
+                <h:graphicImage name="#{config.getImagePath(products.product.code)}" styleClass="modal-img"/>
+            </div>
+        </b:modal>
+
     </ui:define>
 </ui:composition>

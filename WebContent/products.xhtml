@@ -14,22 +14,31 @@
         <hr/>
         <b:container>
             <f:view><h:form>
-                <ui:repeat var="p" value="#{products.page}">
-                    <b:row>
-                        <b:column col-xs="2" col-md="2">
+                <h:dataTable styleClass="table" value="#{products.page}" var="p"
+                        columnClasses="col-md-2 col-sm-2, col-md-10 col-sm-10">
+                    <h:column>
+                        <div>
                             <h:outputLink value="/product/#{p.code}">
-                                <b:thumbnail>
-                                    <h:graphicImage name="#{config.getImagePath(p.code)}" height="100" width="100"/>
-                                </b:thumbnail>
+                                <h:graphicImage name="#{config.getImagePath(p.code)}"
+                                                styleClass="prod-img prod-img-sm"/>
                             </h:outputLink>
-                        </b:column>
-                        <b:column col-xs="6" col-md="4">
-                        <h:outputLink styleClass="productLink" value="/product/#{p.code}">#{p.name}</h:outputLink>
+                        </div>
+                    </h:column>
+                    <h:column>
+                        <p>
+                            <h:outputLink styleClass="product-link" value="/product/#{p.code}">#{p.name}</h:outputLink>
+                        </p>
 
-                            <div class="pricebox">#{config.getPrice(p.price)}</div>
-                        </b:column>
-                    </b:row>
-                </ui:repeat>
+                        <p class="pricebox">#{config.getPrice(p.price)}</p>
+
+                        <p>#{config.getDesc(p.description)}</p>
+                        <h:outputLink styleClass="btn btn-primary btn-xs"
+                                      value="/product/#{p.code}">See more</h:outputLink>
+                        <br/>
+                    </h:column>
+
+                </h:dataTable>
+
                 <b:row><b:column col-md="4" offset="4">
 
                     <b:buttonGroup rendered="#{products.totalPages > 1}">

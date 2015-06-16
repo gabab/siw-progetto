@@ -11,7 +11,7 @@ public class OrderLine {
     @Column(nullable = false)
     private Integer quantity;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     private Product product;
 
     public OrderLine(Product product, Integer quantity) {

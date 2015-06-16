@@ -58,7 +58,6 @@ public class Registration {
         this.birthDate = birthDate;
     }
 
-    //TODO: verificare unicità email;
     public String requestRegistration() {
         this.uf.createCustomer(email, password, name, surname, birthDate);
         return "confirmation";

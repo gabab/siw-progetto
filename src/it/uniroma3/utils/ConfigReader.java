@@ -7,6 +7,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 @ManagedBean(name = "config", eager = true)
@@ -58,11 +59,22 @@ public class ConfigReader {
     }
 
 
+    public String getDesc(String desc) {
+        int maxlen = Integer.parseInt(properties.getProperty("descLen"));
+        if (desc == null || desc.length() <= maxlen)
+            return desc;
+        else
+            return desc.substring(0, maxlen) + "...";
+    }
+
     public int getItemsPerPage() {
-        try {
-            return Integer.parseInt(properties.getProperty("itemsPerPage"));
-        } catch (Exception ignored) {
-        }
-        return 0;
+        return Integer.parseInt(properties.getProperty("itemsPerPage"));
+    }
+
+    public List getLastN(List items) {
+        int from = items.size() - Integer.parseInt(properties.getProperty("quickViewMaxItems"));
+        if (from <= 0)
+            return items;
+        return items.subList(from, items.size());
     }
 }

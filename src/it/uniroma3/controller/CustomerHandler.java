@@ -14,12 +14,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@ManagedBean(name="customer")
+@ManagedBean(name = "customer")
 @SessionScoped
 public class CustomerHandler {
     @ManagedProperty(value = "#{login.customer}")
@@ -108,7 +105,7 @@ public class CustomerHandler {
     }
 
 
-    private String closeOrder(Order o){
+    private String closeOrder(Order o) {
         o.close();
         this.currentCustomer.addOrder(o);
         this.userFacade.updateUser(this.currentCustomer);
@@ -128,7 +125,6 @@ public class CustomerHandler {
     }
 
 
-
     public Customer getCurrentCustomer() {
         return currentCustomer;
     }
@@ -146,7 +142,7 @@ public class CustomerHandler {
     }
 
 
-    public String viewCart(){
+    public String viewCart() {
         return null;
     }
 
@@ -163,7 +159,7 @@ public class CustomerHandler {
         this.quantity = quantity;
     }
 
-    public boolean getExistsAddress(){
+    public boolean getExistsAddress() {
         return currentCustomer != null && currentCustomer.hasAddress();
     }
 
@@ -182,8 +178,9 @@ public class CustomerHandler {
         this.currentOrder = cart;
         closeOrder();
     }
+
     @PostConstruct
-    private void forceGetC(){
+    private void forceGetC() {
         this.currentCustomer = login.getCustomer();
     }
 
@@ -195,15 +192,31 @@ public class CustomerHandler {
     }
 
     public List getOpenOrders() {
-        return this.orderFacade.getOpenOrders(currentCustomer);
+        List orders = this.orderFacade.getOpenOrders(currentCustomer);
+        //Collections.reverse(orders);
+        return orders;
     }
 
     public List getClosedOrders() {
-        return this.orderFacade.getClosedOrders(currentCustomer);
+        List orders = this.orderFacade.getClosedOrders(currentCustomer);
+        //Collections.reverse(orders);
+        return orders;
     }
 
-
     public List getProcessedOrders() {
-        return this.orderFacade.getProcessedOrders(currentCustomer);
+        List orders = this.orderFacade.getProcessedOrders(currentCustomer);
+        //Collections.reverse(orders);
+        return orders;
+    }
+
+    public String modifyOrder(Long orderID) {
+        this.currentOrder = orderFacade.getOrder(orderID);
+        return "insertOrder";
+    }
+
+    public String removeOrder(Long orderID) {
+        this.currentCustomer.getOrders().remove(orderFacade.getOrder(orderID));
+        this.userFacade.updateCustomer(currentCustomer);
+        return "insertOrder";
     }
 }

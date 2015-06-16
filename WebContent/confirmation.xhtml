@@ -2,14 +2,14 @@
 <ui:composition template="templates/main.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:define name="title">Registration Request sent</ui:define>
+    <ui:define name="title">Registration confirmation</ui:define>
 
     <ui:define name="content">
         <div>
             <br/>
             Hello #{registration.name},
             <br/>
-            a confirmation e-mail will be sent to the address #{registration.email}.
+            We will send you a confirmation email to the address #{registration.email}.
             <br/>
             Thank you for using #{config.brand}.
         </div>

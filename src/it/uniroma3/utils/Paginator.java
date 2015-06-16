@@ -11,11 +11,6 @@ public abstract class Paginator {
     private String pageTitle;
 
     private List[] pages;
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage - 1;
-    }
-
     private int currentPage;
 
     public void paginate(List items) {
@@ -25,7 +20,6 @@ public abstract class Paginator {
     public void paginate(List items, int itemsPerPage) {
         this.currentPage = 0;
         int numberOfPages = items.size() / itemsPerPage;
-
         //assicuriamoci che nessun elemento venga escluso aggiungendo una pagina se necessario
         numberOfPages = ((itemsPerPage * numberOfPages) - items.size() >= 0) ? numberOfPages : numberOfPages + 1;
         this.pages = new List[numberOfPages];
@@ -38,13 +32,16 @@ public abstract class Paginator {
         this.pages[numberOfPages - 1] = items.subList(index, items.size());
     }
 
-
     public List getPage() {
         return this.pages[this.currentPage];
     }
 
     public int getCurrentPage() {
         return currentPage + 1;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage - 1;
     }
 
     public boolean hasNext() {

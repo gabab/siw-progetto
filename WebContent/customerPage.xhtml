@@ -20,7 +20,7 @@
                 <b:tabView>
                     <b:tab title="Opened">
                         <h:outputText rendered="#{customer.openOrders.size() == 0}"><p>You don't have open orders</p></h:outputText>
-                        <h:dataTable styleClass="table table-striped" value="#{customer.openOrders}" var="o" rendered="#{customer.openOrders.size() > 0}">
+                        <h:dataTable styleClass="table table-striped" value="#{config.getLastN(customer.openOrders)}" var="o" rendered="#{customer.openOrders.size() > 0}">
                             <h:column>
                                 <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
                                 <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -37,16 +37,15 @@
                                 <b:commandButton look="success" icon-align="left" icon="ok" value="Close" action="#{customer.closeOrder(o.id)}" size="sm"/>
                             </h:column>
                             <h:column>
-                                <b:commandButton look="primary" icon-align="left" icon="plus" value="Modify" action="#" size="sm"/>
+                                <b:commandButton look="primary" icon-align="left" icon="plus" value="Modify" action="#{customer.modifyOrder(o.id)}" size="sm"/>
                             </h:column>
                             <h:column>
-                                <b:commandButton look="danger" icon-align="left" icon="remove" value="Delete" action="#" size="xs"/>
+                                <b:commandButton look="danger" icon-align="left" icon="remove" value="Delete" action="##{customer.removeOrder(o.id)}" size="sm"/>
                             </h:column>
                         </h:dataTable>
                     </b:tab>
                     <b:tab title="Closed">
-                        <h:dataTable styleClass="table table-striped" value="#{customer.closedOrders}" var="o"
-                                     rows="10">
+                        <h:dataTable styleClass="table table-striped" value="#{config.getLastN(customer.closedOrders)}" var="o">
                             <h:column>
                                 <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
                                 <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -66,8 +65,7 @@
                         </h:dataTable>
                     </b:tab>
                     <b:tab title="Processed">
-                        <h:dataTable styleClass="table table-striped" value="#{customer.processedOrders}" var="o"
-                                     rows="10">
+                        <h:dataTable styleClass="table table-striped" value="#{config.getLastN(customer.processedOrders)}" var="o">
                             <h:column>
                                 <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
                                 <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -91,7 +89,7 @@
                         </h:dataTable>
                     </b:tab>
                 </b:tabView>
-                <a href="myOrders.xhtml">View All</a>
+                <a href="myOrders.customerOrders.xhtml">View All</a>
                 <hr/>
 
                 <b:row>
@@ -109,19 +107,8 @@
 
                         <p><b:button look="default" value="#{customer.currentCustomer.hasAddress() ? 'Modify address' : 'Insert address'}" outcome="/mypage/address"/></p>
                     </b:column>
-                    <b:column col-md="4">
-                        <h3>Heading</h3>
-
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-                            ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-
-                        <p><b:button outcome="" value="View details »"/></p>
-                    </b:column>
                 </b:row>
                 <hr/>
-
-                <h:outputLink value="insertAddress.xhtml">AA</h:outputLink>
-
             </h:form>
         </f:view>
     </ui:define>
