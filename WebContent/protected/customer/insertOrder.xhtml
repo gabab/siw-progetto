@@ -8,78 +8,90 @@
 
     <ui:define name="content">
         <b:container>
-
-            <f:view>
-                <h:form>
-                    <h:dataTable styleClass="table table-striped" value="#{customer.currentOrder.items}" var="ol">
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="Product"/></f:facet>
-                            <h:graphicImage name="#{config.getImagePath(ol.product.code)}"
-                                            styleClass="prod-img prod-img-xs"/>
-                        </h:column>
-                        <h:column>
-                            <h:outputText value="#{ol.product.name}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
-                            <h:outputText value="#{ol.quantity}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="Price"/></f:facet>
-                            <h:outputText value="#{config.getPrice(ol.unitPrice)}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header"><h:outputText value="Subtotal"/></f:facet>
-                            <h:outputText value="#{config.getPrice(ol.subTotal)}"/>
-                        </h:column>
-                    </h:dataTable>
-
-                </h:form>
-            </f:view>
-            <hr/>
             <b:row>
-                <div style="float: right">
-                    <p>
-                        <b>Total before taxes:</b> #{orderView.order.total}
-                        <br/>
-                        <b>Taxes:</b> #{config.getTaxes(orderView.order.total)}
-                        <br/>
-                        <b>Total:</b> #{config.getPrice(orderView.order.total)}
-                    </p>
-                </div>
-            </b:row>
-            <f:view>
-                <h:form>
-                    Add another item:
-                    <b:inputText label="Product Code"
-                                 value="#{customer.productCode}"
-                                 required="true"
-                                 requiredMessage="Code is mandatory"
-                            />
-                    <b:inputText label="Quantity" value="#{customer.quantity}"/>
-                    <b:commandButton value="Add" action="#{customer.addToOrder()}"/>
-
-                    <br/>
-                    <br/>
-                    <h:commandButton value="Place Order" action="#{customer.closeOrder}"
-                                     class="btn btn-default"/>
-
-                    <h:commandButton value="Save for later" action="#{customer.closeOrder}"
-                                     class="btn btn-default"/>
-                </h:form>
-            </f:view>
-            <hr/>
-            <b:row>
+                <b:alert severity="danger"
+                         closable="true"
+                         rendered="#{not empty facesContext.messageList}">
+                    There where errors:<br/>
+                    <h:messages/>
+                </b:alert>
 
                 <div style="float: right">
                     <p>
-                        <b>Total before taxes:</b> #{config.getPrice(orderView.order.total)}
+                        <b>Opened:</b> #{config.formatDate(orderView.order.opened)}
                         <br/>
-                        <b>Taxes:</b> #{config.getTaxes(orderView.order.total)}
-                        <br/>
-                        <b>Total:</b> #{config.getPrice(orderView.order.total)}
                     </p>
                 </div>
+                <f:view>
+                    <h:form>
+                        <h:dataTable styleClass="table table-striped" value="#{customer.currentOrder.items}" var="ol">
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Product"/></f:facet>
+                                <h:graphicImage name="#{config.getImagePath(ol.product.code)}"
+                                                styleClass="prod-img prod-img-xs"/>
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="#{ol.product.name}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Quantity"/></f:facet>
+                                <h:outputText value="#{ol.quantity}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Price"/></f:facet>
+                                <h:outputText value="#{config.getPrice(ol.unitPrice)}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"><h:outputText value="Subtotal"/></f:facet>
+                                <h:outputText value="#{config.getPrice(ol.subTotal)}"/>
+                            </h:column>
+                        </h:dataTable>
+
+                    </h:form>
+                </f:view>
+                <hr/>
+                <b:row>
+                    <div style="float: right">
+                        <p>
+                            <b>Total before taxes:</b> #{orderView.order.total}
+                            <br/>
+                            <b>Taxes:</b> #{config.getTaxes(orderView.order.total)}
+                            <br/>
+                            <b>Total:</b> #{config.getPrice(orderView.order.total)}
+                        </p>
+                    </div>
+                </b:row>
+                <f:view>
+                    <h:form>
+                        Add another item:
+                        <b:inputText label="Product Code"
+                                     value="#{customer.productCode}"
+                                     required="true"
+                                     requiredMessage="Code is mandatory"
+                                />
+
+                        <div class="form-group">
+                            <b:inputText type="number"
+                                         label="Quantity"
+                                         value="#{customer.quantity}"
+                                         span="3"
+                                         validatorMessage="Quantity must be positive"
+                                    >
+                                <f:validateDoubleRange minimum="1"/>
+                            </b:inputText>
+                            <b:commandButton value="Add" action="#{customer.addToOrder()}"/>
+                        </div>
+
+                        <hr/>
+                        <h:commandButton look="success" value="Place Order" action="#{customer.closeOrder}"
+                                         class="btn btn-default"/>
+
+                        <h:commandButton look="warning" value="Save for later"
+                                         action="#{customer.saveOrder}"
+                                         class="btn btn-default"/>
+                    </h:form>
+                </f:view>
+                <hr/>
 
             </b:row>
             <br/>

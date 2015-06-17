@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="/templates/main.xhtml"
+<ui:composition template="/protected/admin/sidebar.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:b="http://bootsfaces.net/ui">
-    <ui:define name="title">Insert Product</ui:define>
-    <ui:define name="content">
-        <b:row>
-            <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                <b:listLinks>
-                    <b:navLink href="/manage" value="Main" active="true"/>
-                </b:listLinks>
-                <b:listLinks>
-                    <b:navLink header="Orders" styleClass="sidebar-header"/>
-                    <b:navLink href="/manage/orders" value="View unprocessed orders"/>
-                </b:listLinks>
-                <b:listLinks>
-                    <b:navLink header="Products" styleClass="sidebar-header"/>
-                    <b:navLink href="/manage/insert" value="Insert Product"/>
-                    <b:navLink href="/manage/providers" value="View Providers"/>
-                </b:listLinks>
-                <b:listLinks>
-                    <b:navLink header="Users" styleClass="sidebar-header"/>
-                    <b:navLink href="/manage/users" value="Users"/>
-                </b:listLinks>
-            </b:column>
-            <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="sidebar-main">
-            </b:column>
-        </b:row>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="admintitle">Closed Orders</ui:define>
+    <ui:define name="admincontent">
+
+        <h3>#{config.brand} Control Panel</h3>
+        <hr/>
+        <b:alert severity="danger"
+                 closable="true"
+                 rendered="#{not empty facesContext.messageList}">
+            There where errors:<br/>
+            <h:messages/>
+        </b:alert>
+        <b:alert severity="info"
+                 rendered="#{admin.closedOrders.size() > 0}">
+            There are <strong>#{admin.closedOrders.size()}</strong> orders to process
+        </b:alert>
+        <br/>
+
+        <h3>Search Customer Info</h3>
+        <hr/>
+        <f:view>
+            <h:form>
+                <div class="form-group">
+                    <b:inputText
+                            placeholder="Order ID"
+                            value="#{admin.orderID}"
+                            required="true"
+                            converterMessage="Not a valid ID"
+                            span="3"/>
+                    <b:commandButton look="primary" value="Search" action="#{admin.findCustomerInfo()}"/>
+                </div>
+            </h:form>
+        </f:view>
+
     </ui:define>
 </ui:composition>

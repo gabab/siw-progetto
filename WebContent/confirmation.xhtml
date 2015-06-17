@@ -5,13 +5,13 @@
     <ui:define name="title">Registration confirmation</ui:define>
 
     <ui:define name="content">
-        <div>
-            <br/>
-            Hello #{registration.name},
-            <br/>
-            We will send you a confirmation email to the address #{registration.email}.
-            <br/>
-            Thank you for using #{config.brand}.
+        <div style="padding-top: 20px;">
+            <p>
+                Hello #{registration.name},
+                <br/>
+                We will send you a confirmation email to the address #{registration.email}.
+                <br/>
+                Thank you for using #{config.brand}.</p>
         </div>
     </ui:define>
 </ui:composition>

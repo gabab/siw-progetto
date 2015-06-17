@@ -71,4 +71,8 @@ public class UserFacade {
     public void updateCustomer(Customer c) {
         this.em.merge(c);
     }
+
+    public void refresh(User u) {
+        this.em.refresh(u);
+    }
 }

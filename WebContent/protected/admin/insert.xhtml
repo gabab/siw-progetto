@@ -1,65 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="/templates/main.xhtml"
+<ui:composition template="/protected/admin/sidebar.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:b="http://bootsfaces.net/ui">
-    <ui:define name="title">Insert Product</ui:define>
-    <ui:define name="content">
-        <b:row>
-            <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                <b:listLinks>
-                    <b:navLink href="/manage" value="Main" active="true"/>
-                </b:listLinks>
-                <b:listLinks>
-                    <b:navLink header="Orders" styleClass="sidebar-header"/>
-                    <b:navLink href="/manage/orders" value="View unprocessed orders"/>
-                </b:listLinks>
-                <b:listLinks>
-                    <b:navLink header="Products" styleClass="sidebar-header"/>
-                    <b:navLink href="/manage/insert" value="Insert Product"/>
-                    <b:navLink href="/manage/providers" value="View Providers"/>
-                </b:listLinks>
-                <b:listLinks>
-                    <b:navLink header="Users" styleClass="sidebar-header"/>
-                    <b:navLink href="/manage/users" value="Users"/>
-                </b:listLinks>
-            </b:column>
-            <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="sidebar-main">
-                <b:alert severity="danger"
-                         closable="true"
-                         rendered="#{not empty facesContext.messageList}">
-                    There where errors:<br/>
-                    <h:messages/>
-                </b:alert>
+    <ui:define name="admintitle">Insert Product</ui:define>
+    <ui:define name="admincontent">
+        <b:alert severity="danger"
+                 closable="true"
+                 rendered="#{not empty facesContext.messageList}">
+            There where errors:<br/>
+            <h:messages/>
+        </b:alert>
 
-                <h1>Insert Products</h1>
-                <hr/>
-                <b:panelGrid colSpans="12">
-                    <f:view><h:form>
-                        <b:inputText label="Name"
-                                     value="#{insertProduct.name}"
-                                     required="true"
-                                     requiredMessage="Name is mandatory"
-                                     placeholder="Name"/>
-                        <b:inputText label="Price"
-                                     value="#{insertProduct.price}"
-                                     required="true"
-                                     requiredMessage="Price is mandatory"
-                                     converterMessage="Price must be a number"/>
-                        <b:inputText label="Product Code"
-                                     value="#{insertProduct.code}"
-                                     required="true"
-                                     requiredMessage="Code is mandatory"
-                                     validator="CodeValidator"/>
-                        <h:outputLabel value="Description"/>
-                        <h:inputTextarea value="#{insertProduct.description}"
-                                         styleClass="input-group form-control"/>
-                        <b:commandButton value="Submit" look="primary" action="#{insertProduct.insertProduct}"/>
-                    </h:form></f:view>
-                </b:panelGrid>
-            </b:column>
-        </b:row>
+        <h3>Insert Products</h3>
+        <hr/>
+        <b:panel>
+            <fieldset>
+                <f:view><h:form>
+                    <b:inputText label="Name"
+                                 value="#{insertProduct.name}"
+                                 required="true"
+                                 requiredMessage="Name is mandatory"
+                                 placeholder="Name"/>
+                    <b:inputText label="Price"
+                                 value="#{insertProduct.price}"
+                                 placeholder="Price"
+                                 required="true"
+                                 requiredMessage="Price is mandatory"
+                                 converterMessage="Price must be a number"/>
+                    <b:inputText label="Product Code"
+                                 value="#{insertProduct.code}"
+                                 required="true"
+                                 requiredMessage="Code is mandatory"
+                                 validator="CodeValidator"
+                                 placeholder="Code"/>
+                    <h:outputLabel value="Description"/>
+                    <h:inputTextarea value="#{insertProduct.description}"
+                                     styleClass="input-group form-control"/>
+                    <br/>
+                    <b:commandButton value="Submit" look="primary" action="#{insertProduct.insertProduct}"/>
+                </h:form></f:view>
+            </fieldset>
+        </b:panel>
 
     </ui:define>
 </ui:composition>

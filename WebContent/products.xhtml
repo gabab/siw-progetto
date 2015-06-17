@@ -18,7 +18,7 @@
                              columnClasses="col-md-2 col-sm-2, col-md-10 col-sm-10">
                     <h:column>
                         <div>
-                            <h:outputLink value="product/#{p.code}">
+                            <h:outputLink value="/product/#{p.code}">
                                 <h:graphicImage name="#{config.getImagePath(p.code)}"
                                                 styleClass="prod-img prod-img-sm"/>
                             </h:outputLink>
@@ -26,14 +26,14 @@
                     </h:column>
                     <h:column>
                         <p>
-                            <h:outputLink styleClass="product-link" value="product/#{p.code}">#{p.name}</h:outputLink>
+                            <h:outputLink styleClass="product-link" value="/product/#{p.code}">#{p.name}</h:outputLink>
                         </p>
 
                         <p class="pricebox">#{config.getPrice(p.price)}</p>
 
                         <p>#{config.getDesc(p.description)}</p>
                         <h:outputLink styleClass="btn btn-primary btn-xs"
-                                      value="product/#{p.code}">See more</h:outputLink>
+                                      value="/product/#{p.code}">See more</h:outputLink>
                         <br/>
                     </h:column>
 

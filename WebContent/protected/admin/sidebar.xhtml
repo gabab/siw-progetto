@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/templates/main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+        >
+    <ui:define name="title">Control Panel: <ui:insert name="admintitle"/></ui:define>
+    <ui:define name="content">
+        <table class="table">
+            <tr>
+                <td style="width: 200px !important;">
+                    <b:listLinks>
+                        <b:navLink href="/manage" value="Control Panel"/>
+                    </b:listLinks>
+                    <hr/>
+                    Orders
+                    <b:listLinks>
+                        <b:navLink href="/manage/orders" value="View unprocessed orders"/>
+                        <b:navLink href="/manage/address" value="Search Customer info"/>
+                    </b:listLinks>
+                    <hr/>
+                    Products
+                    <b:listLinks>
+                        <b:navLink href="/manage/insert" value="Insert Product"/>
+                    </b:listLinks>
+                </td>
+                <td>
+                    <ui:insert name="admincontent"/>
+                </td>
+            </tr>
+        </table>
+    </ui:define>
+</ui:composition>

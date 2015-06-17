@@ -1,7 +1,6 @@
 package it.uniroma3.utils;
 
 import javax.faces.bean.ManagedProperty;
-import java.io.Serializable;
 import java.util.List;
 
 public abstract class Paginator {
@@ -11,7 +10,7 @@ public abstract class Paginator {
 
     private String pageTitle;
 
-    private String returnPage = null;
+    private String returnPage = "#";
 
     private List[] pages;
     private int currentPage;

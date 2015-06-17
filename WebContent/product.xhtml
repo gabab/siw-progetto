@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
+        >
     <ui:define name="title">#{products.product.name}</ui:define>
 
     <ui:define name="content">
@@ -33,21 +33,6 @@
                     <b>Code:</b> #{products.product.code}
                     <br/>
                     <br/>
-                    <f:view>
-                        <h:form>
-                            <p><b:inputText label="Quantity" type="number" value="#{customer.quantity}" span="2"
-                                            styleClass="prod-quantity"/></p>
-                            <br/>
-                            <b:commandButton
-                                    value="Add to Cart"
-                                    icon="shopping-cart"
-                                    look="success"
-                                    action="#{customer.addToCart(products.product.code)}">
-                            </b:commandButton>
-
-
-                        </h:form>
-                    </f:view>
 
                     <br/>
                 </b:column>

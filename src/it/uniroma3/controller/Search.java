@@ -13,7 +13,7 @@ import java.util.List;
 public class Search {
 
     @ManagedProperty(value = "#{products}")
-    private ShowProducts sp;
+    private ProductsView sp;
 
     @EJB(beanName = "product")
     private ProductFacade productFacade;
@@ -46,7 +46,7 @@ public class Search {
         return sp.listProducts("pretty:search");
     }
 
-    public void setSp(ShowProducts sp) {
+    public void setSp(ProductsView sp) {
         this.sp = sp;
     }
 

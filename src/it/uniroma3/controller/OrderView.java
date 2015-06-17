@@ -1,23 +1,25 @@
 package it.uniroma3.controller;
 
 import it.uniroma3.facades.OrderFacade;
-import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.utils.Paginator;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.util.List;
 
 @ManagedBean(name = "orderView")
 @SessionScoped
-public class ShowOrder extends Paginator {
+public class OrderView extends Paginator {
 
     @EJB(beanName = "order")
     private OrderFacade of;
 
-    private Customer customer;
+    @ManagedProperty(value = "#{config.orderlinesPerPage}")
+    private int orderlinesPerPage;
+
     private Order order;
     private List orders;
 
@@ -35,34 +37,8 @@ public class ShowOrder extends Paginator {
     }
 
     public String showOrder() {
-        paginate(this.order.getItems(), 2);
+        paginate(this.order.getItems(), orderlinesPerPage);
         return "pretty:orderdetail";
-    }
-
-    public String getPlacedOrders() {
-        this.orders = this.of.getClosedOrders();
-        return listOrders(null, "Closed Orders");
-    }
-
-    public String getPlacedOrders(Customer c) {
-        this.orders = this.of.getClosedOrders();
-        return listOrders(null, "Closed Orders");
-    }
-
-    private String listOrders(String page, String title) {
-        paginate(this.orders);
-        setPageTitle(title);
-        return page;
-    }
-
-    public String getProcessedOrders() {
-        this.orders = this.of.getProcessedOrders();
-        return "pretty:orders";
-    }
-
-    public String getProcessedOrders(Customer c) {
-        this.orders = this.of.getProcessedOrders();
-        return "pretty:orders";
     }
 
     public Order getOrder() {
@@ -71,5 +47,9 @@ public class ShowOrder extends Paginator {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public void setOrderlinesPerPage(int orderlinesPerPage) {
+        this.orderlinesPerPage = orderlinesPerPage;
     }
 }

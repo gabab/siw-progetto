@@ -20,10 +20,16 @@
         <action>#{products.loadProduct}</action>
     </url-mapping>
 
-    <url-mapping id="catalog">
+    <url-mapping id="products">
         <pattern value="/catalog"/>
         <view-id value="/products.xhtml"/>
         <action>#{products.viewCatalog}</action>
+    </url-mapping>
+
+    <url-mapping id="catalog">
+        <pattern value="/catalog/#{products.currentPage}"/>
+        <view-id value="/products.xhtml"/>
+        <action>#{products.loadCatalog}</action>
     </url-mapping>
 
     <url-mapping id="search">
@@ -59,14 +65,20 @@
         <view-id value="/protected/orderDetails.xhtml"/>
     </url-mapping>
 
+    <url-mapping id="customer-order">
+        <pattern value="/mypage/order"/>
+        <view-id value="/protected/customer/orders.xhtml"/>
+    </url-mapping>
+
+
     <url-mapping id="customerorders">
-    <pattern value="mypage/orders"/>
+        <pattern value="/mypage/orders"/>
     <view-id value="/protected/customer/orders.xhtml"/>
     </url-mapping>
 
     <url-mapping id="address">
-        <pattern value="mypage/address"/>
-        <view-id value="insertAddress.xhtml"/>
+        <pattern value="/mypage/address"/>
+        <view-id value="/protected/customer/insertAddress.xhtml"/>
     </url-mapping>
 
     <!--Admin-->
@@ -76,13 +88,22 @@
     <view-id value="/protected/admin/adminPage.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="adminorders">
+    <url-mapping id="admin-orders">
         <pattern value="/manage/orders"/>
-        <view-id value="/protected/admin/orders.xhtml"/>
-        <action>#{admin.loadPlacedOrders}</action>
+        <view-id value="/protected/admin/adminorders.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="adminorders">
+    <url-mapping id="admin-address">
+        <pattern value="/manage/address"/>
+        <view-id value="/protected/admin/address.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="admin-detail">
+        <pattern value="/manage/orders/detail"/>
+        <view-id value="/protected/orderDetails.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="admin-products">
         <pattern value="/manage/insert"/>
         <view-id value="/protected/admin/insert.xhtml"/>
     </url-mapping>

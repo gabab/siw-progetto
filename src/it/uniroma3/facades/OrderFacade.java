@@ -41,7 +41,8 @@ public class OrderFacade {
     }
 
     private List getOrdersState(OrderState state) {
-        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = " + state);
+        Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = :state")
+                .setParameter("state", state);
         return q.getResultList();
     }
 
@@ -75,7 +76,7 @@ public class OrderFacade {
 
     public Order processOrder(Long orderID) {
         Order o = this.getOrder(orderID);
-        for (OrderLine ol : o.getItems()) {
+        for (OrderLine ol : o.getOrderlines().values()) {
             Product p = ol.getProduct();
             if (ol.getQuantity() > p.getInStock()) {
                 em.refresh(o);

@@ -8,14 +8,20 @@
 
     <ui:define name="content">
         <h3>Details for order no. #{orderView.order.id}</h3>
+        <hr/>
         <b:row>
             <div style="float: left">
+                <b>Customer:</b>
+
                 <p>
-                    <b>Customer:</b> #{orderView.order.customer}
-                    <br/>
-                    <h:form>
-                        <b:commandButton value="View Address" action="#{address.loadAddress(orderView.order.customer.address)}"/>
-                    </h:form>
+                    #{orderView.order.customer.fullname}
+                </p>
+
+                <p>
+                    #{orderView.order.customer.address.street}<br/>
+                    #{orderView.order.customer.address.city}, #{orderView.order.customer.address.state}<br/>
+                    #{orderView.order.customer.address.zipcode}<br/>
+                    #{orderView.order.customer.address.country}<br/>
                 </p>
             </div>
 
@@ -37,7 +43,7 @@
                 <h:dataTable styleClass="table table-striped" value="#{orderView.page}" var="ol">
                     <h:column>
                         <f:facet name="header"><h:outputText value="Product"/></f:facet>
-                        <h:graphicImage name="#{config.getImagePath(ol.product.code)}" height="75" width="75"/>
+                        <h:graphicImage name="#{config.getImagePath(ol.product.code)}" styleClass="prod-img-xs"/>
                     </h:column>
                     <h:column>
                         <h:outputText value="#{ol.product.name}"/>
@@ -79,7 +85,7 @@
 
             <div style="float: right">
                 <p>
-                    <b>Total before taxes:</b> #{orderView.order.total}
+                    <b>Total before taxes:</b> #{config.getTaxes(orderView.order.total)}
                     <br/>
                     <b>Taxes:</b> #{config.getTaxes(orderView.order.total)}
                     <br/>

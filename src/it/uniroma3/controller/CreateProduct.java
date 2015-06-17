@@ -20,9 +20,9 @@ public class CreateProduct {
     @EJB(name = "product")
     private ProductFacade productFacade;
     @ManagedProperty(value = "#{products}")
-    private ShowProducts sp;
+    private ProductsView sp;
 
-    public void setSp(ShowProducts sp) {
+    public void setSp(ProductsView sp) {
         this.sp = sp;
     }
 

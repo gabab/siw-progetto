@@ -104,7 +104,6 @@ Caso d'uso UC7: login
 	
 
 	
-	
 Caso d'uso UC8: registrazione cliente
 
 - Attore primario: utente non registrato
@@ -118,36 +117,10 @@ Caso d'uso UC8: registrazione cliente
 	
 - Regole di dominio
 	A.  L'indirizzo email deve essere univoco per ogni cliente e quindi non può essere già presente nel sistema.
-	
-	
-	
-Caso d'uso UC9: effettua ordine (Carrello)
 
 
-- Attore primario: cliente (utente registrato)
-- Scenario principale di successo: 
-	1.  Il cliente vuole comprare dei prodotti
-	2.  Il cliente consulta il catalogo dei prodotti
-	3.  Il cliente sceglie un prodotto e lo aggiunge al carrello
-	4.  Il sistema imposta il prezzo unitario del prodotto scelto al prezzo corrente di listino
-	5.  Il sistema registra la riga ordine
-	6.  Il cliente ripete i passi 2-3 finché necessario
-	7.  Il cliente seleziona il carrello
-	8.  Il sistema mostra l'elenco delle righe d'ordine, mostrando i prodotti scelti, la quantità e il totale.
-	9.  Il cliente sceglie una riga d'ordine e modifica la quantità
-	10.  Il cliente ripete il passo 9 finché necessario
-	11.  Il cliente "chiude" l'ordine
-	12.  Il sistema registra l'ordine
 
-- Precondizioni:	
-	Il cliente è identificato e autenticato
-	
-- Eccezioni
-	11a.  Il cliente non ha inserito un indirizzo nel sistema. Il sistema mostra un messaggio d'errore e chiede all'utente di inserire un indirizzo (caso d'uso UC10)
-	
-	
-	
-Caso d'uso UC10: inserimento indirizzo
+Caso d'uso UC9: inserimento indirizzo
 
 - Attore primario: cliente (utente registrato)
 - Scenario principale di successo: 

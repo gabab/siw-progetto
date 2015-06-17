@@ -99,8 +99,8 @@
                         </h:dataTable>
                     </b:tab>
                 </b:tabView>
-                <b:button value="View All" href="/mypage/orders"/>
-                <a href="orders.xhtml">View All</a>
+                <h:outputLink value="/mypage/orders"
+                              class="btn btn-primary btn-lg">View Product Catalog</h:outputLink>
                 <hr/>
 
                 <b:row>
@@ -116,11 +116,9 @@
 
                         <p>Insert or modify your address</p>
 
-                        <p><a href="insertAddress.xhtml">View All</a>
-
-                            <b:commandButton look="default"
-                                             value="#{customer.currentCustomer.hasAddress() ? 'Modify address' : 'Insert address'}"
-                                             action="#{address.showAddress(customer.currentCustomer.address)}"/></p>
+                        <p><b:commandButton look="default"
+                                            value="#{customer.currentCustomer.hasAddress() ? 'Modify address' : 'Insert address'}"
+                                            action="#{address.showAddress(customer.currentCustomer.address)}"/></p>
                     </b:column>
                 </b:row>
                 <hr/>

@@ -67,6 +67,11 @@ public class ConfigReader {
             return desc.substring(0, maxlen) + "...";
     }
 
+
+    public int getOrderlinesPerPage() {
+        return Integer.parseInt(properties.getProperty("orderlinesPerPage"));
+    }
+
     public int getItemsPerPage() {
         return Integer.parseInt(properties.getProperty("itemsPerPage"));
     }

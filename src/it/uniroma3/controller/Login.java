@@ -84,7 +84,7 @@ public class Login {
         this.user = u;
         if (this.user.isAdmin())
             return "pretty:admin";
-        return "pretty:home";
+        return "pretty:mypage";
     }
 
     public String logout() {

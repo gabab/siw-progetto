@@ -14,12 +14,13 @@
                     <h:panelGrid styleClass="centered-form">
                         <h1>Welcome to #{config.brand}</h1>
 
-                        <h:graphicImage name="images/cart.png" alt="#{config.brand}"
-                                        styleClass="img-main"/>
-                        <b:button look="primary"
-                                  outcome="catalog"
-                                  size="lg"
-                                  value="View Product Catalog"/>
+                        <p><h:graphicImage name="images/cart.png" alt="#{config.brand}"
+                                           styleClass="img-main"/></p>
+
+                        <p><h:outputLink value="/catalog"
+                                         class="btn btn-primary btn-lg">View Product Catalog</h:outputLink>
+                        </p>
+
                     </h:panelGrid>
                 </h:form>
             </b:container>
@@ -31,24 +32,28 @@
         <h2>Hot Now:</h2>
         <hr/>
         <b:row>
-            <ui:repeat value="#{products.lastProducts}" var="p">
-                <b:column col-sm="2" col-md="2">
-                    <h:outputLink value="/product/#{p.code}">
-                        <div class="hotseat">
-                            <div class="imgbox-main">
-                                <h:graphicImage name="#{config.getImagePath(p.code)}"
-                                                styleClass="prod-img prod-img-sm"/>
+            <table class="table table-responsive">
+                <tr>
 
-                            </div>
+                    <ui:repeat value="#{products.lastProducts}" var="p">
+                        <td>
+                            <h:outputLink value="/product/#{p.code}">
+                                <table>
+                                    <tr style="height: 150px">
+                                        <h:graphicImage name="#{config.getImagePath(p.code)}"
+                                                        styleClass="prod-img prod-img-hotseat"/>
 
-                            <div class="descbox-main">
-                                #{p.name}
-                                #{p.price}
-                            </div>
-                        </div>
-                    </h:outputLink>
-                </b:column>
-            </ui:repeat>
+                                    </tr>
+                                </table>
+
+                            </h:outputLink>
+                        </td>
+                    </ui:repeat>
+
+                </tr>
+            </table>
+
+
         </b:row>
     </ui:define>
 </ui:composition>

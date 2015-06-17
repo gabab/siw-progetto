@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/protected/admin/sidebar.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="admintitle">Customer Address</ui:define>
+    <ui:define name="admincontent">
+        <h3>Customer Info</h3>
+        <hr/>
+        <b:well>
+            <p>
+                #{admin.customer.fullname}
+            </p>
+
+            <p>
+                #{admin.customer.address.street}<br/>
+                #{admin.customer.address.city}, #{admin.customer.address.state}<br/>
+                #{admin.customer.address.zipcode}<br/>
+                #{admin.customer.address.country}<br/>
+            </p>
+        </b:well>
+
+    </ui:define>
+</ui:composition>

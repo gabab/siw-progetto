@@ -4,12 +4,10 @@ package it.uniroma3.controller;
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.facades.ProductFacade;
 import it.uniroma3.facades.UserFacade;
-import it.uniroma3.model.Cart;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -18,11 +16,10 @@ import java.util.List;
 
 @ManagedBean(name = "customer")
 @SessionScoped
-public class CustomerHandler {
+public class CustomerController {
     @ManagedProperty(value = "#{login.customer}")
     private Customer currentCustomer;
     private Order order;
-    private Cart cart;
     private Order currentOrder;
     @EJB(name = "order")
     private OrderFacade orderFacade;
@@ -31,20 +28,7 @@ public class CustomerHandler {
     @EJB(name = "user")
     private UserFacade userFacade;
     private String productCode;
-    private int quantity;
-
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public String getCartSize() {
-        return (cart == null || cart.getSize() == 0) ? "" : "(" + cart.getSize() + ")";
-    }
+    private int quantity = 1;
 
     public String getProductCode() {
         return productCode;
@@ -54,16 +38,8 @@ public class CustomerHandler {
         this.productCode = productCode;
     }
 
-    public ProductFacade getProductFacade() {
-        return productFacade;
-    }
-
     public void setProductFacade(ProductFacade productFacade) {
         this.productFacade = productFacade;
-    }
-
-    public UserFacade getUserFacade() {
-        return userFacade;
     }
 
     public void setUserFacade(UserFacade userFacade) {
@@ -78,10 +54,6 @@ public class CustomerHandler {
         this.currentOrder = currentOrder;
     }
 
-    public OrderFacade getOrderFacade() {
-        return orderFacade;
-    }
-
     public void setOrderFacade(OrderFacade orderFacade) {
         this.orderFacade = orderFacade;
     }
@@ -91,9 +63,12 @@ public class CustomerHandler {
         Order o = this.orderFacade.getOrder(orderID);
         this.currentCustomer.getOrders().remove(o);
         return closeOrder(o);
-
     }
 
+    public void saveOrder() {
+        this.orderFacade.updateOrder(this.currentOrder);
+        refreshOrders();
+    }
 
     private String closeOrder(Order o) {
         o.close();
@@ -101,13 +76,10 @@ public class CustomerHandler {
         this.userFacade.updateUser(this.currentCustomer);
         refreshOrders();
         return "pretty:mypage";
-
     }
 
     private void refreshOrders() {
-        getOpenOrders();
-        getClosedOrders();
-        getProcessedOrders();
+        this.userFacade.refresh(currentCustomer);
     }
 
     public String closeOrder() {
@@ -138,7 +110,7 @@ public class CustomerHandler {
 
     public String createOrder() {
         this.currentOrder = new Order(currentCustomer);
-        return "insertOrder";
+        return "pretty:customer-order";
     }
 
     public int getQuantity() {
@@ -154,22 +126,6 @@ public class CustomerHandler {
     }
 
 
-    public String addToCart(String productCode) {
-        if (currentCustomer == null)
-            return "pretty:login";
-        if (cart == null)
-            this.cart = new Cart(currentCustomer);
-        Product p = this.productFacade.getProduct(productCode);
-        this.cart.addProduct(p);
-        return "pretty:";
-    }
-
-    public void closeCart() {
-        this.currentOrder = cart;
-        closeOrder();
-    }
-
-
     public String addToOrder() {
         Product p = this.productFacade.getProduct(productCode);
         if (p != null)
@@ -177,21 +133,16 @@ public class CustomerHandler {
         return "insertOrder";
     }
 
-    //getCurrentCustomer per forzare il caricamento di User
-
     public List getOpenOrders() {
-        List orders = this.orderFacade.getOpenOrders(getCurrentCustomer());
-        return orders;
+        return this.orderFacade.getOpenOrders(currentCustomer);
     }
 
     public List getClosedOrders() {
-        List orders = this.orderFacade.getClosedOrders(getCurrentCustomer());
-        return orders;
+        return this.orderFacade.getClosedOrders(currentCustomer);
     }
 
     public List getProcessedOrders() {
-        List orders = this.orderFacade.getProcessedOrders(getCurrentCustomer());
-        return orders;
+        return this.orderFacade.getProcessedOrders(currentCustomer);
     }
 
     public String modifyOrder(Long orderID) {

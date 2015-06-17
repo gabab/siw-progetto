@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/protected/admin/sidebar.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:b="http://bootsfaces.net/ui">
+    <ui:define name="admintitle">Unfulfilled Orders</ui:define>
+    <ui:define name="admincontent">
+        <h3>Unfulfilled Orders</h3>
+        <hr/>
+        <f:view>
+
+            <b:alert closable="true" rendered="#{admin.alert != null}" severity="danger">
+                #{admin.alert}
+            </b:alert>
+            <h:form>
+                <h:dataTable styleClass="table table-striped" value="#{admin.closedOrders}" var="o">
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Order #"/></f:facet>
+                        <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Opened"/></f:facet>
+                        <h:outputText value="#{config.formatDate(o.opened)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Placed"/></f:facet>
+                        <h:outputText value="#{config.formatDate(o.closed)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value="Items"/></f:facet>
+                        <h:outputText value="#{o.size}"/>
+                    </h:column>
+                    <h:column>
+                        <b:commandButton look="success" icon-align="left" icon="ok" value="Dispatch"
+                                         action="#{admin.processOrder(o.id)}" size="sm"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>

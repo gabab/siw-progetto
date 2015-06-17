@@ -7,12 +7,11 @@ import it.uniroma3.utils.Paginator;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import java.util.List;
 
 @ManagedBean(name = "products")
 @SessionScoped
-public class ShowProducts extends Paginator {
+public class ProductsView extends Paginator {
 
     @EJB(beanName = "product")
     private ProductFacade productFacade;
@@ -39,9 +38,13 @@ public class ShowProducts extends Paginator {
     }
 
     public String viewCatalog() {
+        loadCatalog();
+        return listProducts("pretty:catalog");
+    }
+
+    public void loadCatalog() {
         this.products = this.productFacade.getAllProducts();
         this.setPageTitle("Products Catalog");
-        return listProducts(null);
     }
 
     public String findProduct() {
