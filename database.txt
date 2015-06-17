@@ -1,0 +1,371 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: address; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE address (
+    id bigint NOT NULL,
+    city character varying(255) NOT NULL,
+    country character varying(255) NOT NULL,
+    state character varying(255),
+    street character varying(255) NOT NULL,
+    zipcode character varying(255) NOT NULL
+);
+
+
+ALTER TABLE address OWNER TO postgres;
+
+--
+-- Name: openjpa_sequence_table; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE openjpa_sequence_table (
+    id smallint NOT NULL,
+    sequence_value bigint
+);
+
+
+ALTER TABLE openjpa_sequence_table OWNER TO postgres;
+
+--
+-- Name: order_line; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE order_line (
+    orders_id bigint,
+    product_code character varying(255) NOT NULL,
+    quantity integer NOT NULL,
+    unitprice real NOT NULL
+);
+
+
+ALTER TABLE order_line OWNER TO postgres;
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE orders (
+    id bigint NOT NULL,
+    closed timestamp without time zone,
+    opened timestamp without time zone,
+    processed timestamp without time zone,
+    state character varying(20) NOT NULL,
+    customer_id bigint
+);
+
+
+ALTER TABLE orders OWNER TO postgres;
+
+--
+-- Name: product; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE product (
+    code character varying(255) NOT NULL,
+    description character varying(2000),
+    instock integer NOT NULL,
+    name character varying(255) NOT NULL,
+    price real NOT NULL
+);
+
+
+ALTER TABLE product OWNER TO postgres;
+
+--
+-- Name: provider; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE provider (
+    id bigint NOT NULL,
+    email character varying(255) NOT NULL,
+    piva character varying(255) NOT NULL,
+    phone character varying(255) NOT NULL,
+    address_id bigint
+);
+
+
+ALTER TABLE provider OWNER TO postgres;
+
+--
+-- Name: provider_product; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE provider_product (
+    providers_id bigint,
+    products_code character varying(255)
+);
+
+
+ALTER TABLE provider_product OWNER TO postgres;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE users (
+    id bigint NOT NULL,
+    email character varying(255) NOT NULL,
+    usergroup character varying(20) NOT NULL,
+    name character varying(255) NOT NULL,
+    password character varying(255) NOT NULL,
+    surname character varying(255) NOT NULL,
+    birthdate date NOT NULL,
+    registrationdate date NOT NULL,
+    address_id bigint
+);
+
+
+ALTER TABLE users OWNER TO postgres;
+
+--
+-- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY address (id, city, country, state, street, zipcode) FROM stdin;
+901	Roma	Italia	RM	Via della Vasca Navale 79	00000
+902	Roma	Italia	RM	Piazzale della Radio 1	00000
+\.
+
+
+--
+-- Data for Name: openjpa_sequence_table; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY openjpa_sequence_table (id, sequence_value) FROM stdin;
+0	1401
+\.
+
+
+--
+-- Data for Name: order_line; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY order_line (orders_id, product_code, quantity, unitprice) FROM stdin;
+1051	PROD000003	10	31.2900009
+1051	PROD000001	1	19.9899998
+1052	PROD000004	20	23.7399998
+1053	PROD000007	2	76.9800034
+1101	PROD000001	1	19.9899998
+1151	PROD000003	1	31.2900009
+1201	PROD000006	1	4.98999977
+1203	PROD000001	1	19.9899998
+1204	PROD000007	1	76.9800034
+1301	PROD000007	1	76.9800034
+1351	PROD000001	1	19.9899998
+1353	PROD000007	1	76.9800034
+1353	PROD000005	1	15.25
+\.
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY orders (id, closed, opened, processed, state, customer_id) FROM stdin;
+1052	2015-06-17 16:11:16.904	2015-06-17 15:44:21.146	\N	CLOSED	1
+1051	2015-06-17 15:42:55.939	2015-06-17 15:42:09.35	2015-06-17 16:22:51.794	PROCESSED	1
+1053	2015-06-17 15:44:57.245	2015-06-17 15:44:41.258	2015-06-17 16:23:34.744	PROCESSED	1
+1151	2015-06-17 16:10:55.368	2015-06-17 16:09:38.559	2015-06-17 16:31:39.794	PROCESSED	1
+1204	2015-06-17 16:48:32.5	2015-06-17 16:48:14.846	\N	CLOSED	1
+1203	2015-06-17 16:47:35.571	2015-06-17 16:47:22.98	2015-06-17 17:05:14.675	PROCESSED	1
+1301	2015-06-17 17:06:24.66	2015-06-17 17:06:13.759	2015-06-17 17:14:41.536	PROCESSED	1
+1351	2015-06-17 17:15:59.587	2015-06-17 17:15:44.93	\N	CLOSED	1
+1353	2015-06-17 17:17:47.263	2015-06-17 17:17:00.797	\N	CLOSED	1
+1201	2015-06-17 16:42:04.614	2015-06-17 16:41:48.684	2015-06-17 17:18:24.139	PROCESSED	1
+\.
+
+
+--
+-- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY product (code, description, instock, name, price) FROM stdin;
+PROD000005	Un prodotto	0	Prodotto 5	15.25
+PROD000002	Un altro prodotto	1	Prodotto 2	59.9900017
+PROD000004		1	Prodotto 4	23.7399998
+PROD000003	Un prodotto, ma diverso dai primi due	9	Prodotto 3	31.2900009
+PROD000001	Un prodotto	8	Prodotto 1	19.9899998
+PROD000007	...	2	Prodotto 7	76.9800034
+PROD000006	Un prodotto... ancora	22	Prodotto 6	4.98999977
+\.
+
+
+--
+-- Data for Name: provider; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY provider (id, email, piva, phone, address_id) FROM stdin;
+1	acmesupport@acme.com	000000	000000	902
+\.
+
+
+--
+-- Data for Name: provider_product; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY provider_product (providers_id, products_code) FROM stdin;
+1	PROD000001
+1	PROD000002
+1	PROD000003
+1	PROD000003
+1	PROD000004
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY users (id, email, usergroup, name, password, surname, birthdate, registrationdate, address_id) FROM stdin;
+1	customer@siwshop.com	CUSTOMER	Mario	12345	Rossi	1901-01-01	2015-05-31	901
+601	admin@siwshop.com	ADMINISTRATOR	Paolo	admin	Verdi	1901-01-01	2015-06-16	\N
+\.
+
+
+--
+-- Name: address_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY address
+    ADD CONSTRAINT address_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: openjpa_sequence_table_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY openjpa_sequence_table
+    ADD CONSTRAINT openjpa_sequence_table_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT product_pkey PRIMARY KEY (code);
+
+
+--
+-- Name: provider_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY provider
+    ADD CONSTRAINT provider_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: u_users_email; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT u_users_email UNIQUE (email);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: i_orders_customer; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX i_orders_customer ON orders USING btree (customer_id);
+
+
+--
+-- Name: i_ordr_ln_orders_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX i_ordr_ln_orders_id ON order_line USING btree (orders_id);
+
+
+--
+-- Name: i_ordr_ln_product; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX i_ordr_ln_product ON order_line USING btree (product_code);
+
+
+--
+-- Name: i_providr_address; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX i_providr_address ON provider USING btree (address_id);
+
+
+--
+-- Name: i_prvddct_element; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX i_prvddct_element ON provider_product USING btree (products_code);
+
+
+--
+-- Name: i_prvddct_providers_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX i_prvddct_providers_id ON provider_product USING btree (providers_id);
+
+
+--
+-- Name: i_users_address; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX i_users_address ON users USING btree (address_id);
+
+
+--
+-- Name: i_users_dtype; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX i_users_dtype ON users USING btree (usergroup);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

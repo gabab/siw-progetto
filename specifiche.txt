@@ -97,7 +97,7 @@ Caso d'uso UC7: login
 - Scenario principale:
 	1.  L’utente inserisce il suo indirizzo di posta elettronica e la sua password.
 	2.  Il sistema verifica la correttezza dei dati immessi, e autentica l’utente.
-	3.  Il sistema mostra all'utente la homepage
+	3.  Il sistema mostra all'utente la homepage (o il pannello di controllo nel caso dell'amministratore)
 
 - Eccezioni
 	2a.  L'utente inserisce dei dati non corretti. Il sistema mostra un messaggio di errore
