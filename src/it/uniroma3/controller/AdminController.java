@@ -29,16 +29,26 @@ public class AdminController {
     private Administrator admin;
 
     private String alert;
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void resetAlerts() {
+        this.alert = null;
+        this.message = null;
+    }
 
 
     public String processOrder(Long orderID) {
         Order o = this.of.processOrder(orderID);
-        this.alert = null;
-        if (o == null) {
+        resetAlerts();
+        if (o == null)
             this.alert = "Order no." + orderID + " : not enough items in stock";
-            return "pretty:admin-detail";
-        }
-        return "pretty:admin";
+        else
+            this.message = "Successfully dispatched order no. " + o.getId();
+        return "pretty:admin-orders";
     }
 
     public String findCustomerInfo() {

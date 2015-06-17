@@ -8,8 +8,8 @@
     <ui:define name="admincontent">
         <b:alert severity="info"
                  closable="true"
-                 rendered="#{insert.message != null}">
-            Product
+                 rendered="#{insertProduct.message != null}">
+            #{insertProduct.message}
         </b:alert>
         <b:alert severity="danger"
                  closable="true"

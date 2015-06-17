@@ -21,7 +21,8 @@
                                     <p class="order-text">You don't have any open order</p>
                                 </h:outputText>
                             </h:panelGrid>
-                            <h:dataTable styleClass="table table-striped" value="#{customer.openOrders}" var="o">
+                            <h:dataTable styleClass="table table-striped" value="#{customer.openOrders}"
+                                         var="o" rendered="#{not empty customer.openOrders}">
                                 <h:column>
                                     <f:facet name="header"><h:outputText value="Order Number"/></f:facet>
                                     <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -57,7 +58,8 @@
                                     <p class="order-text">You have not placed any order</p>
                                 </h:outputText>
                             </h:panelGrid>
-                            <h:dataTable styleClass="table table-striped" value="#{customer.closedOrders}" var="o">
+                            <h:dataTable styleClass="table table-striped" value="#{customer.closedOrders}"
+                                         var="o" rendered="#{not empty customer.closedOrders}">
                                 <h:column>
                                     <f:facet name="header"><h:outputText value="Order Number"/></f:facet>
                                     <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -85,7 +87,8 @@
                                     <p class="order-text">You don't have processed orders</p>
                                 </h:outputText>
                             </h:panelGrid>
-                            <h:dataTable styleClass="table table-striped" value="#{customer.processedOrders}" var="o">
+                            <h:dataTable styleClass="table table-striped" value="#{customer.processedOrders}"
+                                         var="o" rendered="#{not empty customer.processedOrders}">
                                 <h:column>
                                     <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
                                     <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>

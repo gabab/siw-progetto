@@ -28,7 +28,7 @@
                             </h:panelGrid>
                             <h:dataTable styleClass="table table-striped"
                                          value="#{config.getLastN(customer.openOrders)}"
-                                         var="o" rendered="#{customer.openOrders.size() > 0}">
+                                         var="o" rendered="#{not empty customer.openOrders}">
                                 <h:column>
                                     <f:facet name="header"><h:outputText value="Order Number"/></f:facet>
                                     <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -66,7 +66,7 @@
                             </h:panelGrid>
                             <h:dataTable styleClass="table table-striped"
                                          value="#{config.getLastN(customer.closedOrders)}"
-                                         var="o">
+                                         var="o" rendered="#{not empty customer.closedOrders}">
                                 <h:column>
                                     <f:facet name="header"><h:outputText value="Order Number"/></f:facet>
                                     <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
@@ -95,7 +95,8 @@
                                 </h:outputText>
                             </h:panelGrid>
                             <h:dataTable styleClass="table table-striped"
-                                         value="#{config.getLastN(customer.processedOrders)}" var="o">
+                                         value="#{config.getLastN(customer.processedOrders)}"
+                                         var="o" rendered="#{not empty customer.processedOrders}">
                                 <h:column>
                                     <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
                                     <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>

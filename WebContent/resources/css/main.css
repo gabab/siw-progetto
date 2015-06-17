@@ -65,7 +65,8 @@ body {
 }
 
 .order-text {
-    color: gray;
+    padding-top: 75px;
+    color: lightgray;
     font-weight: bold;
     font-size: large;
 }

@@ -5,7 +5,6 @@ import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean(name = "insertProduct")
@@ -20,12 +19,6 @@ public class CreateProduct {
     private String message;
     @EJB(name = "product")
     private ProductFacade productFacade;
-    @ManagedProperty(value = "#{products}")
-    private ProductsView sp;
-
-    public void setSp(ProductsView sp) {
-        this.sp = sp;
-    }
 
     public void setProductFacade(ProductFacade productFacade) {
         this.productFacade = productFacade;
@@ -80,8 +73,6 @@ public class CreateProduct {
 
     public void insertProduct() {
         this.product = this.productFacade.createProduct(name, code, price, description);
-        sp.setCode(code);
-        sp.setProduct(product);
         this.message = name + " successfully inserted";
         resetData();
     }

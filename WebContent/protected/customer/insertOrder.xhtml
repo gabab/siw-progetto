@@ -64,27 +64,23 @@
                 </b:row>
                 <hr/>
                 <f:view>
-                    <h:form>
-                        <h4>Add another item:</h4>
+                    <h4>Add another item:</h4>
+                    <h:form styleClass="form-group">
+                        <b:inputText label="Product Code"
+                                     value="#{customer.productCode}"
+                                     required="true"
+                                     requiredMessage="Code is mandatory"
+                                />
+                        <b:inputText type="number"
+                                     label="Quantity"
+                                     value="#{customer.quantity}"
+                                     span="3"
+                                     validatorMessage="Quantity must be positive"
+                                >
+                            <f:validateDoubleRange minimum="1"/>
+                        </b:inputText>
+                        <b:commandButton look="primary" icon="plus" value="Add" action="#{customer.addToOrder()}"/>
 
-                        <div class="form-group">
-                            <b:inputText label="Product Code"
-                                         value="#{customer.productCode}"
-                                         required="true"
-                                         requiredMessage="Code is mandatory"
-                                         style="width: 250px"
-                                    />
-                            <b:inputText type="number"
-                                         label="Quantity"
-                                         value="#{customer.quantity}"
-                                         span="3"
-                                         validatorMessage="Quantity must be positive"
-                                         style="width: 80px"
-                                    >
-                                <f:validateDoubleRange minimum="1"/>
-                            </b:inputText>
-                            <b:commandButton look="primary" icon="plus" value="Add" action="#{customer.addToOrder()}"/>
-                        </div>
                     </h:form>
 
                     <h:form>

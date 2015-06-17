@@ -9,7 +9,9 @@
         <h3>Unfulfilled Orders</h3>
         <hr/>
         <f:view>
-
+            <b:alert closable="true" rendered="#{admin.message != null}" severity="info">
+                #{admin.message}
+            </b:alert>
             <b:alert closable="true" rendered="#{admin.alert != null}" severity="danger">
                 #{admin.alert}
             </b:alert>

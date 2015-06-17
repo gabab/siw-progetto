@@ -24,6 +24,7 @@ public class Order {
     @ManyToOne
     private Customer customer;
     @ElementCollection(fetch = FetchType.EAGER)
+    @MapKeyColumn(name = "product_code")
     @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "orders_id"))
     private Map<String, OrderLine> orderlines;
 
