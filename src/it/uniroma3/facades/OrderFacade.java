@@ -28,15 +28,15 @@ public class OrderFacade {
         this.em = em;
     }
 
-    public List getOpenOrders() {
+    public List findOpenOrders() {
         return getOrdersState(OrderState.OPENED);
     }
 
-    public List getClosedOrders() {
+    public List findClosedOrders() {
         return getOrdersState(OrderState.CLOSED);
     }
 
-    public List getProcessedOrders() {
+    public List findProcessedOrders() {
         return getOrdersState(OrderState.PROCESSED);
     }
 
@@ -46,15 +46,15 @@ public class OrderFacade {
         return q.getResultList();
     }
 
-    public List getOpenOrders(Customer c) {
+    public List findOpenOrders(Customer c) {
         return getOrdersState(OrderState.OPENED, c);
     }
 
-    public List getClosedOrders(Customer c) {
+    public List findClosedOrders(Customer c) {
         return getOrdersState(OrderState.CLOSED, c);
     }
 
-    public List getProcessedOrders(Customer c) {
+    public List findProcessedOrders(Customer c) {
         return getOrdersState(OrderState.PROCESSED, c);
     }
 
@@ -66,7 +66,7 @@ public class OrderFacade {
         return filtered;
     }
 
-    public Order getOrder(Long orderID) {
+    public Order findOrder(Long orderID) {
         return this.em.find(Order.class, orderID);
     }
 
@@ -74,8 +74,12 @@ public class OrderFacade {
         this.em.merge(o);
     }
 
+    public void insertOrder(Order o) {
+        this.em.persist(o);
+    }
+
     public Order processOrder(Long orderID) {
-        Order o = this.getOrder(orderID);
+        Order o = this.findOrder(orderID);
         for (OrderLine ol : o.getOrderlines().values()) {
             Product p = ol.getProduct();
             if (ol.getQuantity() > p.getInStock()) {
@@ -90,10 +94,7 @@ public class OrderFacade {
         return o;
     }
 
-    public Order createOrder() {
-        Order order = new Order();
-        em.persist(order);
-        return order;
+    public void deleteOrder(Order o) {
+        em.remove(em.merge(o));
     }
-
 }

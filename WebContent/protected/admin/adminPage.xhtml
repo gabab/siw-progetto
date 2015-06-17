@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:b="http://bootsfaces.net/ui">
-    <ui:define name="admintitle">Closed Orders</ui:define>
+    <ui:define name="admintitle">Home</ui:define>
     <ui:define name="admincontent">
 
         <h3>#{config.brand} Control Panel</h3>
@@ -25,16 +25,18 @@
         <hr/>
         <f:view>
             <h:form>
-                <div class="form-group">
+                <h:panelGrid columns="2" cellpadding="5">
                     <b:inputText
                             placeholder="Order ID"
                             value="#{admin.orderID}"
                             required="true"
                             converterMessage="Not a valid ID"
-                            span="4"
-                            style="max-width: 250px"/>
-                    <b:commandButton look="primary" value="Search" action="#{admin.findCustomerInfo()}"/>
-                </div>
+                            span="4">
+                        <f:facet name="append">
+                            <b:commandButton look="primary" value="Search" action="#{admin.findCustomerInfo()}"/>
+                        </f:facet>
+                    </b:inputText>
+                </h:panelGrid>
             </h:form>
         </f:view>
 

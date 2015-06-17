@@ -32,7 +32,7 @@ public class OrderView extends Paginator {
     }
 
     public String show(Long orderID) {
-        this.order = this.of.getOrder(orderID);
+        this.order = this.of.findOrder(orderID);
         return showOrder();
     }
 

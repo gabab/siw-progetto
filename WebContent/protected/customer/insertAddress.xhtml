@@ -29,12 +29,10 @@
                             #{address.country}<br/>
                         </h:outputText>
                         <br/>
-                        <b:commandButton value="Modify" look="primary"
-                                         action="#{address.modifyAddress(customer.currentCustomer)}"/>
                     </h:form>
-                    <b:panel title="Insert Address">
+                    <b:panel title="Insert Address" rendered="#{!customer.currentCustomer.hasAddress()}">
                         <f:view>
-                            <h:form rendered="#{!customer.currentCustomer.hasAddress()}">
+                            <h:form>
                                 <fieldset>
                                     <b:inputText value="#{address.street}"
                                                  label="Street"

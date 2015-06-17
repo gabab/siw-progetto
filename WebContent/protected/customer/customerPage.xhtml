@@ -20,87 +20,103 @@
                 <b:tabView>
                     <b:tab title="Opened">
                         <div class="order-tab">
-                            <h:outputText
-                                rendered="#{empty customer.openOrders}">
-                                <p class="order-text">You don't have open orders</p>
-                        </h:outputText>
-                        <h:dataTable styleClass="table table-striped" value="#{config.getLastN(customer.openOrders)}"
-                                     var="o" rendered="#{customer.openOrders.size() > 0}">
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
-                                <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Opened"/></f:facet>
-                                <h:outputText value="#{config.formatDate(o.opened)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Items"/></f:facet>
-                                <h:outputText value="#{o.size}"/>
-                            </h:column>
-                            <h:column>
-                                <b:commandButton look="success" icon-align="left" icon="ok" value="Place"
-                                                 action="#{customer.closeOrder(o.id)}" size="sm"/>
-                            </h:column>
-                            <h:column>
-                                <b:commandButton look="primary" icon-align="left" icon="plus" value="Modify"
-                                                 action="#{customer.modifyOrder(o.id)}" size="sm"/>
-                            </h:column>
-                            <h:column>
-                                <b:commandButton look="danger" icon-align="left" icon="remove" value="Delete"
-                                                 action="#{customer.removeOrder(o.id)}" size="sm"/>
-                            </h:column>
-                        </h:dataTable>
+                            <h:panelGrid styleClass="centered-form">
+                                <h:outputText
+                                        rendered="#{empty customer.openOrders}">
+                                    <p class="order-text">You don't have any open order</p>
+                                </h:outputText>
+                            </h:panelGrid>
+                            <h:dataTable styleClass="table table-striped"
+                                         value="#{config.getLastN(customer.openOrders)}"
+                                         var="o" rendered="#{customer.openOrders.size() > 0}">
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Order Number"/></f:facet>
+                                    <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Opened"/></f:facet>
+                                    <h:outputText value="#{config.formatDate(o.opened)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Items"/></f:facet>
+                                    <h:outputText value="#{o.size}"/>
+                                </h:column>
+                                <h:column>
+                                    <b:commandButton look="success" icon-align="left" icon="ok" value="Place"
+                                                     action="#{customer.closeOrder(o.id)}" size="sm"/>
+                                </h:column>
+                                <h:column>
+                                    <b:commandButton look="primary" icon-align="left" icon="plus" value="Modify"
+                                                     action="#{customer.modifyOrder(o.id)}" size="sm"/>
+                                </h:column>
+                                <h:column>
+                                    <b:commandButton look="danger" icon-align="left" icon="remove" value="Delete"
+                                                     action="#{customer.removeOrder(o.id)}" size="sm"/>
+                                </h:column>
+                            </h:dataTable>
                         </div>
                     </b:tab>
-                    <b:tab title="Closed">
+                    <b:tab title="Placed">
                         <div class="order-tab">
-                        <h:dataTable styleClass="table table-striped" value="#{config.getLastN(customer.closedOrders)}"
-                                     var="o">
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
-                                <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Opened"/></f:facet>
-                                <h:outputText value="#{config.formatDate(o.opened)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Closed"/></f:facet>
-                                <h:outputText value="#{config.formatDate(o.closed)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Items"/></f:facet>
-                                <h:outputText value="#{o.size}"/>
-                            </h:column>
-                        </h:dataTable>
+                            <h:panelGrid styleClass="centered-form">
+                                <h:outputText
+                                        rendered="#{empty customer.closedOrders}">
+                                    <p class="order-text">You don't have any close order</p>
+                                </h:outputText>
+                            </h:panelGrid>
+                            <h:dataTable styleClass="table table-striped"
+                                         value="#{config.getLastN(customer.closedOrders)}"
+                                         var="o">
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Order Number"/></f:facet>
+                                    <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Opened"/></f:facet>
+                                    <h:outputText value="#{config.formatDate(o.opened)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Placed"/></f:facet>
+                                    <h:outputText value="#{config.formatDate(o.closed)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Items"/></f:facet>
+                                    <h:outputText value="#{o.size}"/>
+                                </h:column>
+                            </h:dataTable>
                         </div>
                     </b:tab>
                     <b:tab title="Processed">
                         <div class="order-tab">
-                        <h:dataTable styleClass="table table-striped"
-                                     value="#{config.getLastN(customer.processedOrders)}" var="o">
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
-                                <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Opened"/></f:facet>
-                                <h:outputText value="#{config.formatDate(o.opened)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Closed"/></f:facet>
-                                <h:outputText value="#{config.formatDate(o.closed)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Processed"/></f:facet>
-                                <h:outputText value="#{config.formatDate(o.processed)}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><h:outputText value="Items"/></f:facet>
-                                <h:outputText value="#{o.size}"/>
-                            </h:column>
-                        </h:dataTable>
+                            <h:panelGrid styleClass="centered-form">
+                                <h:outputText
+                                        rendered="#{empty customer.processedOrders}">
+                                    <p class="order-text">You don't have processed orders</p>
+                                </h:outputText>
+                            </h:panelGrid>
+                            <h:dataTable styleClass="table table-striped"
+                                         value="#{config.getLastN(customer.processedOrders)}" var="o">
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Order Number:"/></f:facet>
+                                    <h:commandLink value="#{o.id}" action="#{orderView.show(o.id)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Opened"/></f:facet>
+                                    <h:outputText value="#{config.formatDate(o.opened)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Closed"/></f:facet>
+                                    <h:outputText value="#{config.formatDate(o.closed)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Processed"/></f:facet>
+                                    <h:outputText value="#{config.formatDate(o.processed)}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header"><h:outputText value="Items"/></f:facet>
+                                    <h:outputText value="#{o.size}"/>
+                                </h:column>
+                            </h:dataTable>
                         </div>
                     </b:tab>
                 </b:tabView>
@@ -122,7 +138,7 @@
                         <p>Insert or modify your address</p>
 
                         <p><b:commandButton look="default"
-                                            value="#{customer.currentCustomer.hasAddress() ? 'Modify address' : 'Insert address'}"
+                                            value="View or insert address'"
                                             action="#{address.showAddress(customer.currentCustomer)}"/></p>
                     </b:column>
                 </b:row>

@@ -17,6 +17,7 @@ public class CreateProduct {
     private Float price;
     private String description;
     private String code;
+    private String message;
     @EJB(name = "product")
     private ProductFacade productFacade;
     @ManagedProperty(value = "#{products}")
@@ -70,10 +71,22 @@ public class CreateProduct {
         this.name = name;
     }
 
-    public String insertProduct() {
+    public void resetData() {
+        name = null;
+        price = null;
+        description = null;
+        code = null;
+    }
+
+    public void insertProduct() {
         this.product = this.productFacade.createProduct(name, code, price, description);
         sp.setCode(code);
         sp.setProduct(product);
-        return "product";
+        this.message = name + " successfully inserted";
+        resetData();
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

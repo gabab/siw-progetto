@@ -42,7 +42,7 @@ public class CreateOrder extends Paginator {
     }
 
 //    public String closeOrder(Long orderID) {
-//        Order o = this.of.getOrder(orderID);
+//        Order o = this.of.findOrder(orderID);
 //
 //    }
 

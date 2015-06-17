@@ -8,6 +8,7 @@ import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -29,6 +30,28 @@ public class CustomerController {
     private UserFacade userFacade;
     private String productCode;
     private int quantity = 1;
+    private List<Order> openOrders;
+    private List<Order> closedOrders;
+    private List<Order> processedOrders;
+
+    public List getOpenOrders() {
+        return openOrders;
+    }
+
+    public List getProcessedOrders() {
+        return processedOrders;
+    }
+
+    public List getClosedOrders() {
+        return closedOrders;
+    }
+
+    @PostConstruct
+    public void refreshLists() {
+        this.openOrders = (List<Order>) this.orderFacade.findOpenOrders(currentCustomer);
+        this.closedOrders = (List<Order>) this.orderFacade.findClosedOrders(currentCustomer);
+        this.processedOrders = (List<Order>) this.orderFacade.findProcessedOrders(currentCustomer);
+    }
 
     public String getProductCode() {
         return productCode;
@@ -60,20 +83,26 @@ public class CustomerController {
 
 
     public String closeOrder(Long orderID) {
-        Order o = this.orderFacade.getOrder(orderID);
-        this.currentCustomer.getOrders().remove(o);
+        Order o = this.orderFacade.findOrder(orderID);
         return closeOrder(o);
     }
 
-    public void saveOrder() {
-        this.orderFacade.updateOrder(this.currentOrder);
+    public String saveOrder() {
+        if (orderFacade.findOrder(this.currentOrder.getId()) == null)
+            this.orderFacade.insertOrder(this.currentOrder);
+        else
+            this.orderFacade.updateOrder(this.currentOrder);
+        this.openOrders.add(this.currentOrder);
+        this.currentOrder = null;
+        return "pretty:mypage";
     }
 
     private String closeOrder(Order o) {
         if (o.getSize() > 0) {
             o.close();
-            this.currentCustomer.addOrder(o);
-            this.userFacade.updateUser(this.currentCustomer);
+            this.openOrders.remove(o);
+            this.closedOrders.add(o);
+            this.orderFacade.updateOrder(o);
         }
         return "pretty:mypage";
     }
@@ -105,10 +134,6 @@ public class CustomerController {
         this.productCode = null;
     }
 
-    public String viewCart() {
-        return null;
-    }
-
     public String createOrder() {
         this.currentOrder = new Order(currentCustomer);
         resetData();
@@ -136,27 +161,19 @@ public class CustomerController {
         return "pretty:neworder";
     }
 
-    public List getOpenOrders() {
-        return this.orderFacade.getOpenOrders(currentCustomer);
-    }
-
-    public List getClosedOrders() {
-        return this.orderFacade.getClosedOrders(currentCustomer);
-    }
-
-    public List getProcessedOrders() {
-        return this.orderFacade.getProcessedOrders(currentCustomer);
-    }
 
     public String modifyOrder(Long orderID) {
-        this.currentOrder = orderFacade.getOrder(orderID);
+        this.currentOrder = orderFacade.findOrder(orderID);
         resetData();
         return "pretty:neworder";
     }
 
     public String removeOrder(Long orderID) {
-        this.currentCustomer.getOrders().remove(orderFacade.getOrder(orderID));
-        this.userFacade.updateCustomer(currentCustomer);
-        return "insertOrder";
+        Order o = orderFacade.findOrder(orderID);
+        this.currentCustomer.removeOrder(o);
+        this.openOrders.remove(o);
+        this.orderFacade.deleteOrder(o);
+        return "pretty:mypage";
     }
+
 }

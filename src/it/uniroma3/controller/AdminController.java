@@ -42,14 +42,14 @@ public class AdminController {
     }
 
     public String findCustomerInfo() {
-        Order o = this.of.getOrder(orderID);
+        Order o = this.of.findOrder(orderID);
         this.customer = (o == null) ? null : o.getCustomer();
         return "pretty:admin-address";
     }
 
     @PostConstruct
     public void loadClosedOrders() {
-        this.closedOrders = this.of.getClosedOrders();
+        this.closedOrders = this.of.findClosedOrders();
     }
 
     public String getAlert() {

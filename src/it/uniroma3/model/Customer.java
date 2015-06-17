@@ -22,7 +22,7 @@ public class Customer extends User {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public Customer(String email, String password, String name, String surname, Date birthDate, UserGroup group) {
@@ -36,7 +36,6 @@ public class Customer extends User {
     public Customer() {
         super();
     }
-
 
     public void addOrder(Order o) {
         this.orders.add(o);
@@ -115,6 +114,10 @@ public class Customer extends User {
 
     public boolean hasAddress() {
         return address != null;
+    }
+
+    public void removeOrder(Order o) {
+        this.orders.remove(o);
     }
 }
 
