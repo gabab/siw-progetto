@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="/protected/admin/sidebar.xhtml"
+<ui:composition template="/templates/sidebar.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -16,7 +16,7 @@
             <h:messages/>
         </b:alert>
         <b:alert severity="info"
-                 rendered="#{admin.closedOrders.size() > 0}">
+                 rendered="#{not empty admin.closedOrders}">
             There are <strong>#{admin.closedOrders.size()}</strong> orders to process
         </b:alert>
         <br/>
@@ -31,7 +31,8 @@
                             value="#{admin.orderID}"
                             required="true"
                             converterMessage="Not a valid ID"
-                            span="3"/>
+                            span="4"
+                            style="max-width: 250px"/>
                     <b:commandButton look="primary" value="Search" action="#{admin.findCustomerInfo()}"/>
                 </div>
             </h:form>

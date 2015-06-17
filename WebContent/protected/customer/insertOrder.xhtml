@@ -8,6 +8,7 @@
 
     <ui:define name="content">
         <b:container>
+            <h3>Your new Order</h3>
             <b:row>
                 <b:alert severity="danger"
                          closable="true"
@@ -18,7 +19,7 @@
 
                 <div style="float: right">
                     <p>
-                        <b>Opened:</b> #{config.formatDate(orderView.order.opened)}
+                        <b>Opened:</b> #{config.formatDate(customer.currentOrder.opened)}
                         <br/>
                     </p>
                 </div>
@@ -53,45 +54,50 @@
                 <b:row>
                     <div style="float: right">
                         <p>
-                            <b>Total before taxes:</b> #{orderView.order.total}
+                            <b>Total before taxes:</b> #{customer.currentOrder.total}
                             <br/>
-                            <b>Taxes:</b> #{config.getTaxes(orderView.order.total)}
+                            <b>Taxes:</b> #{config.getTaxes(customer.currentOrder.total)}
                             <br/>
-                            <b>Total:</b> #{config.getPrice(orderView.order.total)}
+                            <b>Total:</b> #{config.getPrice(customer.currentOrder.total)}
                         </p>
                     </div>
                 </b:row>
+                <hr/>
                 <f:view>
                     <h:form>
-                        Add another item:
-                        <b:inputText label="Product Code"
-                                     value="#{customer.productCode}"
-                                     required="true"
-                                     requiredMessage="Code is mandatory"
-                                />
+                        <h4>Add another item:</h4>
 
                         <div class="form-group">
+                            <b:inputText label="Product Code"
+                                         value="#{customer.productCode}"
+                                         required="true"
+                                         requiredMessage="Code is mandatory"
+                                         style="width: 250px"
+                                    />
                             <b:inputText type="number"
                                          label="Quantity"
                                          value="#{customer.quantity}"
                                          span="3"
                                          validatorMessage="Quantity must be positive"
+                                         style="width: 80px"
                                     >
                                 <f:validateDoubleRange minimum="1"/>
                             </b:inputText>
-                            <b:commandButton value="Add" action="#{customer.addToOrder()}"/>
+                            <b:commandButton look="primary" icon="plus" value="Add" action="#{customer.addToOrder()}"/>
                         </div>
+                    </h:form>
 
+                    <h:form>
                         <hr/>
-                        <h:commandButton look="success" value="Place Order" action="#{customer.closeOrder}"
-                                         class="btn btn-default"/>
+                        <div style="float: right;">
+                            <b:commandButton look="warning" value="Place Order"
+                                             action="#{customer.closeOrder}"/>
 
-                        <h:commandButton look="warning" value="Save for later"
-                                         action="#{customer.saveOrder}"
-                                         class="btn btn-default"/>
+                            <b:commandButton look="default" value="Save for later"
+                                             action="#{customer.saveOrder}"/>
+                        </div>
                     </h:form>
                 </f:view>
-                <hr/>
 
             </b:row>
             <br/>

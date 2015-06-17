@@ -65,20 +65,19 @@
         <view-id value="/protected/orderDetails.xhtml"/>
     </url-mapping>
 
-    <url-mapping id="customer-order">
-        <pattern value="/mypage/order"/>
-        <view-id value="/protected/customer/orders.xhtml"/>
-    </url-mapping>
-
-
-    <url-mapping id="customerorders">
+    <url-mapping id="order">
         <pattern value="/mypage/orders"/>
-    <view-id value="/protected/customer/orders.xhtml"/>
+        <view-id value="/protected/customer/orders.xhtml"/>
     </url-mapping>
 
     <url-mapping id="address">
         <pattern value="/mypage/address"/>
         <view-id value="/protected/customer/insertAddress.xhtml"/>
+    </url-mapping>
+
+    <url-mapping id="neworder">
+        <pattern value="/mypage/newOrder"/>
+        <view-id value="/protected/customer/insertOrder.xhtml"/>
     </url-mapping>
 
     <!--Admin-->

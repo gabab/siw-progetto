@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="/protected/admin/sidebar.xhtml"
+<ui:composition template="/templates/sidebar.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:b="http://bootsfaces.net/ui">
+                xmlns:b="http://bootsfaces.net/ui" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
     <ui:define name="admintitle">Customer Address</ui:define>
     <ui:define name="admincontent">
         <h3>Customer Info</h3>
         <hr/>
+        <b:alert severity="danger"
+                 closable="true"
+                 rendered="#{not empty facesContext.messageList}">
+            There where errors:<br/>
+            <h:messages/>
+        </b:alert>
+        <f:view>
+            <h:form>
+                <div class="form-group">
+                    <b:inputText
+                            placeholder="Order ID"
+                            value="#{admin.orderID}"
+                            required="true"
+                            converterMessage="Not a valid ID"
+                            span="4"
+                            style="max-width: 250px"/>
+                    <b:commandButton look="primary" value="Search" action="#{admin.findCustomerInfo()}"/>
+                </div>
+            </h:form>
+        </f:view>
         <b:well>
             <p>
                 #{admin.customer.fullname}

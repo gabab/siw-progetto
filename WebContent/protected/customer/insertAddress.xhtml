@@ -4,11 +4,13 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:b="http://bootsfaces.net/ui">
-    <ui:define name="title">Insert address</ui:define>
+    <ui:define name="title">Your address</ui:define>
 
     <ui:define name="content">
 
         <b:container>
+            <h3>Your Current Address</h3>
+            <hr/>
             <b:row>
                 <b:column col-md="6" offset="3">
                     <b:alert severity="danger"
@@ -26,6 +28,7 @@
                             #{address.zipcode}<br/>
                             #{address.country}<br/>
                         </h:outputText>
+                        <br/>
                         <b:commandButton value="Modify" look="primary"
                                          action="#{address.modifyAddress(customer.currentCustomer)}"/>
                     </h:form>

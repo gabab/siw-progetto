@@ -67,19 +67,15 @@ public class CustomerController {
 
     public void saveOrder() {
         this.orderFacade.updateOrder(this.currentOrder);
-        refreshOrders();
     }
 
     private String closeOrder(Order o) {
-        o.close();
-        this.currentCustomer.addOrder(o);
-        this.userFacade.updateUser(this.currentCustomer);
-        refreshOrders();
+        if (o.getSize() > 0) {
+            o.close();
+            this.currentCustomer.addOrder(o);
+            this.userFacade.updateUser(this.currentCustomer);
+        }
         return "pretty:mypage";
-    }
-
-    private void refreshOrders() {
-        this.userFacade.refresh(currentCustomer);
     }
 
     public String closeOrder() {
@@ -104,13 +100,19 @@ public class CustomerController {
     }
 
 
+    public void resetData() {
+        this.quantity = 1;
+        this.productCode = null;
+    }
+
     public String viewCart() {
         return null;
     }
 
     public String createOrder() {
         this.currentOrder = new Order(currentCustomer);
-        return "pretty:customer-order";
+        resetData();
+        return "pretty:neworder";
     }
 
     public int getQuantity() {
@@ -130,7 +132,8 @@ public class CustomerController {
         Product p = this.productFacade.getProduct(productCode);
         if (p != null)
             this.currentOrder.addProduct(p, quantity);
-        return "insertOrder";
+        resetData();
+        return "pretty:neworder";
     }
 
     public List getOpenOrders() {
@@ -147,7 +150,8 @@ public class CustomerController {
 
     public String modifyOrder(Long orderID) {
         this.currentOrder = orderFacade.getOrder(orderID);
-        return "insertOrder";
+        resetData();
+        return "pretty:neworder";
     }
 
     public String removeOrder(Long orderID) {

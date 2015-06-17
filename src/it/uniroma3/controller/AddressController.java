@@ -6,7 +6,6 @@ import it.uniroma3.model.Customer;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 
@@ -23,8 +22,9 @@ public class AddressController implements Serializable {
     private UserFacade uf;
 
 
-    public void showAddress(Customer c){
-
+    public String showAddress(Customer c) {
+        loadAddress(c.getAddress());
+        return "pretty:address";
     }
 
 
