@@ -17,7 +17,8 @@
         </b:alert>
         <b:alert severity="info"
                  rendered="#{not empty admin.closedOrders}">
-            There are <strong>#{admin.closedOrders.size()}</strong> orders to process
+            There are <strong>#{admin.closedOrders.size()}</strong> orders to process. <strong><a
+                href="/manage/orders">View now</a></strong>
         </b:alert>
         <br/>
 

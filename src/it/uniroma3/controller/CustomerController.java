@@ -3,7 +3,6 @@ package it.uniroma3.controller;
 
 import it.uniroma3.facades.OrderFacade;
 import it.uniroma3.facades.ProductFacade;
-import it.uniroma3.facades.UserFacade;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Order;
 import it.uniroma3.model.Product;
@@ -13,7 +12,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @ManagedBean(name = "customer")
 @SessionScoped
@@ -26,31 +27,31 @@ public class CustomerController {
     private OrderFacade orderFacade;
     @EJB(name = "product")
     private ProductFacade productFacade;
-    @EJB(name = "user")
-    private UserFacade userFacade;
     private String productCode;
     private int quantity = 1;
-    private List<Order> openOrders;
-    private List<Order> closedOrders;
-    private List<Order> processedOrders;
+    private Map<Long, Order> openOrders;
+    private Map<Long, Order> closedOrders;
+    private Map<Long, Order> processedOrders;
+    private String error;
 
     public List getOpenOrders() {
-        return openOrders;
+        return new ArrayList<>(openOrders.values());
     }
 
     public List getProcessedOrders() {
-        return processedOrders;
+        return new ArrayList<>(processedOrders.values());
     }
 
     public List getClosedOrders() {
-        return closedOrders;
+        return new ArrayList<>(closedOrders.values());
     }
 
+
     @PostConstruct
-    public void refreshLists() {
-        this.openOrders = (List<Order>) this.orderFacade.findOpenOrders(currentCustomer);
-        this.closedOrders = (List<Order>) this.orderFacade.findClosedOrders(currentCustomer);
-        this.processedOrders = (List<Order>) this.orderFacade.findProcessedOrders(currentCustomer);
+    public void init() {
+        this.openOrders = this.orderFacade.findOpenOrders(currentCustomer);
+        this.closedOrders = this.orderFacade.findClosedOrders(currentCustomer);
+        this.processedOrders = this.orderFacade.findProcessedOrders(currentCustomer);
     }
 
     public String getProductCode() {
@@ -65,9 +66,6 @@ public class CustomerController {
         this.productFacade = productFacade;
     }
 
-    public void setUserFacade(UserFacade userFacade) {
-        this.userFacade = userFacade;
-    }
 
     public Order getCurrentOrder() {
         return currentOrder;
@@ -87,23 +85,14 @@ public class CustomerController {
         return closeOrder(o);
     }
 
-    public String saveOrder() {
-        if (orderFacade.findOrder(this.currentOrder.getId()) == null)
-            this.orderFacade.insertOrder(this.currentOrder);
-        else
-            this.orderFacade.updateOrder(this.currentOrder);
-        this.openOrders.add(this.currentOrder);
-        this.currentOrder = null;
-        return "pretty:mypage";
-    }
-
     private String closeOrder(Order o) {
+        this.openOrders.remove(o.getId());
         if (o.getSize() > 0) {
             o.close();
-            this.openOrders.remove(o);
-            this.closedOrders.add(o);
-            this.orderFacade.updateOrder(o);
+            o = this.orderFacade.updateOrder(o);
+            this.closedOrders.put(o.getId(), o);
         }
+
         return "pretty:mypage";
     }
 
@@ -111,6 +100,15 @@ public class CustomerController {
         return closeOrder(this.currentOrder);
     }
 
+
+    public String saveOrder() {
+        if (this.currentOrder.getSize() > 0) {
+            this.currentOrder = this.orderFacade.updateOrder(this.currentOrder);
+            this.openOrders.put(this.currentOrder.getId(), this.currentOrder);
+        }
+        this.currentOrder = null;
+        return "pretty:mypage";
+    }
 
     public Customer getCurrentCustomer() {
         return currentCustomer;
@@ -132,6 +130,7 @@ public class CustomerController {
     public void resetData() {
         this.quantity = 1;
         this.productCode = null;
+        this.error = null;
     }
 
     public String createOrder() {
@@ -148,16 +147,14 @@ public class CustomerController {
         this.quantity = quantity;
     }
 
-    public boolean getExistsAddress() {
-        return currentCustomer != null && currentCustomer.hasAddress();
-    }
-
 
     public String addToOrder() {
         Product p = this.productFacade.getProduct(productCode);
+        resetData();
         if (p != null)
             this.currentOrder.addProduct(p, quantity);
-        resetData();
+        else
+            this.error = "Invalid Code";
         return "pretty:neworder";
     }
 
@@ -170,10 +167,12 @@ public class CustomerController {
 
     public String removeOrder(Long orderID) {
         Order o = orderFacade.findOrder(orderID);
-        this.currentCustomer.removeOrder(o);
-        this.openOrders.remove(o);
+        this.openOrders.remove(o.getId());
         this.orderFacade.deleteOrder(o);
         return "pretty:mypage";
     }
 
+    public String getError() {
+        return error;
+    }
 }

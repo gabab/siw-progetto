@@ -10,9 +10,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Stateless(name = "order")
 public class OrderFacade {
@@ -28,41 +27,46 @@ public class OrderFacade {
         this.em = em;
     }
 
-    public List findOpenOrders() {
+    public Map<Long, Order> findOpenOrders() {
         return getOrdersState(OrderState.OPENED);
     }
 
-    public List findClosedOrders() {
+    public Map<Long, Order> findClosedOrders() {
         return getOrdersState(OrderState.CLOSED);
     }
 
-    public List findProcessedOrders() {
+    public Map<Long, Order> findProcessedOrders() {
         return getOrdersState(OrderState.PROCESSED);
     }
 
-    private List getOrdersState(OrderState state) {
+    private Map<Long, Order> getOrdersState(OrderState state) {
         Query q = this.em.createQuery("SELECT o FROM Order o WHERE o.state = :state")
                 .setParameter("state", state);
-        return q.getResultList();
+        Map<Long, Order> map = new HashMap<>();
+        for (Object o : q.getResultList()) {
+            Order order = (Order) o;
+            map.put(order.getId(), order);
+        }
+        return map;
     }
 
-    public List findOpenOrders(Customer c) {
+    public Map<Long, Order> findOpenOrders(Customer c) {
         return getOrdersState(OrderState.OPENED, c);
     }
 
-    public List findClosedOrders(Customer c) {
+    public Map<Long, Order> findClosedOrders(Customer c) {
         return getOrdersState(OrderState.CLOSED, c);
     }
 
-    public List findProcessedOrders(Customer c) {
+    public Map<Long, Order> findProcessedOrders(Customer c) {
         return getOrdersState(OrderState.PROCESSED, c);
     }
 
-    private List getOrdersState(OrderState state, Customer c) {
-        List<Order> filtered = new ArrayList<>();
+    private Map<Long, Order> getOrdersState(OrderState state, Customer c) {
+        Map<Long, Order> filtered = new HashMap<>();
         for (Order o : c.getOrders())
             if (o.getState() == state)
-                filtered.add(o);
+                filtered.put(o.getId(), o);
         return filtered;
     }
 
@@ -70,15 +74,11 @@ public class OrderFacade {
         return this.em.find(Order.class, orderID);
     }
 
-    public void updateOrder(Order o) {
-        this.em.merge(o);
+    public Order updateOrder(Order o) {
+        return this.em.merge(o);
     }
 
-    public void insertOrder(Order o) {
-        this.em.persist(o);
-    }
-
-    public Order processOrder(Long orderID) {
+    public Order fulfillOrder(Long orderID) {
         Order o = this.findOrder(orderID);
         for (OrderLine ol : o.getOrderlines().values()) {
             Product p = ol.getProduct();
@@ -88,10 +88,8 @@ public class OrderFacade {
             }
             p.setInStock(p.getInStock() - ol.getQuantity());
         }
-        o.setState(OrderState.PROCESSED);
-        o.setClosed(new Date());
-        em.merge(o);
-        return o;
+        o.fulfill();
+        return em.merge(o);
     }
 
     public void deleteOrder(Order o) {

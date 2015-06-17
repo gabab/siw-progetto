@@ -69,7 +69,7 @@ public class Order {
         this.state = OrderState.CLOSED;
     }
 
-    public void process() {
+    public void fulfill() {
         this.processed = new Date();
         this.state = OrderState.PROCESSED;
     }

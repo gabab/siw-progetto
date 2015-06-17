@@ -12,8 +12,9 @@
             <b:row>
                 <b:alert severity="danger"
                          closable="true"
-                         rendered="#{not empty facesContext.messageList}">
+                         rendered="#{not empty facesContext.messageList or customer.error != null}">
                     There where errors:<br/>
+                    #{customer.error}
                     <h:messages/>
                 </b:alert>
 
@@ -65,30 +66,29 @@
                 <hr/>
                 <f:view>
                     <h4>Add another item:</h4>
+
                     <h:form styleClass="form-group">
-                        <b:inputText label="Product Code"
+                        <b:inputText placeholder="Product Code"
                                      value="#{customer.productCode}"
                                      required="true"
                                      requiredMessage="Code is mandatory"
+                                     style="max-width: 200px"
                                 />
                         <b:inputText type="number"
-                                     label="Quantity"
                                      value="#{customer.quantity}"
-                                     span="3"
                                      validatorMessage="Quantity must be positive"
+                                     style="max-width: 75px"
                                 >
                             <f:validateDoubleRange minimum="1"/>
-                        </b:inputText>
-                        <b:commandButton look="primary" icon="plus" value="Add" action="#{customer.addToOrder()}"/>
-
+                        </b:inputText> <b:commandButton look="primary" icon="plus" value="Add"
+                                                        action="#{customer.addToOrder()}"/>
                     </h:form>
-
                     <h:form>
                         <hr/>
                         <div style="float: right;">
                             <b:commandButton look="warning" value="Place Order"
                                              action="#{customer.closeOrder}"/>
-
+                            <span/>
                             <b:commandButton look="default" value="Save for later"
                                              action="#{customer.saveOrder}"/>
                         </div>

@@ -61,7 +61,7 @@
                             <h:panelGrid styleClass="centered-form">
                                 <h:outputText
                                         rendered="#{empty customer.closedOrders}">
-                                    <p class="order-text">You don't have any close order</p>
+                                    <p class="order-text">You have not placed any orders yet</p>
                                 </h:outputText>
                             </h:panelGrid>
                             <h:dataTable styleClass="table table-striped"
@@ -139,7 +139,7 @@
                         <p>Insert or modify your address</p>
 
                         <p><b:commandButton look="default"
-                                            value="View or insert address'"
+                                            value="View or insert address"
                                             action="#{address.showAddress(customer.currentCustomer)}"/></p>
                     </b:column>
                 </b:row>

@@ -10,7 +10,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @ManagedBean(name = "admin")
 @SessionScoped
@@ -20,7 +22,7 @@ public class AdminController {
 
     private Customer customer;
 
-    private List closedOrders;
+    private Map<Long, Order> closedOrders;
 
     @EJB(beanName = "order")
     private OrderFacade of;
@@ -42,12 +44,14 @@ public class AdminController {
 
 
     public String processOrder(Long orderID) {
-        Order o = this.of.processOrder(orderID);
+        Order o = this.of.fulfillOrder(orderID);
         resetAlerts();
         if (o == null)
             this.alert = "Order no." + orderID + " : not enough items in stock";
-        else
+        else {
             this.message = "Successfully dispatched order no. " + o.getId();
+            this.closedOrders.remove(o.getId());
+        }
         return "pretty:admin-orders";
     }
 
@@ -75,7 +79,7 @@ public class AdminController {
     }
 
     public List getClosedOrders() {
-        return closedOrders;
+        return new ArrayList<>(closedOrders.values());
     }
 
     public Long getOrderID() {

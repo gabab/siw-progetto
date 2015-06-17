@@ -31,8 +31,8 @@ public class ValidateCode implements Validator {
         String code = (String) value;
         // resettiamo il valore nel caso il codice non sia valido
         ((UIInput) component).setSubmittedValue("");
-//        if (code.length() != 10)
-//            throw new ValidatorException(new FacesMessage("Code must be 10 characters long"));
+        if (code.length() != 10)
+            throw new ValidatorException(new FacesMessage("Code must be 10 characters long"));
         if (!Pattern.matches("^[a-zA-Z0-9]{10}$", code))
             throw new ValidatorException(new FacesMessage("Only alphanumeric characters allowed"));
         if (pf.getProduct(code.toUpperCase()) != null) {
