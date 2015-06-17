@@ -52,6 +52,7 @@ public class AdminController {
             this.message = "Successfully dispatched order no. " + o.getId();
             this.closedOrders.remove(o.getId());
         }
+        this.of.findClosedOrders();
         return "pretty:admin-orders";
     }
 
